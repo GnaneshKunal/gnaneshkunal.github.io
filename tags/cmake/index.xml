@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cmake on GK&#39;s Blog</title>
+    <link>/tags/cmake/</link>
+    <description>Recent content in Cmake on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/cmake/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Install packages &amp; libraries on your local paths</title>
+      <link>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</guid>
+      <description>Fedora is my favorite Linux distribution which is sponsored by Red Hat. Fedora 28 is out with a lot of features. Instead of upgrading my fedora using dnf-plugin-system-upgrade or the GNOME Software way, I&amp;rsquo;d always like to download the ISO and install it from a USB Flash Drive (cause that returns a pointer to the ISO and I could use it anywhere (ಠ⌣ಠ)). I have a love/hate relationship is with the Red Hat&amp;rsquo;s Automatic Partition which usually leaves with just 50GB for the Computer (/) and the rest for your $HOME.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Emacs on GK&#39;s Blog</title>
+    <link>/tags/emacs/</link>
+    <description>Recent content in Emacs on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dumped Spacemacs for Vanilla Emacs</title>
+      <link>/post/2018/04/14/dumped-spacemacs-for-vanilla-emacs/</link>
+      <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/14/dumped-spacemacs-for-vanilla-emacs/</guid>
+      <description>The startup time for Spacemacs used to be pretty high. So I&amp;rsquo;ve tried unsetting few layers, but the problem still persists.
+I&amp;rsquo;d planned on dumping Spacemacs but I&amp;rsquo;ve started my emacs journey with Spacemacs, So learning the underlying layer of emacs was too difficult to me. I&amp;rsquo;ve seen myself deleting Spacemacs, giving a try on Vannila Emacs and coming back to Spacemacs again.
+ Most of the times the common problems I&amp;rsquo;ve faced was I can&amp;rsquo;t find any packages.</description>
+    </item>
+    
+  </channel>
+</rss>

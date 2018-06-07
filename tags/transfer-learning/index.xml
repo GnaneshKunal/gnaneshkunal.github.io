@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Transfer Learning on GK&#39;s Blog</title>
+    <link>/tags/transfer-learning/</link>
+    <description>Recent content in Transfer Learning on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/transfer-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Applying Transfer Learning on ResNet using PyTorch</title>
+      <link>/post/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch/</link>
+      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch/</guid>
+      <description>Recently I&amp;rsquo;ve written a Classifier that is able to distinguish dogs from cats.
+Things I&amp;rsquo;ve learned: 0. How to use a Pretrained Model 1. Apply Transfer Learning
+DATASET I&amp;rsquo;ve trained the model using Kaggle&amp;rsquo;s classic dogs vs. cats dataset. The dataset can be found here
+Well, I have to say it&amp;rsquo;s not plug and play. At least not for the torchvision APIs. torchvision has an ImageFolder that&amp;rsquo;s (right now) the standard to load images as well as it&amp;rsquo;s labels automatically.</description>
+    </item>
+    
+  </channel>
+</rss>

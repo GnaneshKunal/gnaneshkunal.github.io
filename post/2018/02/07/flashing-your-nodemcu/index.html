@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flashing your NodeMCU | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Flashing your NodeMCU</span></h1>
+    
+    <h2 class="date">2018/02/07</h2>
+</div>
+
+<main>
+    
+
+<p>NodeMCU always comes to my mind (just like Arduino) while I think about any project related to the Internet of Things. I know, Arduino is a way better than NodeMCU. Lots of libraries, portability, and you can plug to almost all anything.</p>
+
+<p><i>Anything</i>?</p>
+
+<p><i>Yes, Anything!!</i></p>
+
+<!-- more -->
+
+<p>Well, the only reason I prefer NodeMCU over Arduino UNO is the inbuilt WIFI module (ESP8266) NodeMCU comes with.</p>
+
+<div align="center">
+    <br />
+    <br />
+  <img src="https://www.dropbox.com/s/b91s2usliebe37w/node-mcu.png?raw=1"><br><br>
+</div>
+
+<p>The ESP8266 is also available as a standalone WIFI module, which you can connect to most of the Microcontrollers.
+But most of the Microcontrollers use 5v as default compared to 3.3v of ESP9266.</p>
+
+<p>Arduino UNO isn&rsquo;t compatible due to its 5v only outputs. There&rsquo;s a 3.3v output though, but the current generated from that isn&rsquo;t enough for the ESP8266 module.</p>
+
+<p>So, then you can use the standard 5v output and regulate the current using a Voltage Regulator that converts the 5v to 3.3v. This also assures that enough current will be provided from the output.</p>
+
+<p>You can use the Voltage Regulator(AMS1117) which converts 5v to 3.3v. If you don&rsquo;t have a Voltage Regulator, you can use a Potentiometer. Using a potentiometer is a bit harmful that it could damage if there&rsquo;s any rise in voltage.</p>
+
+<p>There&rsquo;s a lot of things to do even after you have done your wiring.</p>
+
+<p>This could be said for a reason that I simply prefer NodeMCU over Arduino + ESP8266.</p>
+
+<p><i>Why don&rsquo;t you simply pick NodeMCU over Arduino + ESP8266 which ignores all the problems requirements mentioned above?</i></p>
+
+<p>Well even in NodeMCU you must do some simple(software side) steps that are most often confused.</p>
+
+<p>Steps that you must do:
+0. Update your Firmware
+1. Verify your Firmware
+2. Test with a small Program</p>
+
+<h4 id="update-your-firmware">UPDATE YOUR FIRMWARE</h4>
+
+<ol>
+<li><p>Download esptool either as a zip file or using git clone.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/themadinventor/esptool.git</code></pre></div></li>
+
+<li><p>Connect the NodeMCU via USB cable to the computer.</p></li>
+
+<li><p>Make sure you have python2.7 installed, open a terminal and type</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo python setup.py install</code></pre></div></li>
+
+<li><p>Download the latest NodeMCU firmware from <a href="https://github.com/nodemcu/nodemcu-firmware/releases">here</a>. You could find nodemcu_integer_*.bin at the end of the page.</p></li>
+
+<li><p>Flash the firmware using the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo python2 esptool.py --baud <span style="color:#ae81ff">460800</span> --port /dev/ttyUSB0 write_flash -fm dio 0x00000 /home/monster/Downloads/nodemcu_integer_0.9.6-dev_20150704.bin</code></pre></div>
+<p>If that worked, you are good to go</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>monster@monster esptool<span style="color:#f92672">]</span>$ sudo python2 esptool.py --baud <span style="color:#ae81ff">460800</span> --port /dev/ttyUSB0 write_flash -fm dio 0x00000 /home/monster/Downloads/nodemcu_integer_0.9.6-dev_20150704.bin
+esptool.py v2.3-dev
+Connecting....
+Detecting chip type... ESP8266
+Chip is ESP8266EX
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to <span style="color:#ae81ff">460800</span>
+Changed.
+Configuring flash size...
+Auto-detected Flash size: 4MB
+Flash params set to 0x0240
+Compressed <span style="color:#ae81ff">450072</span> bytes to <span style="color:#ae81ff">290528</span>...
+Wrote <span style="color:#ae81ff">450072</span> bytes <span style="color:#f92672">(</span><span style="color:#ae81ff">290528</span> compressed<span style="color:#f92672">)</span> at 0x00000000 in <span style="color:#ae81ff">6</span>.6 seconds <span style="color:#f92672">(</span>effective <span style="color:#ae81ff">543</span>.0 kbit/s<span style="color:#f92672">)</span>...
+Hash of data verified.
+Leaving...
+Hard resetting via RTS pin...
+<span style="color:#f92672">[</span>monster@monster esptool<span style="color:#f92672">]</span>$ </code></pre></div></li>
+</ol>
+
+<h4 id="verify-your-firmware">VERIFY YOUR FIRMWARE</h4>
+
+<ol>
+<li>Install the CP2102 driver from <a href="https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers">here</a>.</li>
+<li>Then extract the tarball and run the makefile
+<code>bash
+[monster@monster ~]$ tar xvzf '/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source.tar.gz'
+[monster@monster ~]$ cd Linu*Source
+[monster@monster Linux_3.x.x_4.x.x_VCP_Driver_Source]$ make
+make -C /lib/modules/`uname -r`/build M=/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source modules
+make[1]: Entering directory '/usr/src/kernels/4.14.16-300.fc27.x86_64'
+Building modules, stage 2.
+MODPOST 1 modules
+make[1]: Leaving directory '/usr/src/kernels/4.14.16-300.fc27.x86_64'
+[monster@monster Linux_3.x.x_4.x.x_VCP_Driver_Source]$
+</code></li>
+<li>Additional Configurations
+<code>bash
+[monster@monster ~]$ modprobe cp210x
+[monster@monster ~]$ export DISPLAY=:0
+[monster@monster ~]$ xhost + localhost
+[monster@monster ~]$ export DISPLAY=&quot;:0.0&quot;
+[monster@monster ~]$ xhost +local:all
+[monster@monster ~]$ xhost +inet:&lt;your_ip_address&gt;
+</code></li>
+
+<li><p>Download ESPlorer from <a href="http://esp8266.ru/esplorer-latest/?f=ESPlorer.zip">here</a>.</p></li>
+
+<li><p>Run the ESPlorer using the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>monster@monster ~<span style="color:#f92672">]</span>$ cd ESPlorer
+<span style="color:#f92672">[</span>monster@monster ~<span style="color:#f92672">]</span>$ sudo java -jar ESPlorer.jar</code></pre></div></li>
+
+<li><p>This the window you&rsquo;ll be getting
+<div align="center">
+<br />
+<img src="https://www.dropbox.com/s/vwev6rryfon53o3/node-mcu1.png?raw=1"><br><br>
+</div></p></li>
+
+<li><p>Select the /dev/tty*(your USB NO., Mine is /dev/ttyUSB0) and set the baud rate to 9600. Then click the &ldquo;Open&rdquo; button in ESPlorer Configuration.</p></li>
+
+<li><p>Push the RST button on the ESP8266(two times), it is right next to the micro-USB port.</p></li>
+
+<li><p>You should now see a message</p></li>
+</ol>
+
+<pre><code>NodeMCU 0.9.6 build 20150704 powered by Lua 5.1.4
+</code></pre>
+
+<div align="center">
+  <img src="https://www.dropbox.com/s/r8cvzxhis6rafut/node-mcu2.png?raw=1">
+</div>
+
+<h4 id="final-program">FINAL PROGRAM</h4>
+
+<h4 id="nodemcu-uses-lua-programming-language-which-is-a-cross-breed-of-node-js-and-python-when-booting-the-device-will-look-for-a-file-called-init-lua-and-executes-the-file">NodeMCU uses Lua programming language, which is a cross breed of Node.js and python. When booting the device will look for a file called init.lua and executes the file.</h4>
+
+<ol>
+<li><p>Click the Format button to delete all the files.</p></li>
+
+<li><p>Copy/paste the following code</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">-- Config</span>
+<span style="color:#66d9ef">local</span> pin <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>            <span style="color:#75715e">--&gt; GPIO2</span>
+<span style="color:#66d9ef">local</span> value <span style="color:#f92672">=</span> gpio.LOW
+<span style="color:#66d9ef">local</span> duration <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>    <span style="color:#75715e">--&gt; 1 second</span>
+<span style="color:#75715e">-- Function toggles LED state</span>
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleLED</span> ()
+<span style="color:#66d9ef">if</span> value <span style="color:#f92672">==</span> gpio.LOW <span style="color:#66d9ef">then</span>
+    value <span style="color:#f92672">=</span> gpio.HIGH
+<span style="color:#66d9ef">else</span>
+    value <span style="color:#f92672">=</span> gpio.LOW
+<span style="color:#66d9ef">end</span>
+
+gpio.write(pin, value)
+<span style="color:#66d9ef">end</span>
+<span style="color:#75715e">-- Initialise the pin</span>
+gpio.mode(pin, gpio.OUTPUT)
+gpio.write(pin, value)
+<span style="color:#75715e">-- Create an interval</span>
+tmr.alarm(<span style="color:#ae81ff">0</span>, duration, <span style="color:#ae81ff">1</span>, toggleLED)</code></pre></div></li>
+
+<li><p>Save the file as <code>init.lua</code>.</p></li>
+</ol>
+
+<div align="center">
+    <br />
+  <img src="https://www.dropbox.com/s/up09cce4wxpy65n/node-mcu3.png?raw=1">
+</div>
+
+<ol>
+<li>Now the blue onboard LED should blink on and off every second. If you restart the device, it will load the init.lua file and keep on blinking.</li>
+</ol>
+
+<div align="center">
+    <br />
+  <img src="https://www.dropbox.com/s/nnb8f22uzxil5v3/node-mcu4.png?raw=1">
+</div>
+
+<ol>
+<li>If the LED doesn&rsquo;t blink, then you can do normal <code>upload</code>, <code>&quot;Save to ESP&quot;</code>, <code>&quot;Send to ESP&quot;</code> and click <code>Run</code>.</li>
+</ol>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

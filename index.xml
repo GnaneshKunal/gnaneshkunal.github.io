@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on GK&#39;s Blog</title>
+    <link>/</link>
+    <description>Recent content in Home on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using JavaScript packages that doesn&#39;t have types</title>
+      <link>/post/2018/05/28/using-javascript-packages-that-doesnt-have-types/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/28/using-javascript-packages-that-doesnt-have-types/</guid>
+      <description>I write JavaScript, your write JavaScript, everyone writes JavaScript. I write TypeScript, but you may not write TypeScript.
+&amp;ldquo;Oh!! Who cares?&amp;rdquo; &amp;ldquo;We do.&amp;rdquo;
+&amp;ldquo;If that&amp;rsquo;s the case, use an alternate library, you know, each second, a shit JS library is born OUTTA NOWHERE.&amp;rdquo; &amp;ldquo;But I need your types.&amp;rdquo;
+JavaScript has too many packages that it even has two Google Maps Library(React). But only one of the library has Type Definitions. It&amp;rsquo;s a pain to write your own definition file.</description>
+    </item>
+    
+    <item>
+      <title>Install packages &amp; libraries on your local paths</title>
+      <link>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</guid>
+      <description>Fedora is my favorite Linux distribution which is sponsored by Red Hat. Fedora 28 is out with a lot of features. Instead of upgrading my fedora using dnf-plugin-system-upgrade or the GNOME Software way, I&amp;rsquo;d always like to download the ISO and install it from a USB Flash Drive (cause that returns a pointer to the ISO and I could use it anywhere (ಠ⌣ಠ)). I have a love/hate relationship is with the Red Hat&amp;rsquo;s Automatic Partition which usually leaves with just 50GB for the Computer (/) and the rest for your $HOME.</description>
+    </item>
+    
+    <item>
+      <title>Blog is now powered by Hexo</title>
+      <link>/post/2018/04/15/blog-is-now-powered-by-hexo/</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/15/blog-is-now-powered-by-hexo/</guid>
+      <description>I&amp;rsquo;ve been using gatsbyjs and faced a lot of issues on user defined components. Adding asciinema never worked. It took me days to cleanly render my Terminal component. Most of the pluggins were still under development. Rendering a pdf was really a nightmare which at last was successful but not in a clear way. The gatsby pdf has never been started. The themes were lacking. The RSS plugin didn&amp;rsquo;t work at all.</description>
+    </item>
+    
+    <item>
+      <title>Dumped Spacemacs for Vanilla Emacs</title>
+      <link>/post/2018/04/14/dumped-spacemacs-for-vanilla-emacs/</link>
+      <pubDate>Sat, 14 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/14/dumped-spacemacs-for-vanilla-emacs/</guid>
+      <description>The startup time for Spacemacs used to be pretty high. So I&amp;rsquo;ve tried unsetting few layers, but the problem still persists.
+I&amp;rsquo;d planned on dumping Spacemacs but I&amp;rsquo;ve started my emacs journey with Spacemacs, So learning the underlying layer of emacs was too difficult to me. I&amp;rsquo;ve seen myself deleting Spacemacs, giving a try on Vannila Emacs and coming back to Spacemacs again.
+ Most of the times the common problems I&amp;rsquo;ve faced was I can&amp;rsquo;t find any packages.</description>
+    </item>
+    
+    <item>
+      <title>Applying Transfer Learning on ResNet using PyTorch</title>
+      <link>/post/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch/</link>
+      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch/</guid>
+      <description>Recently I&amp;rsquo;ve written a Classifier that is able to distinguish dogs from cats.
+Things I&amp;rsquo;ve learned: 0. How to use a Pretrained Model 1. Apply Transfer Learning
+DATASET I&amp;rsquo;ve trained the model using Kaggle&amp;rsquo;s classic dogs vs. cats dataset. The dataset can be found here
+Well, I have to say it&amp;rsquo;s not plug and play. At least not for the torchvision APIs. torchvision has an ImageFolder that&amp;rsquo;s (right now) the standard to load images as well as it&amp;rsquo;s labels automatically.</description>
+    </item>
+    
+    <item>
+      <title>Flashing your NodeMCU</title>
+      <link>/post/2018/02/07/flashing-your-nodemcu/</link>
+      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/02/07/flashing-your-nodemcu/</guid>
+      <description>NodeMCU always comes to my mind (just like Arduino) while I think about any project related to the Internet of Things. I know, Arduino is a way better than NodeMCU. Lots of libraries, portability, and you can plug to almost all anything.
+Anything?
+Yes, Anything!!
+Well, the only reason I prefer NodeMCU over Arduino UNO is the inbuilt WIFI module (ESP8266) NodeMCU comes with.
+ The ESP8266 is also available as a standalone WIFI module, which you can connect to most of the Microcontrollers.</description>
+    </item>
+    
+    <item>
+      <title>Numpy vs. Python Lists</title>
+      <link>/post/2018/02/05/numpy-vs.-python-lists/</link>
+      <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/02/05/numpy-vs.-python-lists/</guid>
+      <description>While I was learning Machine Learning, I made my mind not to use any of the third-party-libraries (including numpy and Pandas) until I got to know what happened in the background and feel okay to use libraries.  It was a bit harder to write everything from scratch. Even the dot product must be written, cause python doesn&amp;rsquo;t have that inbuilt.
+Finally, I&amp;rsquo;ve felt comfortable and could clearly understand what is happening in the background (cause, Machine Learning is all about Math).</description>
+    </item>
+    
+    <item>
+      <title>What are containers!!</title>
+      <link>/post/2017/08/24/what-are-containers/</link>
+      <pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/08/24/what-are-containers/</guid>
+      <description>“Have you ever come across people saying or found yourself saying, “It worked on my machine”? Well, Don’t say you never said it, you did.”
+“Of course, everyone does, when I want to transfer my project to a new machine, I usually fall into this trap. Don’t you say it too?”
+“Well, I was, but not these days.”
+“So what should we do to stop saying it, there’s any special Operating System Virtualization that works the same on every Machine?</description>
+    </item>
+    
+    <item>
+      <title>ABOUT ME</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Homo sapien who is interested in Data Engineering and Low Level System Design. I use C for systems, JavaScript and PHP for the web, scala for Big Data and python for Data science.
+CERTIFICATIONS(coursera):  Functional Programming in Scala Big Data Machine Learning Cryptography Deep Learning   {% githubCard user:GnaneshKunal %}</description>
+    </item>
+    
+    <item>
+      <title>PROJECTS</title>
+      <link>/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/</guid>
+      <description>Dogs vs. Cats classifier A classifier that is able to distinguish cats from dogs. Transfer Learning technique is applied to a ResNet18 as a fixed feature extractor.
+{% githubCard user:GnaneshKunal repo:dogs-vs-cats-classifier %}
+Twitter To analyze the twitter data of people belonging to a region using their tweets, location and using Natural Language Processing to predict any racist or opinion based riots and protests from tweets and trending hashtags.
+{% githubCard user:GnaneshKunal repo:twitter-riots %}</description>
+    </item>
+    
+    <item>
+      <title>RESUME</title>
+      <link>/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

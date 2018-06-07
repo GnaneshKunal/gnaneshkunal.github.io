@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dumped Spacemacs for Vanilla Emacs | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Dumped Spacemacs for Vanilla Emacs</span></h1>
+    
+    <h2 class="date">2018/04/14</h2>
+</div>
+
+<main>
+    
+
+<p>The startup time for <a href="http://spacemacs.org/">Spacemacs</a> used to be pretty high. So I&rsquo;ve tried unsetting few layers, but the problem still persists.</p>
+
+<p>I&rsquo;d planned on dumping Spacemacs but I&rsquo;ve started my emacs journey with Spacemacs, So learning the underlying layer of emacs was too difficult to me.
+<!-- more -->
+I&rsquo;ve seen myself deleting Spacemacs, giving a try on <a href="https://www.gnu.org/software/emacs/">Vannila Emacs</a> and coming back to Spacemacs again.</p>
+
+<div align="center">
+    <img height="200" width="200" src="https://www.dropbox.com/s/2le5houarieb132/emacs.png?raw=1" />
+</div>
+
+<p>Most of the times the common problems I&rsquo;ve faced was <i><b>I can&rsquo;t find any packages.</b></i></p>
+
+<p>I wish I&rsquo;ve known about <b><a href="https://melpa.org/">Melpa</a> not showing me newer packages.</b>
+I&rsquo;ve gone through the Melpa Installation steps, which was the starting point to configure Emacs with my own configuration.</p>
+
+<p>By copy pasting certain elisp commands on <i><code>.emacs</code></i> I&rsquo;ve found elisp to be a lot simpler and I could clearly understand what&rsquo;s happening in the background as well.</p>
+
+<h2 id="melpa">Melpa</h2>
+
+<p>Add the following in your <code>.emacs</code> and your are done.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(require <span style="color:#e6db74">&#39;package</span>)
+(let* ((no-ssl (and (memq system-type <span style="color:#f92672">&#39;</span>(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl <span style="color:#e6db74">&#34;http&#34;</span> <span style="color:#e6db74">&#34;https&#34;</span>)))
+  <span style="color:#75715e">;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
+  (add-to-list <span style="color:#e6db74">&#39;package-archives</span> (cons <span style="color:#e6db74">&#34;melpa&#34;</span> (concat proto <span style="color:#e6db74">&#34;://melpa.org/packages/&#34;</span>)) <span style="color:#66d9ef">t</span>)
+  <span style="color:#75715e">;;(add-to-list &#39;package-archives (cons &#34;melpa-stable&#34; (concat proto &#34;://stable.melpa.org/packages/&#34;)) t)</span>
+  (when (&lt; emacs-major-version <span style="color:#ae81ff">24</span>)
+    <span style="color:#75715e">;; For important compatibility libraries like cl-lib</span>
+    (add-to-list <span style="color:#e6db74">&#39;package-archives</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;gnu&#34;</span> <span style="color:#f92672">.</span> (concat proto <span style="color:#e6db74">&#34;://elpa.gnu.org/packages/&#34;</span>)))))
+(package-initialize)</code></pre></div>
+<h2 id="autocomplete">Autocomplete</h2>
+
+<p>Autocomplete is a must. You really need it if you need some cool <code>auto-completition</code> for other languages as well.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] auto-complete [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lsip" data-lang="lsip">;;.emacs
+;; Autocomplete
+(ac-config-default)</code></pre></div>
+<h2 id="c-c">C/C++</h2>
+
+<p>I love clang. And you must love it too. <a href="https://github.com/Sarcasm/irony-mode">irony</a> provides better editing experience for C and  C++, and is based on <code>libclang</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] irony [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
+<span style="color:#75715e">;; irony</span>
+
+(add-hook <span style="color:#e6db74">&#39;c++-mode-hook</span> <span style="color:#e6db74">&#39;irony-mode</span>)
+(add-hook <span style="color:#e6db74">&#39;c-mode-hook</span> <span style="color:#e6db74">&#39;irony-mode</span>)
+(add-hook <span style="color:#e6db74">&#39;objc-mode-hook</span> <span style="color:#e6db74">&#39;irony-mode</span>)
+
+(add-hook <span style="color:#e6db74">&#39;irony-mode-hook</span> <span style="color:#e6db74">&#39;irony-cdb-autosetup-compile-options</span>)</code></pre></div>
+<h2 id="python-mode">Python Mode</h2>
+
+<p>I&rsquo;m using <code>anaconda-mode</code> as my python environment. The <a href="https://github.com/jorgenschaefer/elpy"><code>elpy</code></a> is another python environment with <code>automatic code rules</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] anaconda-mode [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
+<span style="color:#75715e">;; Anaconda-mode python</span>
+(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span><span style="color:#f92672">&#39;</span> <span style="color:#e6db74">&#39;anaconda-mode</span>)</code></pre></div>
+<h2 id="web">Web</h2>
+
+<p>You definitly need it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] web-mode [RET]
+M-x package-install [RET] tide [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
+<span style="color:#75715e">;;; HTML</span>
+
+(require <span style="color:#e6db74">&#39;web-mode</span>)
+(add-to-list <span style="color:#e6db74">&#39;auto-mode-alist</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;\\.html?\\&#39;&#34;</span> <span style="color:#f92672">.</span> web-mode))
+
+<span style="color:#75715e">;; tide typescript</span>
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode <span style="color:#ae81ff">+1</span>)
+  (setq flycheck-check-syntax-automatically <span style="color:#f92672">&#39;</span>(save mode-enabled))
+  (eldoc-mode <span style="color:#ae81ff">+1</span>)
+  (tide-hl-identifier-mode <span style="color:#ae81ff">+1</span>)
+  <span style="color:#75715e">;; company is an optional dependency. You have to</span>
+  <span style="color:#75715e">;; install it separately via package-install</span>
+  <span style="color:#75715e">;; `M-x package-install [ret] company`</span>
+  (company-mode <span style="color:#ae81ff">+1</span>))
+
+<span style="color:#75715e">;; aligns annotation to the right hand side</span>
+(setq company-tooltip-align-annotations <span style="color:#66d9ef">t</span>)
+
+<span style="color:#75715e">;; formats the buffer before saving</span>
+(add-hook <span style="color:#e6db74">&#39;before-save-hook</span> <span style="color:#e6db74">&#39;tide-format-before-save</span>)
+
+<span style="color:#75715e">;; tide typescript</span>
+(add-hook <span style="color:#e6db74">&#39;typescript-mode-hook</span> <span style="color:#a6e22e">#&#39;</span>setup-tide-mode)</code></pre></div>
+<h2 id="git">Git</h2>
+
+<p>Finally.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] magit [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
+<span style="color:#75715e">;; magit</span>
+(global-set-key (kbd <span style="color:#e6db74">&#34;C-x g&#34;</span>) <span style="color:#e6db74">&#39;magit-status</span>)</code></pre></div>
+<h2 id="spacemacs-theme">Spacemacs-theme</h2>
+
+<p>If you love <code>spacemacs-theme</code>, then this one&rsquo;s for you</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] spacemacs-theme [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
+(load-theme <span style="color:#e6db74">&#39;spacemacs-dark</span> <span style="color:#66d9ef">t</span>)</code></pre></div>
+<p>Thinks are a bit fast now though. The startup time has decreased by <b>75%</b>. I&rsquo;m finally experiencing the same joy I&rsquo;ve got while using spacemacs.</p>
+
+<p>Well, you could mail, play games, listen to songs and do most of the things without leaving <a href="https://www.gnu.org/software/emacs/">emacs</a>.</p>
+
+<p>Hey, do You know you could even control butterflies without leaving emacs?
+<div align="center">
+    <img src="https://www.dropbox.com/s/1ieuooe2vgk1iie/butterfly.png?raw=1" />
+</div></p>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

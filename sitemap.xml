@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/post/2018/05/28/using-javascript-packages-that-doesnt-have-types/</loc>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/04/15/blog-is-now-powered-by-hexo/</loc>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/04/14/dumped-spacemacs-for-vanilla-emacs/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch/</loc>
+    <lastmod>2018-04-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/02/07/flashing-your-nodemcu/</loc>
+    <lastmod>2018-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/02/05/numpy-vs.-python-lists/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2017/08/24/what-are-containers/</loc>
+    <lastmod>2017-08-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/blog/</loc>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/cmake/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/containers/</loc>
+    <lastmod>2017-08-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/docker/</loc>
+    <lastmod>2017-08-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/emacs/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/gatsbyjs/</loc>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/hexo/</loc>
+    <lastmod>2018-04-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/internet-of-things/</loc>
+    <lastmod>2018-02-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2018-04-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/make/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/neural-networks/</loc>
+    <lastmod>2018-04-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/nodemcu/</loc>
+    <lastmod>2018-02-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/numpy/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/projects/</loc>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/programming-languages/</loc>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/pytorch/</loc>
+    <lastmod>2018-04-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/resume/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/system-administration/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/text-editor/</loc>
+    <lastmod>2018-04-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/transfer-learning/</loc>
+    <lastmod>2018-04-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/typescript/</loc>
+    <lastmod>2018-05-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/unix/</loc>
+    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

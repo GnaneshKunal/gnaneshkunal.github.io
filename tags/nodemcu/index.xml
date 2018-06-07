@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NodeMCU on GK&#39;s Blog</title>
+    <link>/tags/nodemcu/</link>
+    <description>Recent content in NodeMCU on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/nodemcu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Flashing your NodeMCU</title>
+      <link>/post/2018/02/07/flashing-your-nodemcu/</link>
+      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/02/07/flashing-your-nodemcu/</guid>
+      <description>NodeMCU always comes to my mind (just like Arduino) while I think about any project related to the Internet of Things. I know, Arduino is a way better than NodeMCU. Lots of libraries, portability, and you can plug to almost all anything.
+Anything?
+Yes, Anything!!
+Well, the only reason I prefer NodeMCU over Arduino UNO is the inbuilt WIFI module (ESP8266) NodeMCU comes with.
+ The ESP8266 is also available as a standalone WIFI module, which you can connect to most of the Microcontrollers.</description>
+    </item>
+    
+  </channel>
+</rss>

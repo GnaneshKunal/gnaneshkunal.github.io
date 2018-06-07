@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Containers on GK&#39;s Blog</title>
+    <link>/tags/containers/</link>
+    <description>Recent content in Containers on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/containers/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What are containers!!</title>
+      <link>/post/2017/08/24/what-are-containers/</link>
+      <pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/08/24/what-are-containers/</guid>
+      <description>“Have you ever come across people saying or found yourself saying, “It worked on my machine”? Well, Don’t say you never said it, you did.”
+“Of course, everyone does, when I want to transfer my project to a new machine, I usually fall into this trap. Don’t you say it too?”
+“Well, I was, but not these days.”
+“So what should we do to stop saying it, there’s any special Operating System Virtualization that works the same on every Machine?</description>
+    </item>
+    
+  </channel>
+</rss>

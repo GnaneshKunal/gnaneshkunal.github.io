@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Install packages &amp; libraries on your local paths | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Install packages &amp; libraries on your local paths</span></h1>
+    
+    <h2 class="date">2018/05/13</h2>
+</div>
+
+<main>
+    
+
+<p>Fedora is my favorite Linux distribution which is sponsored by Red Hat. Fedora 28 is out with a lot of features. Instead of upgrading my fedora using <code>dnf-plugin-system-upgrade</code> or the <code>GNOME Software</code> way, I&rsquo;d always like to download the ISO and install it from a USB Flash Drive (cause that returns a pointer to the ISO and I could use it anywhere (ಠ⌣ಠ)).
+<!-- more --></p>
+
+<p>I have a love/hate relationship is with the Red Hat&rsquo;s <code>Automatic Partition</code> which usually leaves with just 50GB for the <code>Computer</code> (<code>/</code>) and the rest for your <code>$HOME</code>. So I usually do <code>Manual Partition</code> and give the partitions the right space. But <code>Automatic Partitions</code> will save you some time by automatically giving other partitions the right amount of space.</p>
+
+<p>This time, I opted for <code>Automatic Partition</code> and now I&rsquo;m left with just 52.6GB. Actually its just 42.7GB after doing <code>dnf upgrade</code>. In my past, the first time when I&rsquo;ve given Fedora a try, I used it for more days than I thought I would and I was struggling with &lt;12GB of free space. That was the time, I thought, I wish I had known how to configure and install libraries on my local paths without letting everything existing packages down(<code>pkg-config</code>).</p>
+
+<p>Now, I&rsquo;ve finally found a way to install libraries on my own path. I like to use <code>$HOME/.local/</code>.</p>
+
+<h2 id="the-usual-way">The Usual way</h2>
+
+<p>Usually, When you compile libraries from source, the usual way would be</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure
+make
+sudo make install</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./autogen.sh
+./configure
+make
+sudo make install</code></pre></div>
+<p>Where do you think the libraries get installed?</p>
+
+<p>That&rsquo;s <code>/usr/local/include</code> for headers, <code>/usr/local/lib/</code> for your libraries that you can link with your programs. And also, <code>pkg-config</code> easily finds your libraries and packages.</p>
+
+<p>What if you have less space on your <code>Computer</code> or like to install a package in a different location (like as I said <code>$HOME/.local/</code>)?</p>
+
+<h2 id="what-you-need-to-do">What You Need To Do</h2>
+
+<p>Well, that&rsquo;s easy though. The <code>configure</code> script also has a <code>--prefix</code> argument that allows you to install the package on given path.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure --prefix $HOME/.local
+make
+make install</code></pre></div>
+<p><b>Note that you don&rsquo;t need the sudo command</b>, as the <code>$HOME</code> doesn&rsquo;t require you to have <code>root</code> privileges.</p>
+
+<p>After installing</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>monster@monster json-c<span style="color:#f92672">]</span>$ whereis json-c
+json-c: /home/monster/.local/include/json-c</code></pre></div>
+<p>But will your packages be found and linked to other programs that use this packages?</p>
+
+<p><b>Now I could finally install packages on my local paths.</b> (YAY)
+<b>Will I be able to use it? The answer is NO.</b> (BOOO)</p>
+
+<p>You must add the path to your <code>$PATH</code> variable.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~.bashrc
+</span><span style="color:#75715e"></span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib:</span>$HOME<span style="color:#e6db74">/.local/share:</span>$HOME<span style="color:#e6db74">/.local/include:</span>$HOME<span style="color:#e6db74">/.local/bin&#34;</span></code></pre></div>
+<p>Sometimes you get complains about shared libraries.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
+</span><span style="color:#75715e"></span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$LD_LIBRARY_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib&#34;</span>
+export LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$LIBRARY_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib&#34;</span></code></pre></div>
+<p>Also, you love <code>pkg-config</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
+</span><span style="color:#75715e"></span>export PKG_CONFIG_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PKG_CONFIG_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib/pkgconfig&#34;</span></code></pre></div>
+<p>When you manually compile, your <code>C/C++</code> compiler complains that it couldn&rsquo;t find the headers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
+</span><span style="color:#75715e"></span>export CPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$CPATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/include&#34;</span>
+export C_INCLUDE_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$C_INCLUDE_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/include&#34;</span>
+export CPLUS_INCLUDE_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$CPLUS_INCLUDE_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/include&#34;</span></code></pre></div>
+<h4 id="useful-links">Useful Links</h4>
+
+<ul>
+<li><a href="http://www.network-theory.co.uk/docs/gccintro/gccintro_23.html">GCC Environemnt Variables</a></li>
+<li><a href="https://askubuntu.com/questions/210210/pkg-config-path-environment-variable">pkg-config path Environment Variables</a></li>
+<li><a href="https://stackoverflow.com/questions/480764/linux-error-while-loading-shared-libraries-cannot-open-shared-object-file-no-s">Shared Libraries paths&rsquo;</a></li>
+</ul>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

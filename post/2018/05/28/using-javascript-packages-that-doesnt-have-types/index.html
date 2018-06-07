@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Using JavaScript packages that doesn&#39;t have types | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Using JavaScript packages that doesn&#39;t have types</span></h1>
+    
+    <h2 class="date">2018/05/28</h2>
+</div>
+
+<main>
+    <p>I write JavaScript, your write JavaScript, everyone writes JavaScript.
+I write TypeScript, but you may not write TypeScript.</p>
+
+<!--more -->
+
+<p><i>&ldquo;Oh!! Who cares?&rdquo;</i>
+<i>&ldquo;We do.&rdquo;</i></p>
+
+<p><i>&ldquo;If that&rsquo;s the case, use an alternate library, you know, each second, a shit JS library is born OUTTA NOWHERE.&rdquo;</i>
+<i>&ldquo;But I need your types.&rdquo;</i></p>
+
+<p>JavaScript has too many packages that it even has two Google Maps Library(React). But only one of the library has Type Definitions. It&rsquo;s a pain to write your own definition file. You could dig the source code and contribute a type file or you could simply write a minimal one with functions that you use. Type file is almost all similar to a TS interface.</p>
+
+<p>A basic definition file would be like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// yourLibrary.d.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">declare</span> <span style="color:#66d9ef">module</span> <span style="color:#a6e22e">yourLibrary</span> {
+	<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">objectName</span> {
+		<span style="color:#a6e22e">prop</span>: <span style="color:#66d9ef">type</span>
+	}
+}</code></pre></div>
+<p>On top of your file, add the following statement:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// someFile.ts
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">/// &lt;reference path=&#34;./path/yourLibrary.d.ts&#34; /&gt;</span></code></pre></div>
+<p><i>But I&rsquo;ve so many packages and writing a definition file for each package is tedious. I just want an ONE VS. ALL way.</i></p>
+
+<p>Your definition file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// index.d.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">declare</span> <span style="color:#a6e22e">module</span> <span style="color:#e6db74">&#34;*&#34;</span>;</code></pre></div>
+<p>Your statement:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// someFile.ts
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">/// &lt;reference path=&#34;./path/index.d.ts&#34; /&gt;</span></code></pre></div>
+<p>The above statement turns off type checking for all the packages, so it&rsquo;s not recommended.</p>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

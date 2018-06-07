@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on GK&#39;s Blog</title>
+    <link>/tags/typescript/</link>
+    <description>Recent content in TypeScript on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using JavaScript packages that doesn&#39;t have types</title>
+      <link>/post/2018/05/28/using-javascript-packages-that-doesnt-have-types/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/28/using-javascript-packages-that-doesnt-have-types/</guid>
+      <description>I write JavaScript, your write JavaScript, everyone writes JavaScript. I write TypeScript, but you may not write TypeScript.
+&amp;ldquo;Oh!! Who cares?&amp;rdquo; &amp;ldquo;We do.&amp;rdquo;
+&amp;ldquo;If that&amp;rsquo;s the case, use an alternate library, you know, each second, a shit JS library is born OUTTA NOWHERE.&amp;rdquo; &amp;ldquo;But I need your types.&amp;rdquo;
+JavaScript has too many packages that it even has two Google Maps Library(React). But only one of the library has Type Definitions. It&amp;rsquo;s a pain to write your own definition file.</description>
+    </item>
+    
+  </channel>
+</rss>

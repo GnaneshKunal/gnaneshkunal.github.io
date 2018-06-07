@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What are containers!! | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">What are containers!!</span></h1>
+    
+    <h2 class="date">2017/08/24</h2>
+</div>
+
+<main>
+    <p>“Have you ever come across people saying or found yourself saying, “It worked on my machine”? Well, Don’t say you never said <em>it</em>, you did.”</p>
+
+<!-- more -->
+
+<p>“Of course, everyone does, when I want to transfer my project to a new machine, I usually fall into <em>this</em> trap. Don’t you say it too?”</p>
+
+<p>“Well, I <em>was</em>, but not these days.”</p>
+
+<p>“So what should we <em>do</em> to stop saying <em>it,</em> there’s any special <a href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization">Operating System Virtualization</a> that works the same on every Machine?”</p>
+
+<p>“Well again, there’s no such <em>thing</em> that works fine on every Machine, but there are <strong><em>Containers</em></strong>.”
+“What are <em>Containers</em>, Actually?”</p>
+
+<p><center>
+    <img src="https://cdn-images-1.medium.com/max/800/1*lu5prM28fxIlbHmjPT8VIg.jpeg" />
+</center></p>
+
+<p>“<a href="https://en.wikipedia.org/wiki/Linux_containers">According to Wiki</a>, <strong>Linux container</strong> is a generic term for an implementation of <a href="https://en.wikipedia.org/wiki/Operating_system-level_virtualization">operating system-level virtualization</a> for the <a href="https://en.wikipedia.org/wiki/Linux">Linux</a> <a href="https://en.wikipedia.org/wiki/Operating_system">operating system</a>.”</p>
+
+<p>“I don’t understand.”</p>
+
+<p>“Containers are <em>like</em> lightweight Virtual Machines. Unlike VMs, containers do bundle a light-weight operating system with the only libraries and settings required to make the software work. This makes for efficient, lightweight, self-contained systems and guarantees that software will always run the same, regardless of where it’s deployed. If you need a windows container, that exists too.”</p>
+
+<p>“Can you talk a bit higher level than <em>this</em>?”</p>
+
+<p>“Containers are a way to wrap up an application into its own isolated box. For the application in its container, it has no knowledge of any other applications or processes that exist outside of its box. Everything the application depends on to run successfully also lives inside this container. Wherever the box may move, the application will always be satisfied because it is bundled up with everything it needs to run.”</p>
+
+<p>“So what about <em>its</em> <strong>kernel</strong>?”</p>
+
+<p>“The <em>Container-Manager</em> shares the current <strong>System kernel.</strong>”</p>
+
+<p>“Can you give me a basic working architecture?”</p>
+
+<p>“Imagine a kitchen. We pack up all the appliances and furniture, the pots and pans, the dish soap and hand towels. This is our container</p>
+
+<p><center>
+    <img src="https://cdn-images-1.medium.com/max/800/1*KzpYqtbNeOc8mUb4kpQnpg.png" />
+</center></p>
+
+<p>We can now take this container and drop it into whatever host apartment we want, and it will be the same kitchen. All we must do is connect lectricity and water to it, and then we’re clear to start cooking (because we have all the appliances we need!)</p>
+
+<p><center>
+    <img src="https://cdn-images-1.medium.com/max/800/1*R5hZBPeNL4Nb97n1Rj_oig.png" />
+</center></p>
+
+<p>In much the same way, containers are like this kitchen. There can be different kinds of rooms as well as many of the same kinds of rooms. What matters is that the containers come packaged up with everything they need. <strong>source:</strong> <a href="https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/"><strong><em>Microsoft</em></strong></a></p>
+
+<p>Hello there !</p>
+
+<p>“Well, that’s amazing!! Is <em>that</em> the only problem it solves ?”</p>
+
+<p>“Tell me how do you deploy a full stack Web app, for example?”</p>
+
+<p>“Creating Instances for each Service in the stack, Installing Operating System for each Service, Configuring runtime environments for each Service, Adding security layer for each Service, and so on. And, the last and crucial <em>one</em> is connecting each Service to each other”</p>
+
+<p>“Well, All <em>that</em> takes is huge cost and time, right?”</p>
+
+<p>“Yeah!! But it’s worth the time, right?”</p>
+
+<p>“What if <em>it</em> doesn’t work the same?, And for example, if it’s a Nginx server, the service that doesn’t require much storage, affording it much storage wouldn’t lead to a hardware wastage?, And each instance doesn’t use 90% of the OS-library services, having all those unnecessary services in the instance would do any great? Would doing <em>that</em> be <em>okay</em>?”</p>
+
+<p>“That’s really <em>not okay</em>. Is there any better ways to do <em>it</em>?”</p>
+
+<p>“There are better ways to do <em>that</em> in containers. You could build few containers, that your services need, and cluster <em>them</em> together while exposing only the service that needs to be exposed.”</p>
+
+<p>“Are <em>they</em> portable?”</p>
+
+<p>“Because the container has everything it needs to run your application, they are very portable and can run on any machine. You can create and test containers locally, then deploy that same container image to your private cloud, public cloud or service provider.”</p>
+
+<p>“Is there any app language restrictions?”</p>
+
+<p>“With containers, developers can build an app in any language. These apps are completely portable and can run anywhere — laptop, desktop, server, private cloud, public cloud or service provider — without any code changes.”</p>
+
+<p>“So you’re telling me containers, doesn’t just solve installing; configuring; adding security; etc., but also solves hardware wastage?”</p>
+
+<p>“Exactly!”</p>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

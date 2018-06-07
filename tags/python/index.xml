@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on GK&#39;s Blog</title>
+    <link>/tags/python/</link>
+    <description>Recent content in Python on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Numpy vs. Python Lists</title>
+      <link>/post/2018/02/05/numpy-vs.-python-lists/</link>
+      <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/02/05/numpy-vs.-python-lists/</guid>
+      <description>While I was learning Machine Learning, I made my mind not to use any of the third-party-libraries (including numpy and Pandas) until I got to know what happened in the background and feel okay to use libraries.  It was a bit harder to write everything from scratch. Even the dot product must be written, cause python doesn&amp;rsquo;t have that inbuilt.
+Finally, I&amp;rsquo;ve felt comfortable and could clearly understand what is happening in the background (cause, Machine Learning is all about Math).</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Applying Transfer Learning on ResNet using PyTorch | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Applying Transfer Learning on ResNet using PyTorch</span></h1>
+    
+    <h2 class="date">2018/04/06</h2>
+</div>
+
+<main>
+    
+
+<p>Recently I&rsquo;ve written a Classifier that is able to distinguish dogs from cats.</p>
+
+<!--more -->
+
+<p>Things I&rsquo;ve learned:
+0. How to use a Pretrained Model
+1. Apply Transfer Learning</p>
+
+<h2 id="dataset">DATASET</h2>
+
+<p>I&rsquo;ve trained the model using Kaggle&rsquo;s classic dogs vs. cats dataset. The dataset can be found <a href="https://www.kaggle.com/c/dogs-vs-cats/data">here</a></p>
+
+<p>Well, I have to say it&rsquo;s not plug and play. At least not for the <code>torchvision</code> APIs. <code>torchvision</code> has an <code>ImageFolder</code> that&rsquo;s (right now) the standard to load images as well as it&rsquo;s labels automatically. The document suggests that <code>ImageFolder</code> requires the dataset in the following format:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root/dog/xxx.png
+root/dog/xxy.png
+root/dog/xxz.png
+
+root/cat/123.png
+root/cat/nsdf3.png
+root/cat/asd932_.png</code></pre></div>
+<p>So, I&rsquo;ve arranged the dataset as the <code>ImageFolder</code> requires me to.</p>
+
+<h2 id="model">Model</h2>
+
+<p>The choice is arbitrary. I&rsquo;ve considered some wired model. I don&rsquo;t know what to name it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>conv1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>)
+self<span style="color:#f92672">.</span>pool <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>MaxPool(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)
+self<span style="color:#f92672">.</span>conv2 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">3</span>)
+self<span style="color:#f92672">.</span>conv3 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">3</span>)
+self<span style="color:#f92672">.</span>conv4 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">3</span>)
+self<span style="color:#f92672">.</span>conv5 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">3</span>)
+
+self<span style="color:#f92672">.</span>fc1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">64</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1000</span>)
+self<span style="color:#f92672">.</span>fc2 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">500</span>)
+self<span style="color:#f92672">.</span>fc3 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">120</span>)
+self<span style="color:#f92672">.</span>fc4 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">84</span>)
+self<span style="color:#f92672">.</span>fc5 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">10</span>)
+self<span style="color:#f92672">.</span>fc6 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>)</code></pre></div>
+<p>With ReLu everywhere and softmax layer at the end. It worked but not as I thought its gonna be. And its still smaller than starter ResNet which is ResNet18. So, I&rsquo;ve considered ResNet18 over my network.</p>
+
+<h2 id="training">Training</h2>
+
+<p>I&rsquo;ve considered training my ResNet18 for the whole dataset. But the main problem is I don&rsquo;t have a GPU. (ノಠ益ಠ)ノ彡┻━┻</p>
+
+<p>So Transfer Learning is the only choice I&rsquo;ve got. I&rsquo;ve opted for a pretrained Model which is trained on an ImageNet.</p>
+
+<div align="center">
+    <br />
+    <br />
+    <img src="https://www.dropbox.com/s/agb73ch2afnuy2r/transfer_learning.jpg?raw=1"><br /><br />
+</div>
+
+<p>Choices I&rsquo;ve got:
+0. Full Pretrained Model
+1. Fine-Tuning the ConvNet
+2. ConvNet as fixed feature extractor</p>
+
+<h3 id="full-pretrained-model">Full Pretrained Model</h3>
+
+<p>I&rsquo;ve got to tell you that using this is of no use. It just works. You don&rsquo;t have to do anything. You just have to write the predict function.</p>
+
+<h3 id="fine-tuning-the-convnet">Fine-Tuning the ConvNet</h3>
+
+<p>Taking the whole network and retraining the parameters just looked cool and painful too. Well, this one worked really good. The results were good too. It took so much time to train the model than I&rsquo;ve thought it would take. I&rsquo;ve trained the model but forgot to save it. I trained it another time though. But the time consumption was really too much.</p>
+
+<h3 id="convnet-as-fixed-feature-extractor">ConvNet as fixed feature extractor</h3>
+
+<p>Taking the whole network and adding a final layer and training just the last layer with softmax has done the job. The results are as expected. And also, It takes too less time compared to Full training and Fine-Tuning the ConvNet. The results are almost equal to the Fine-Tuning technique.</p>
+
+<h2 id="predictions">Predictions</h2>
+
+<p>I&rsquo;ve got more than 91% of accuracy.</p>
+
+<div align="center">
+    <br />
+    <br />
+    <img src="https://www.dropbox.com/s/k842le5vb74og5y/cnn1.png?raw=1"><br /><br />
+</div>
+
+<p>I&rsquo;ve tried some dog filter on <a href="https://twitter.com/praneshbalu7">praveen</a> just to check whether it is able to classify him correctly. Well, it has classified him as a <code>cat</code> though. Look likes there&rsquo;s even more to do. ┬──┬ ノ( ゜-゜ノ)</p>
+
+<div align="center">
+    <br />
+    <br />
+    <img src="https://www.dropbox.com/s/31p6pfvd58fld4f/cnn2.png?raw=1"><br /><br />
+</div>
+
+<h2 id="source-code">Source Code</h2>
+
+<p><a href="https://github.com/GnaneshKunal/dogs-vs-cats-classifier/">GnaneshKunal/dogs-vs-cats-classifier</a></p>
+
+<h2 id="useful-links">Useful Links</h2>
+
+<ul>
+<li><a href="https://cs231n.github.io/transfer-learning/">Transfer Learning</a></li>
+<li><a href="https://arxiv.org/pdf/1512.03385.pdf">Resnet</a></li>
+<li><a href="https://arxiv.org/pdf/1311.2901.pdf">Visualizing and Understanding Convolutional Networks</a></li>
+<li><a href="http://pytorch.org/docs/0.3.1/">PyTorch</a></li>
+</ul>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>System Administration on GK&#39;s Blog</title>
+    <link>/categories/system-administration/</link>
+    <description>Recent content in System Administration on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/system-administration/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Install packages &amp; libraries on your local paths</title>
+      <link>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/13/install-packages--libraries-on-your-local-paths/</guid>
+      <description>Fedora is my favorite Linux distribution which is sponsored by Red Hat. Fedora 28 is out with a lot of features. Instead of upgrading my fedora using dnf-plugin-system-upgrade or the GNOME Software way, I&amp;rsquo;d always like to download the ISO and install it from a USB Flash Drive (cause that returns a pointer to the ISO and I could use it anywhere (ಠ⌣ಠ)). I have a love/hate relationship is with the Red Hat&amp;rsquo;s Automatic Partition which usually leaves with just 50GB for the Computer (/) and the rest for your $HOME.</description>
+    </item>
+    
+    <item>
+      <title>What are containers!!</title>
+      <link>/post/2017/08/24/what-are-containers/</link>
+      <pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/08/24/what-are-containers/</guid>
+      <description>“Have you ever come across people saying or found yourself saying, “It worked on my machine”? Well, Don’t say you never said it, you did.”
+“Of course, everyone does, when I want to transfer my project to a new machine, I usually fall into this trap. Don’t you say it too?”
+“Well, I was, but not these days.”
+“So what should we do to stop saying it, there’s any special Operating System Virtualization that works the same on every Machine?</description>
+    </item>
+    
+  </channel>
+</rss>
