@@ -61,23 +61,23 @@ I write TypeScript, but you may not write TypeScript.</p>
 <p>JavaScript has too many packages that it even has two Google Maps Library(React). But only one of the library has Type Definitions. It&rsquo;s a pain to write your own definition file. You could dig the source code and contribute a type file or you could simply write a minimal one with functions that you use. Type file is almost all similar to a TS interface.</p>
 
 <p>A basic definition file would be like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// yourLibrary.d.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">declare</span> <span style="color:#66d9ef">module</span> <span style="color:#a6e22e">yourLibrary</span> {
-	<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">objectName</span> {
-		<span style="color:#a6e22e">prop</span>: <span style="color:#66d9ef">type</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#008000">// yourLibrary.d.ts
+</span><span style="color:#008000"></span><span style="color:#00f">declare</span> <span style="color:#00f">module</span> yourLibrary {
+	<span style="color:#00f">export</span> <span style="color:#00f">interface</span> objectName {
+		prop: <span style="color:#2b91af">type</span>
 	}
 }</code></pre></div>
 <p>On top of your file, add the following statement:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// someFile.ts
-</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">/// &lt;reference path=&#34;./path/yourLibrary.d.ts&#34; /&gt;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#008000">// someFile.ts
+</span><span style="color:#008000"></span><span style="">/// &lt;reference path=&#34;./path/yourLibrary.d.ts&#34; /&gt;</span></code></pre></div>
 <p><i>But I&rsquo;ve so many packages and writing a definition file for each package is tedious. I just want an ONE VS. ALL way.</i></p>
 
 <p>Your definition file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// index.d.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">declare</span> <span style="color:#a6e22e">module</span> <span style="color:#e6db74">&#34;*&#34;</span>;</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#008000">// index.d.ts
+</span><span style="color:#008000"></span><span style="color:#00f">declare</span> module <span style="color:#a31515">&#34;*&#34;</span>;</code></pre></div>
 <p>Your statement:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#75715e">// someFile.ts
-</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">/// &lt;reference path=&#34;./path/index.d.ts&#34; /&gt;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ts" data-lang="ts"><span style="color:#008000">// someFile.ts
+</span><span style="color:#008000"></span><span style="">/// &lt;reference path=&#34;./path/index.d.ts&#34; /&gt;</span></code></pre></div>
 <p>The above statement turns off type checking for all the packages, so it&rsquo;s not recommended.</p>
 
 </main>

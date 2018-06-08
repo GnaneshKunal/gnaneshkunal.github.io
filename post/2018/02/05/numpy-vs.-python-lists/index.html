@@ -78,39 +78,39 @@ $${J_{train}(\Theta)  = \dfrac{1}{m} \sum_{i=1}^{m} cost( \Theta, (x^{(i)}, y^{(
 <h2 id="a-dumb-stochastic-gradient-descent-implementation">A dumb Stochastic Gradient Descent Implementation</h2>
 
 <h3 id="using-lists">Using Lists:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dot</span>(v, w):
-    <span style="color:#66d9ef">return</span> sum(v_i <span style="color:#f92672">*</span> w_i <span style="color:#66d9ef">for</span> v_i, w_i <span style="color:#f92672">in</span> zip(v, w))
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> dot(v, w):
+    <span style="color:#00f">return</span> sum(v_i * w_i <span style="color:#00f">for</span> v_i, w_i <span style="color:#00f">in</span> zip(v, w))
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">predict_multi</span>(x_i, beta):
-    <span style="color:#66d9ef">return</span> dot(x_i, beta)
+<span style="color:#00f">def</span> predict_multi(x_i, beta):
+    <span style="color:#00f">return</span> dot(x_i, beta)
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">error_multi</span>(beta, x, y):
-    <span style="color:#66d9ef">return</span> y <span style="color:#f92672">-</span> predict_multi(x, beta)
+<span style="color:#00f">def</span> error_multi(beta, x, y):
+    <span style="color:#00f">return</span> y - predict_multi(x, beta)
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stochastic_gradient_descent</span>(x, y, theta, learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>):
-    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1500</span>):
-        <span style="color:#66d9ef">for</span> x_i, y_i <span style="color:#f92672">in</span> zip(x, y):
-            i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-            <span style="color:#66d9ef">for</span> x_ii, theta_i <span style="color:#f92672">in</span> zip(x_i, theta):
-                theta[i] <span style="color:#f92672">=</span> theta_i <span style="color:#f92672">-</span> learning_rate <span style="color:#f92672">*</span> (<span style="color:#f92672">-</span>error_multi(theta, x_i, y_i)) <span style="color:#f92672">*</span> x_ii
-                i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">return</span> theta</code></pre></div>
+<span style="color:#00f">def</span> stochastic_gradient_descent(x, y, theta, learning_rate=0.001):
+    <span style="color:#00f">for</span> _ <span style="color:#00f">in</span> range(1500):
+        <span style="color:#00f">for</span> x_i, y_i <span style="color:#00f">in</span> zip(x, y):
+            i = 0
+            <span style="color:#00f">for</span> x_ii, theta_i <span style="color:#00f">in</span> zip(x_i, theta):
+                theta[i] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
+                i += 1
+    <span style="color:#00f">return</span> theta</code></pre></div>
 <p>So, the benchmark results</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">%timeit stochastic_gradient_descent(multi_data, daily_minutes_good, theta)<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>1.85 s ± 21.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">%timeit stochastic_gradient_descent(multi_data, daily_minutes_good, theta)<span style="">
+</span><span style=""></span>1.85 s ± 21.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</code></pre></div>
 <h3 id="using-numpy">Using Numpy:</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> numpy <span style="color:#00f">as</span> np
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stochastic_gradient_descent_np</span>(x, y, theta, learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>):
-    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1500</span>):
-        <span style="color:#66d9ef">for</span> x_i, y_i <span style="color:#f92672">in</span> zip(x, y):
-            theta <span style="color:#f92672">=</span> theta <span style="color:#f92672">-</span> learning_rate <span style="color:#f92672">*</span> (np<span style="color:#f92672">.</span>sum(x_i <span style="color:#f92672">*</span> theta) <span style="color:#f92672">-</span> y_i) <span style="color:#f92672">*</span> x_i
-    <span style="color:#66d9ef">return</span> theta</code></pre></div>
+<span style="color:#00f">def</span> stochastic_gradient_descent_np(x, y, theta, learning_rate=0.001):
+    <span style="color:#00f">for</span> _ <span style="color:#00f">in</span> range(1500):
+        <span style="color:#00f">for</span> x_i, y_i <span style="color:#00f">in</span> zip(x, y):
+            theta = theta - learning_rate * (np.sum(x_i * theta) - y_i) * x_i
+    <span style="color:#00f">return</span> theta</code></pre></div>
 <p>That&rsquo;s it, boom. The Numpy implementation of Gradient Descent actually uses a vectorized implementation.</p>
 
 <p>Benchmark using Numpy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">%timeit stochastic_gradient_descent_np(np_multi_data, np_daily, np_theta)<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>1.96 s ± 7.53 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">%timeit stochastic_gradient_descent_np(np_multi_data, np_daily, np_theta)<span style="">
+</span><span style=""></span>1.96 s ± 7.53 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</code></pre></div>
 <p>Using Numpy doesn&rsquo;t just make the implementation simpler but also faster.</p>
 
 </main>

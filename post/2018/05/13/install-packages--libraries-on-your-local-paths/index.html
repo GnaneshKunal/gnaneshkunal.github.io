@@ -61,11 +61,11 @@
 <h2 id="the-usual-way">The Usual way</h2>
 
 <p>Usually, When you compile libraries from source, the usual way would be</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure
 make
 sudo make install</code></pre></div>
 <p>or</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./autogen.sh
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./autogen.sh
 ./configure
 make
 sudo make install</code></pre></div>
@@ -78,13 +78,13 @@ sudo make install</code></pre></div>
 <h2 id="what-you-need-to-do">What You Need To Do</h2>
 
 <p>Well, that&rsquo;s easy though. The <code>configure</code> script also has a <code>--prefix</code> argument that allows you to install the package on given path.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure --prefix $HOME/.local
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure --prefix $HOME/.local
 make
 make install</code></pre></div>
 <p><b>Note that you don&rsquo;t need the sudo command</b>, as the <code>$HOME</code> doesn&rsquo;t require you to have <code>root</code> privileges.</p>
 
 <p>After installing</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>monster@monster json-c<span style="color:#f92672">]</span>$ whereis json-c
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">[monster@monster json-c]$ whereis json-c
 json-c: /home/monster/.local/include/json-c</code></pre></div>
 <p>But will your packages be found and linked to other programs that use this packages?</p>
 
@@ -92,20 +92,20 @@ json-c: /home/monster/.local/include/json-c</code></pre></div>
 <b>Will I be able to use it? The answer is NO.</b> (BOOO)</p>
 
 <p>You must add the path to your <code>$PATH</code> variable.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~.bashrc
-</span><span style="color:#75715e"></span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib:</span>$HOME<span style="color:#e6db74">/.local/share:</span>$HOME<span style="color:#e6db74">/.local/include:</span>$HOME<span style="color:#e6db74">/.local/bin&#34;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># ~.bashrc
+</span><span style="color:#008000"></span>export PATH=<span style="color:#a31515">&#34;</span>$PATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/lib:</span>$HOME<span style="color:#a31515">/.local/share:</span>$HOME<span style="color:#a31515">/.local/include:</span>$HOME<span style="color:#a31515">/.local/bin&#34;</span></code></pre></div>
 <p>Sometimes you get complains about shared libraries.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
-</span><span style="color:#75715e"></span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$LD_LIBRARY_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib&#34;</span>
-export LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$LIBRARY_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib&#34;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># ~/.bashrc
+</span><span style="color:#008000"></span>export LD_LIBRARY_PATH=<span style="color:#a31515">&#34;</span>$LD_LIBRARY_PATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/lib&#34;</span>
+export LIBRARY_PATH=<span style="color:#a31515">&#34;</span>$LIBRARY_PATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/lib&#34;</span></code></pre></div>
 <p>Also, you love <code>pkg-config</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
-</span><span style="color:#75715e"></span>export PKG_CONFIG_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PKG_CONFIG_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/lib/pkgconfig&#34;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># ~/.bashrc
+</span><span style="color:#008000"></span>export PKG_CONFIG_PATH=<span style="color:#a31515">&#34;</span>$PKG_CONFIG_PATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/lib/pkgconfig&#34;</span></code></pre></div>
 <p>When you manually compile, your <code>C/C++</code> compiler complains that it couldn&rsquo;t find the headers.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
-</span><span style="color:#75715e"></span>export CPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$CPATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/include&#34;</span>
-export C_INCLUDE_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$C_INCLUDE_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/include&#34;</span>
-export CPLUS_INCLUDE_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$CPLUS_INCLUDE_PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.local/include&#34;</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># ~/.bashrc
+</span><span style="color:#008000"></span>export CPATH=<span style="color:#a31515">&#34;</span>$CPATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/include&#34;</span>
+export C_INCLUDE_PATH=<span style="color:#a31515">&#34;</span>$C_INCLUDE_PATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/include&#34;</span>
+export CPLUS_INCLUDE_PATH=<span style="color:#a31515">&#34;</span>$CPLUS_INCLUDE_PATH<span style="color:#a31515">:</span>$HOME<span style="color:#a31515">/.local/include&#34;</span></code></pre></div>
 <h4 id="useful-links">Useful Links</h4>
 
 <ul>

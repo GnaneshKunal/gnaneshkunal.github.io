@@ -69,82 +69,82 @@ I&rsquo;ve gone through the Melpa Installation steps, which was the starting poi
 <h2 id="melpa">Melpa</h2>
 
 <p>Add the following in your <code>.emacs</code> and your are done.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(require <span style="color:#e6db74">&#39;package</span>)
-(let* ((no-ssl (and (memq system-type <span style="color:#f92672">&#39;</span>(windows-nt ms-dos))
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(require <span style="color:#a31515">&#39;package</span>)
+(let* ((no-ssl (and (memq system-type &#39;(windows-nt ms-dos))
                     (not (gnutls-available-p))))
-       (proto (if no-ssl <span style="color:#e6db74">&#34;http&#34;</span> <span style="color:#e6db74">&#34;https&#34;</span>)))
-  <span style="color:#75715e">;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
-  (add-to-list <span style="color:#e6db74">&#39;package-archives</span> (cons <span style="color:#e6db74">&#34;melpa&#34;</span> (concat proto <span style="color:#e6db74">&#34;://melpa.org/packages/&#34;</span>)) <span style="color:#66d9ef">t</span>)
-  <span style="color:#75715e">;;(add-to-list &#39;package-archives (cons &#34;melpa-stable&#34; (concat proto &#34;://stable.melpa.org/packages/&#34;)) t)</span>
-  (when (&lt; emacs-major-version <span style="color:#ae81ff">24</span>)
-    <span style="color:#75715e">;; For important compatibility libraries like cl-lib</span>
-    (add-to-list <span style="color:#e6db74">&#39;package-archives</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;gnu&#34;</span> <span style="color:#f92672">.</span> (concat proto <span style="color:#e6db74">&#34;://elpa.gnu.org/packages/&#34;</span>)))))
+       (proto (if no-ssl <span style="color:#a31515">&#34;http&#34;</span> <span style="color:#a31515">&#34;https&#34;</span>)))
+  <span style="color:#008000">;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
+  (add-to-list <span style="color:#a31515">&#39;package-archives</span> (cons <span style="color:#a31515">&#34;melpa&#34;</span> (concat proto <span style="color:#a31515">&#34;://melpa.org/packages/&#34;</span>)) t)
+  <span style="color:#008000">;;(add-to-list &#39;package-archives (cons &#34;melpa-stable&#34; (concat proto &#34;://stable.melpa.org/packages/&#34;)) t)</span>
+  (when (&lt; emacs-major-version 24)
+    <span style="color:#008000">;; For important compatibility libraries like cl-lib</span>
+    (add-to-list <span style="color:#a31515">&#39;package-archives</span> &#39;(<span style="color:#a31515">&#34;gnu&#34;</span> . (concat proto <span style="color:#a31515">&#34;://elpa.gnu.org/packages/&#34;</span>)))))
 (package-initialize)</code></pre></div>
 <h2 id="autocomplete">Autocomplete</h2>
 
 <p>Autocomplete is a must. You really need it if you need some cool <code>auto-completition</code> for other languages as well.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] auto-complete [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lsip" data-lang="lsip">;;.emacs
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] auto-complete [RET]</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lsip" data-lang="lsip">;;.emacs
 ;; Autocomplete
 (ac-config-default)</code></pre></div>
 <h2 id="c-c">C/C++</h2>
 
 <p>I love clang. And you must love it too. <a href="https://github.com/Sarcasm/irony-mode">irony</a> provides better editing experience for C and  C++, and is based on <code>libclang</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] irony [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
-<span style="color:#75715e">;; irony</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] irony [RET]</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#008000">;;.emacs</span>
+<span style="color:#008000">;; irony</span>
 
-(add-hook <span style="color:#e6db74">&#39;c++-mode-hook</span> <span style="color:#e6db74">&#39;irony-mode</span>)
-(add-hook <span style="color:#e6db74">&#39;c-mode-hook</span> <span style="color:#e6db74">&#39;irony-mode</span>)
-(add-hook <span style="color:#e6db74">&#39;objc-mode-hook</span> <span style="color:#e6db74">&#39;irony-mode</span>)
+(add-hook <span style="color:#a31515">&#39;c++-mode-hook</span> <span style="color:#a31515">&#39;irony-mode</span>)
+(add-hook <span style="color:#a31515">&#39;c-mode-hook</span> <span style="color:#a31515">&#39;irony-mode</span>)
+(add-hook <span style="color:#a31515">&#39;objc-mode-hook</span> <span style="color:#a31515">&#39;irony-mode</span>)
 
-(add-hook <span style="color:#e6db74">&#39;irony-mode-hook</span> <span style="color:#e6db74">&#39;irony-cdb-autosetup-compile-options</span>)</code></pre></div>
+(add-hook <span style="color:#a31515">&#39;irony-mode-hook</span> <span style="color:#a31515">&#39;irony-cdb-autosetup-compile-options</span>)</code></pre></div>
 <h2 id="python-mode">Python Mode</h2>
 
 <p>I&rsquo;m using <code>anaconda-mode</code> as my python environment. The <a href="https://github.com/jorgenschaefer/elpy"><code>elpy</code></a> is another python environment with <code>automatic code rules</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] anaconda-mode [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
-<span style="color:#75715e">;; Anaconda-mode python</span>
-(add-hook <span style="color:#e6db74">&#39;python-mode-hook</span><span style="color:#f92672">&#39;</span> <span style="color:#e6db74">&#39;anaconda-mode</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] anaconda-mode [RET]</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#008000">;;.emacs</span>
+<span style="color:#008000">;; Anaconda-mode python</span>
+(add-hook <span style="color:#a31515">&#39;python-mode-hook</span>&#39; <span style="color:#a31515">&#39;anaconda-mode</span>)</code></pre></div>
 <h2 id="web">Web</h2>
 
 <p>You definitly need it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] web-mode [RET]
-M-x package-install [RET] tide [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
-<span style="color:#75715e">;;; HTML</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] web-mode [RET]
+M-x package-install [RET] tide [RET]</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#008000">;;.emacs</span>
+<span style="color:#008000">;;; HTML</span>
 
-(require <span style="color:#e6db74">&#39;web-mode</span>)
-(add-to-list <span style="color:#e6db74">&#39;auto-mode-alist</span> <span style="color:#f92672">&#39;</span>(<span style="color:#e6db74">&#34;\\.html?\\&#39;&#34;</span> <span style="color:#f92672">.</span> web-mode))
+(require <span style="color:#a31515">&#39;web-mode</span>)
+(add-to-list <span style="color:#a31515">&#39;auto-mode-alist</span> &#39;(<span style="color:#a31515">&#34;\\.html?\\&#39;&#34;</span> . web-mode))
 
-<span style="color:#75715e">;; tide typescript</span>
+<span style="color:#008000">;; tide typescript</span>
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
-  (flycheck-mode <span style="color:#ae81ff">+1</span>)
-  (setq flycheck-check-syntax-automatically <span style="color:#f92672">&#39;</span>(save mode-enabled))
-  (eldoc-mode <span style="color:#ae81ff">+1</span>)
-  (tide-hl-identifier-mode <span style="color:#ae81ff">+1</span>)
-  <span style="color:#75715e">;; company is an optional dependency. You have to</span>
-  <span style="color:#75715e">;; install it separately via package-install</span>
-  <span style="color:#75715e">;; `M-x package-install [ret] company`</span>
-  (company-mode <span style="color:#ae81ff">+1</span>))
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically &#39;(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  <span style="color:#008000">;; company is an optional dependency. You have to</span>
+  <span style="color:#008000">;; install it separately via package-install</span>
+  <span style="color:#008000">;; `M-x package-install [ret] company`</span>
+  (company-mode +1))
 
-<span style="color:#75715e">;; aligns annotation to the right hand side</span>
-(setq company-tooltip-align-annotations <span style="color:#66d9ef">t</span>)
+<span style="color:#008000">;; aligns annotation to the right hand side</span>
+(setq company-tooltip-align-annotations t)
 
-<span style="color:#75715e">;; formats the buffer before saving</span>
-(add-hook <span style="color:#e6db74">&#39;before-save-hook</span> <span style="color:#e6db74">&#39;tide-format-before-save</span>)
+<span style="color:#008000">;; formats the buffer before saving</span>
+(add-hook <span style="color:#a31515">&#39;before-save-hook</span> <span style="color:#a31515">&#39;tide-format-before-save</span>)
 
-<span style="color:#75715e">;; tide typescript</span>
-(add-hook <span style="color:#e6db74">&#39;typescript-mode-hook</span> <span style="color:#a6e22e">#&#39;</span>setup-tide-mode)</code></pre></div>
+<span style="color:#008000">;; tide typescript</span>
+(add-hook <span style="color:#a31515">&#39;typescript-mode-hook</span> #&#39;setup-tide-mode)</code></pre></div>
 <h2 id="git">Git</h2>
 
 <p>Finally.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] magit [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
-<span style="color:#75715e">;; magit</span>
-(global-set-key (kbd <span style="color:#e6db74">&#34;C-x g&#34;</span>) <span style="color:#e6db74">&#39;magit-status</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] magit [RET]</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#008000">;;.emacs</span>
+<span style="color:#008000">;; magit</span>
+(global-set-key (kbd <span style="color:#a31515">&#34;C-x g&#34;</span>) <span style="color:#a31515">&#39;magit-status</span>)</code></pre></div>
 <h2 id="spacemacs-theme">Spacemacs-theme</h2>
 
 <p>If you love <code>spacemacs-theme</code>, then this one&rsquo;s for you</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] spacemacs-theme [RET]</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#75715e">;;.emacs</span>
-(load-theme <span style="color:#e6db74">&#39;spacemacs-dark</span> <span style="color:#66d9ef">t</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">M-x package-install [RET] spacemacs-theme [RET]</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp"><span style="color:#008000">;;.emacs</span>
+(load-theme <span style="color:#a31515">&#39;spacemacs-dark</span> t)</code></pre></div>
 <p>Thinks are a bit fast now though. The startup time has decreased by <b>75%</b>. I&rsquo;m finally experiencing the same joy I&rsquo;ve got while using spacemacs.</p>
 
 <p>Well, you could mail, play games, listen to songs and do most of the things without leaving <a href="https://www.gnu.org/software/emacs/">emacs</a>.</p>

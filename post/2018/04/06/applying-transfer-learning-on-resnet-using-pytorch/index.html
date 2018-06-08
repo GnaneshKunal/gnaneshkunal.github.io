@@ -62,7 +62,7 @@
 <p>I&rsquo;ve trained the model using Kaggle&rsquo;s classic dogs vs. cats dataset. The dataset can be found <a href="https://www.kaggle.com/c/dogs-vs-cats/data">here</a></p>
 
 <p>Well, I have to say it&rsquo;s not plug and play. At least not for the <code>torchvision</code> APIs. <code>torchvision</code> has an <code>ImageFolder</code> that&rsquo;s (right now) the standard to load images as well as it&rsquo;s labels automatically. The document suggests that <code>ImageFolder</code> requires the dataset in the following format:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root/dog/xxx.png
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root/dog/xxx.png
 root/dog/xxy.png
 root/dog/xxz.png
 
@@ -74,19 +74,19 @@ root/cat/asd932_.png</code></pre></div>
 <h2 id="model">Model</h2>
 
 <p>The choice is arbitrary. I&rsquo;ve considered some wired model. I don&rsquo;t know what to name it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>conv1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>)
-self<span style="color:#f92672">.</span>pool <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>MaxPool(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)
-self<span style="color:#f92672">.</span>conv2 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">3</span>)
-self<span style="color:#f92672">.</span>conv3 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">3</span>)
-self<span style="color:#f92672">.</span>conv4 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">3</span>)
-self<span style="color:#f92672">.</span>conv5 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">64</span>, <span style="color:#ae81ff">3</span>)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self.conv1 = nn.Conv2d(3, 8, 5)
+self.pool = nn.MaxPool(2, 2)
+self.conv2 = nn.Conv2d(8, 16, 3)
+self.conv3 = nn.Conv2d(16, 32, 3)
+self.conv4 = nn.Conv2d(32, 64, 3)
+self.conv5 = nn.Conv2d(64, 64, 3)
 
-self<span style="color:#f92672">.</span>fc1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">64</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1000</span>)
-self<span style="color:#f92672">.</span>fc2 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">500</span>)
-self<span style="color:#f92672">.</span>fc3 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">120</span>)
-self<span style="color:#f92672">.</span>fc4 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">120</span>, <span style="color:#ae81ff">84</span>)
-self<span style="color:#f92672">.</span>fc5 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">84</span>, <span style="color:#ae81ff">10</span>)
-self<span style="color:#f92672">.</span>fc6 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>)</code></pre></div>
+self.fc1 = nn.Linear(64 * 5 * 5, 1000)
+self.fc2 = nn.Linear(1000, 500)
+self.fc3 = nn.Linear(500, 120)
+self.fc4 = nn.Linear(120, 84)
+self.fc5 = nn.Linear(84, 10)
+self.fc6 = nn.Linear(10, 2)</code></pre></div>
 <p>With ReLu everywhere and softmax layer at the end. It worked but not as I thought its gonna be. And its still smaller than starter ResNet which is ResNet18. So, I&rsquo;ve considered ResNet18 over my network.</p>
 
 <h2 id="training">Training</h2>

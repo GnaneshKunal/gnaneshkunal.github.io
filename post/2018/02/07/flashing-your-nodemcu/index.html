@@ -91,19 +91,19 @@ But most of the Microcontrollers use 5v as default compared to 3.3v of ESP9266.<
 
 <ol>
 <li><p>Download esptool either as a zip file or using git clone.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/themadinventor/esptool.git</code></pre></div></li>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/themadinventor/esptool.git</code></pre></div></li>
 
 <li><p>Connect the NodeMCU via USB cable to the computer.</p></li>
 
 <li><p>Make sure you have python2.7 installed, open a terminal and type</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo python setup.py install</code></pre></div></li>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo python setup.py install</code></pre></div></li>
 
 <li><p>Download the latest NodeMCU firmware from <a href="https://github.com/nodemcu/nodemcu-firmware/releases">here</a>. You could find nodemcu_integer_*.bin at the end of the page.</p></li>
 
 <li><p>Flash the firmware using the following command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo python2 esptool.py --baud <span style="color:#ae81ff">460800</span> --port /dev/ttyUSB0 write_flash -fm dio 0x00000 /home/monster/Downloads/nodemcu_integer_0.9.6-dev_20150704.bin</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo python2 esptool.py --baud 460800 --port /dev/ttyUSB0 write_flash -fm dio 0x00000 /home/monster/Downloads/nodemcu_integer_0.9.6-dev_20150704.bin</code></pre></div>
 <p>If that worked, you are good to go</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>monster@monster esptool<span style="color:#f92672">]</span>$ sudo python2 esptool.py --baud <span style="color:#ae81ff">460800</span> --port /dev/ttyUSB0 write_flash -fm dio 0x00000 /home/monster/Downloads/nodemcu_integer_0.9.6-dev_20150704.bin
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[monster@monster esptool]$ sudo python2 esptool.py --baud 460800 --port /dev/ttyUSB0 write_flash -fm dio 0x00000 /home/monster/Downloads/nodemcu_integer_0.9.6-dev_20150704.bin
 esptool.py v2.3-dev
 Connecting....
 Detecting chip type... ESP8266
@@ -111,17 +111,17 @@ Chip is ESP8266EX
 Uploading stub...
 Running stub...
 Stub running...
-Changing baud rate to <span style="color:#ae81ff">460800</span>
+Changing baud rate to 460800
 Changed.
 Configuring flash size...
 Auto-detected Flash size: 4MB
 Flash params set to 0x0240
-Compressed <span style="color:#ae81ff">450072</span> bytes to <span style="color:#ae81ff">290528</span>...
-Wrote <span style="color:#ae81ff">450072</span> bytes <span style="color:#f92672">(</span><span style="color:#ae81ff">290528</span> compressed<span style="color:#f92672">)</span> at 0x00000000 in <span style="color:#ae81ff">6</span>.6 seconds <span style="color:#f92672">(</span>effective <span style="color:#ae81ff">543</span>.0 kbit/s<span style="color:#f92672">)</span>...
+Compressed 450072 bytes to 290528...
+Wrote 450072 bytes (290528 compressed) at 0x00000000 in 6.6 seconds (effective 543.0 kbit/s)...
 Hash of data verified.
 Leaving...
 Hard resetting via RTS pin...
-<span style="color:#f92672">[</span>monster@monster esptool<span style="color:#f92672">]</span>$ </code></pre></div></li>
+[monster@monster esptool]$ </code></pre></div></li>
 </ol>
 
 <h4 id="verify-your-firmware">VERIFY YOUR FIRMWARE</h4>
@@ -153,8 +153,8 @@ make[1]: Leaving directory '/usr/src/kernels/4.14.16-300.fc27.x86_64'
 <li><p>Download ESPlorer from <a href="http://esp8266.ru/esplorer-latest/?f=ESPlorer.zip">here</a>.</p></li>
 
 <li><p>Run the ESPlorer using the following command.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>monster@monster ~<span style="color:#f92672">]</span>$ cd ESPlorer
-<span style="color:#f92672">[</span>monster@monster ~<span style="color:#f92672">]</span>$ sudo java -jar ESPlorer.jar</code></pre></div></li>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[monster@monster ~]$ cd ESPlorer
+[monster@monster ~]$ sudo java -jar ESPlorer.jar</code></pre></div></li>
 
 <li><p>This the window you&rsquo;ll be getting
 <div align="center">
@@ -184,25 +184,25 @@ make[1]: Leaving directory '/usr/src/kernels/4.14.16-300.fc27.x86_64'
 <li><p>Click the Format button to delete all the files.</p></li>
 
 <li><p>Copy/paste the following code</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">-- Config</span>
-<span style="color:#66d9ef">local</span> pin <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>            <span style="color:#75715e">--&gt; GPIO2</span>
-<span style="color:#66d9ef">local</span> value <span style="color:#f92672">=</span> gpio.LOW
-<span style="color:#66d9ef">local</span> duration <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>    <span style="color:#75715e">--&gt; 1 second</span>
-<span style="color:#75715e">-- Function toggles LED state</span>
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">toggleLED</span> ()
-<span style="color:#66d9ef">if</span> value <span style="color:#f92672">==</span> gpio.LOW <span style="color:#66d9ef">then</span>
-    value <span style="color:#f92672">=</span> gpio.HIGH
-<span style="color:#66d9ef">else</span>
-    value <span style="color:#f92672">=</span> gpio.LOW
-<span style="color:#66d9ef">end</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#008000">-- Config</span>
+<span style="color:#00f">local</span> pin = 4            <span style="color:#008000">--&gt; GPIO2</span>
+<span style="color:#00f">local</span> value = gpio.LOW
+<span style="color:#00f">local</span> duration = 1000    <span style="color:#008000">--&gt; 1 second</span>
+<span style="color:#008000">-- Function toggles LED state</span>
+<span style="color:#00f">function</span> toggleLED ()
+<span style="color:#00f">if</span> value == gpio.LOW <span style="color:#00f">then</span>
+    value = gpio.HIGH
+<span style="color:#00f">else</span>
+    value = gpio.LOW
+<span style="color:#00f">end</span>
 
 gpio.write(pin, value)
-<span style="color:#66d9ef">end</span>
-<span style="color:#75715e">-- Initialise the pin</span>
+<span style="color:#00f">end</span>
+<span style="color:#008000">-- Initialise the pin</span>
 gpio.mode(pin, gpio.OUTPUT)
 gpio.write(pin, value)
-<span style="color:#75715e">-- Create an interval</span>
-tmr.alarm(<span style="color:#ae81ff">0</span>, duration, <span style="color:#ae81ff">1</span>, toggleLED)</code></pre></div></li>
+<span style="color:#008000">-- Create an interval</span>
+tmr.alarm(0, duration, 1, toggleLED)</code></pre></div></li>
 
 <li><p>Save the file as <code>init.lua</code>.</p></li>
 </ol>
