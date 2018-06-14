@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tags | GK&#39;s Blog</title>
+    <title>Complexity Analysis | GK&#39;s Blog</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
@@ -41,127 +41,38 @@
     </nav>
 
 
-<h1>Tags</h1>
 
-<ul class="terms">
+<h1>Complexity Analysis</h1>
+
+
+
+
+
+<div id="riddle">
+</div>
+<script type="text/javascript">
+ (function () {
+     var xmlhttp;
+     
+     xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function(){
+	 if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+	     var riddleDOM = document.getElementById("riddle");
+	     var r = JSON.parse(xmlhttp.responseText).riddle;
+	     console.log(r);
+	     riddleDOM.innerHTML = r.q;
+	 }
+     }
+     xmlhttp.open("GET", 'https://edwardnigma.herokuapp.com/riddle?a=0', true);
+     xmlhttp.send();
+ })();
+</script>
+
+<ul>
   
   <li>
-    <a href="/tags/complexity-analysis">
-      Complexity Analysis
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/containers">
-      Containers
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/docker">
-      Docker
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/emacs">
-      Emacs
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/linux">
-      Linux
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/neural-networks">
-      Neural Networks
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/nodemcu">
-      NodeMCU
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/numpy">
-      Numpy
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/pytorch">
-      PyTorch
-    </a>
-    (2)
-  </li>
-  
-  <li>
-    <a href="/tags/python">
-      Python
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/transfer-learning">
-      Transfer Learning
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/typescript">
-      TypeScript
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/unix">
-      Unix
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/cmake">
-      cmake
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/gatsbyjs">
-      gatsbyjs
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/hexo">
-      hexo
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/tags/make">
-      make
-    </a>
-    (1)
+    <span class="date">2018/06/14</span>
+    <a href="/note/2018/06/14/wonderful-post-about-algorithm-complexity-analysis/">Wonderful post about Algorithm Complexity Analysis</a>
   </li>
   
 </ul>

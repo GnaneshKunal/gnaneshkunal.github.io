@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Notes on GK&#39;s Blog</title>
-    <link>/note/</link>
-    <description>Recent content in Notes on GK&#39;s Blog</description>
+    <title>Complexity Analysis on GK&#39;s Blog</title>
+    <link>/tags/complexity-analysis/</link>
+    <description>Recent content in Complexity Analysis on GK&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 14 Jun 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/note/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/complexity-analysis/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,16 +19,6 @@
       <guid>/note/2018/06/14/wonderful-post-about-algorithm-complexity-analysis/</guid>
       <description>Found this Amazing post about Algorithm Complexity which explains every thing in detail.
  A Gentle Introduction to Algorithm Complexity Analysis  </description>
-    </item>
-    
-    <item>
-      <title>PyTorch tutorials</title>
-      <link>/note/2018/06/08/pytorch-tutorials/</link>
-      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/note/2018/06/08/pytorch-tutorials/</guid>
-      <description>Found two repositories with good list of PyTorch tutorials.
- Awesome PyTorch list The Incredible PyTorch  </description>
     </item>
     
   </channel>
