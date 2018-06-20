@@ -126,7 +126,7 @@ scala&gt; Person(Name(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>
  required: Int
        Person(Name(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), Age(20))
                                         ^</code></pre></div>
-<p><em>Why it does it still not work?</em></p>
+<p><em>Why does it still not work?</em></p>
 
 <p>Well!! The <code>this(n: Name, a: Age)</code> is an auxiliary constructor. The <code>apply</code> methods which will be generated for <code>case class</code> objects won&rsquo;t be defined for them. To define a class with <code>Name</code> and <code>Age</code> as parameters types, we must use the <code>new</code> keyword.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">new</span> <span style="color:#2b91af">Person</span>(<span style="color:#2b91af">Name</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), <span style="color:#2b91af">Age</span>(20))</code></pre></div>
