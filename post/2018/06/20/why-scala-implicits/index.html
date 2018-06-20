@@ -52,11 +52,11 @@
 <p>Before I tell you what <code>implicit</code>s actually are, I&rsquo;ll tell you what they solve.</p>
 
 <p>If you have to store the details of a Person&rsquo;s name and age, there are two ways to do it.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, <span style="color:#2b91af">Age</span><span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
 <p>While this does the work we need, it&rsquo;s not the right way to do it. This simple declaration lacks a lot of features.</p>
 
 <p>To get most of all the features(mainly pattern matching) we have to declare a <code>case class</code>. So, Now the above code will be turned to:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, <span style="color:#2b91af">Age</span><span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
 <p>Usage:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#2b91af">Person</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)</code></pre></div>
 <p>The name here is just a simple string.</p>
