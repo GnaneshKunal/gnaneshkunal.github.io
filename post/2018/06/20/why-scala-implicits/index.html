@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Why Scala Implicits | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume/">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">Why Scala Implicits</span></h1>
+    
+    <h2 class="date">2018/06/20</h2>
+</div>
+
+<main>
+    <p>There&rsquo;s a huge debate on Scala Implicits since they&rsquo;ve introduced it to the language. Some people love it while some people comment it on making the code unpredictable. So should we use it?</p>
+
+<p>Before I tell you what <code>implicit</code>s actually are, I&rsquo;ll tell you what they solve.</p>
+
+<p>If you have to store the details of a Person&rsquo;s name and age, there are two ways to do it.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, <span style="color:#2b91af">Age</span><span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
+<p>While this does the work we need, it&rsquo;s not the right way to do it. This simple declaration lacks a lot of features.</p>
+
+<p>To get most of all the features(mainly pattern matching) we have to declare a <code>case class</code>. So, Now the above code will be turned to:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, <span style="color:#2b91af">Age</span><span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
+<p>Usage:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#2b91af">Person</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)</code></pre></div>
+<p>The name here is just a simple string.</p>
+
+<p>It doesn&rsquo;t say anything about the person&rsquo;s <code>firstname</code> and <code>lastname</code>. We simply have to split the given string and must think the first item in the array corresponds to his first name. But that&rsquo;s still not the right way to do it. But for now, let me keep it simple and limit name to just a string.</p>
+
+<p><em>It would be better if we have a separate datatype that defines something.</em>
+So, let&rsquo;s define some.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Name</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>) 
+<span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Age</span>(age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)</code></pre></div>
+<p>So now, let me use those datatypes.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> name <span style="color:#00f">=</span> <span style="color:#2b91af">Name</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>)
+<span style="color:#00f">val</span> age <span style="color:#00f">=</span> <span style="color:#2b91af">Age</span>(20)
+<span style="color:#00f">val</span> person <span style="color:#00f">=</span> <span style="color:#2b91af">Person</span>(name, age)</code></pre></div>
+<p>If you try running the above code, you would get a type mismatch error.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scala&gt; val person = Person(name, age)
+&lt;console&gt;:33: error: type mismatch;
+ found   : Name
+ required: String
+       val person = Person(name, age)
+                           ^
+&lt;console&gt;:33: error: type mismatch;
+ found   : Age
+ required: Int
+       val person = Person(name, age)
+                                 ^</code></pre></div>
+<p>What we have known here is that the <code>name</code> and <code>age</code> variable have <code>Name</code> and <code>Age</code> datatypes respectively. But what we need is a <code>String</code> and <code>Int</code>. As I&rsquo;ve told you earlier that using custom datatypes leads us to define many different data structures.</p>
+
+<p>The Person class must be re-implemented using the newer data types.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span>, age<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span>)</code></pre></div>
+<p>This works now.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scala&gt; Person(name, age)
+res1: Person = Person(Name(Gnanesh Kunal),Age(20))</code></pre></div>
+<p>But do you think the following code is gonna work?</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#2b91af">Person</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scala&gt; Person(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)
+&lt;console&gt;:30: error: type mismatch;
+ found   : String(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>)
+ required: Name
+       Person(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)
+              ^
+&lt;console&gt;:30: error: type mismatch;
+ found   : Int(20)
+ required: Age
+       Person(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)</code></pre></div>
+<p>The same error again. The object must be initialized like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#2b91af">Person</span>(<span style="color:#2b91af">Name</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), <span style="color:#2b91af">Age</span>(20))</code></pre></div>
+<p>Another implementation would be to try multiple constructors.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, a<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) {
+	<span style="color:#00f">var</span> name<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span> = <span style="color:#2b91af">Name</span>(n)
+	<span style="color:#00f">var</span> age<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span> = <span style="color:#2b91af">Age</span>(a)
+	<span style="color:#00f">def</span> <span style="color:#00f">this</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span>, a<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span>) <span style="color:#00f">=</span> <span style="color:#00f">this</span>(n.name, a.age)
+}	</code></pre></div>
+<p>The parameters names have been changed to <code>n</code> and <code>a</code> since each parameter defined will become a property in Scala.</p>
+
+<p>Now let us try to create the objects.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scala&gt; Person(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20) <span style="color:#008000"># Yay!!
+</span><span style="color:#008000"></span>res10: Person = Person(Gnanesh Kunal,20)
+
+scala&gt; Person(Name(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), Age(20)) <span style="color:#008000"># Boo!!
+</span><span style="color:#008000"></span>&lt;console&gt;:30: error: type mismatch;
+ found   : Name
+ required: String
+       Person(Name(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), Age(20))
+                  ^
+&lt;console&gt;:30: error: type mismatch;
+ found   : Age
+ required: Int
+       Person(Name(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), Age(20))
+                                        ^</code></pre></div>
+<p><em>Why it does it still not work?</em></p>
+
+<p>Well!! The <code>this(n: Name, a: Age)</code> is an auxiliary constructor. The <code>apply</code> methods which will be generated for <code>case class</code> objects won&rsquo;t be defined for them. To define a class with <code>Name</code> and <code>Age</code> as parameters types, we must use the <code>new</code> keyword.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">new</span> <span style="color:#2b91af">Person</span>(<span style="color:#2b91af">Name</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), <span style="color:#2b91af">Age</span>(20))</code></pre></div>
+<p>To do something like <code>Person(Name(&quot;Gnanesh Kunal&quot;), Age(20))</code> to work we must create a companion object.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">// Person class Implementation ...
+</span><span style="color:#008000"></span>
+<span style="color:#00f">object</span> <span style="color:#2b91af">Person</span> {
+	<span style="color:#00f">def</span> apply(n<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span>, a<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Person</span>(n.name, a.age) 
+}</code></pre></div>
+<p>Finally it works.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">scala&gt; <span style="color:#2b91af">Person</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)
+res14<span style="color:#00f">:</span> <span style="color:#2b91af">Person</span> = <span style="color:#2b91af">Person</span>(<span style="color:#2b91af">Gnanesh</span> <span style="color:#2b91af">Kunal</span>,20)
+
+scala&gt; <span style="color:#2b91af">Person</span>(<span style="color:#2b91af">Name</span>(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), <span style="color:#2b91af">Age</span>(20))
+res15<span style="color:#00f">:</span> <span style="color:#2b91af">Person</span> = <span style="color:#2b91af">Person</span>(<span style="color:#2b91af">Gnanesh</span> <span style="color:#2b91af">Kunal</span>,20)</code></pre></div>
+<p>The complete above code to make the person class work.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Name</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>) 
+<span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Age</span>(age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
+
+<span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, a<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) {
+	<span style="color:#00f">var</span> name<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span> = <span style="color:#2b91af">Name</span>(n)
+	<span style="color:#00f">var</span> age<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span> = <span style="color:#2b91af">Age</span>(a)
+	<span style="color:#00f">def</span> <span style="color:#00f">this</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span>, a<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span>) <span style="color:#00f">=</span> <span style="color:#00f">this</span>(n.name, a.age)
+}
+
+<span style="color:#00f">object</span> <span style="color:#2b91af">Person</span> {
+	<span style="color:#00f">def</span> apply(n<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span>, a<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Person</span>(n.name, a.age) 
+}</code></pre></div>
+<p>So much hassle to define a simple class, right?</p>
+
+<p><strong>Implicits to the rescue.</strong></p>
+
+<p>Implicits can be said as a syntactic sugar.</p>
+
+<p>Doing everything defined above under a minute.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Name</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>) 
+<span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Age</span>(age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
+
+<span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span>, age<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span>)
+
+<span style="color:#00f">implicit</span> <span style="color:#00f">def</span> strToName(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Name</span> = <span style="color:#2b91af">Name</span>(name)
+<span style="color:#00f">implicit</span> <span style="color:#00f">def</span> intToAge(age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Age</span> = <span style="color:#2b91af">Age</span>(age)</code></pre></div>
+<p>Everything fits.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">scala&gt; Person(Name(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>), Age(20))
+res17: Person = Person(Name(Gnanesh Kunal),Age(20))
+
+scala&gt; Person(<span style="color:#a31515">&#34;Gnanesh Kunal&#34;</span>, 20)
+res18: Person = Person(Name(Gnanesh Kunal),Age(20))</code></pre></div>
+<p>The way <code>Person(&quot;Gnanesh Kunal&quot;, 20)</code> works are, first, the compiler will check the parameter types.
+The compiler expects the first parameter of type <code>Name</code> but finds the type <code>String</code> it&rsquo;ll be ready to throw an error. Before throwing an error, the compiler checks for some function which converts the object of type <code>String</code> to <code>Name</code>.
+Something like <code>s: String =&gt; Name</code>.</p>
+
+<p>So as we have defined a function which converts a <code>String</code> datatype to <code>Name</code> it calls the function for us automatically. To make the compiler to call the function we have to prefix the keyword <code>implicit</code>. Implicit functions can&rsquo;t we called explicitly.</p>
+
+<p><em>cool</em> ☜(⌒▽⌒)☞</p>
+
+<p><code>implicit</code>s aren&rsquo;t just limited to functions, there&rsquo;s <code>implicit</code> variables, classes, objects etc.</p>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+
