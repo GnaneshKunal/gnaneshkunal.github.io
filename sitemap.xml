@@ -203,10 +203,6 @@
   </url>
   
   <url>
-    <loc>/resume/</loc>
-  </url>
-  
-  <url>
     <loc>/tags/scala/</loc>
     <lastmod>2018-06-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
