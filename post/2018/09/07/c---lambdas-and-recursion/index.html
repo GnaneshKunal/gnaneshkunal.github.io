@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>C&#43;&#43; Lambdas and Recursion | GK&#39;s Blog</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/post">Blog</a></li>
+      
+      <li><a href="/note">Note</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/projects/">Projects</a></li>
+      
+      <li><a href="/resume.pdf">Resume</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+      <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+      
+      <li><a href="/index.xml">Subscribe</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+    <h1><span class="title">C&#43;&#43; Lambdas and Recursion</span></h1>
+    
+    <h2 class="date">2018/09/07</h2>
+</div>
+
+<main>
+    
+
+<p>Let me say I want to reverse a sequence of elements. First I&rsquo;ve to define a function.</p>
+
+<!--more -->
+
+<p>One definition:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#2b91af">int</span> main (<span style="color:#2b91af">void</span>) {
+	<span style="color:#008000">// sequence
+</span><span style="color:#008000"></span>	<span style="color:#2b91af">void</span> reverse (vector&lt;<span style="color:#2b91af">int</span>&gt; &amp;arr) {
+		<span style="color:#2b91af">int</span> i = 0, j = arr.size() - 1;
+		<span style="color:#00f">while</span> (i &lt; j) {
+			<span style="color:#2b91af">int</span> temp = arr[i];
+			arr[i++] = arr[j];
+			arr[j--] = temp;
+		}
+	}
+	<span style="color:#008000">// calls reverse
+</span><span style="color:#008000"></span>	<span style="color:#00f">return</span> 0;
+}</code></pre></div>
+<p>But you can&rsquo;t do that in C++. You compiler complains about it.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file.cpp:9:35: error: <span style="color:#00f">function</span> definition is not allowed here
+  void reverse(vector&lt;int&gt; &amp; arr) {
+                                  ^
+file.cpp:21:3: error: no matching <span style="color:#00f">function</span> <span style="color:#00f">for</span> call to <span style="color:#a31515">&#39;reverse&#39;</span>
+  reverse(arr);
+  ^~~~~~~</code></pre></div>
+<p>You can&rsquo;t define a function inside another function.</p>
+
+<p>So the only approach will be to define it elsewhere.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#2b91af">void</span> reverse (vector&lt;<span style="color:#2b91af">int</span>&gt; &amp;arr) {
+	<span style="color:#2b91af">int</span> i = 0, j = arr.size() - 1;
+	<span style="color:#00f">while</span> (i &lt; j) {
+		<span style="color:#2b91af">int</span> temp = arr[i];
+		arr[i++] = arr[j];
+		arr[j--] = temp;
+	}
+}
+
+<span style="color:#2b91af">int</span> main (<span style="color:#2b91af">void</span>) {
+	<span style="color:#008000">// sequence
+</span><span style="color:#008000"></span>	<span style="color:#008000">// calls reverse
+</span><span style="color:#008000"></span>	<span style="color:#00f">return</span> 0;
+}</code></pre></div>
+<p>This just works.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[monster@monster tmp]$ clang++ file.cpp &amp;&amp; ./a.out
+9 8 7 6 5 4 3 2 1 
+[monster@monster tmp]$ </code></pre></div>
+<p>It would be better to be modular and write a swap function. Note, we can&rsquo;t write the <code>swap</code> function inside reverse function as it isn&rsquo;t allowed. The standard says a forward declaration is a must but it works without that in modern compilers.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#2b91af">void</span> swap(<span style="color:#2b91af">int</span> *a, <span style="color:#2b91af">int</span> *b) {
+	<span style="color:#2b91af">int</span> temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+<span style="color:#2b91af">void</span> reverse (vector&lt;<span style="color:#2b91af">int</span>&gt; &amp; arr) {
+	<span style="color:#2b91af">int</span> i = 0, j = arr.size() - 1;
+	<span style="color:#00f">while</span> (i &lt; j) {
+		swap(arr[i++], arr[j--]);
+	}
+}
+// main here</code></pre></div>
+<p><i>Can&rsquo;t we just have the fancy rule to declare function anywhere like in many other dynamic and static languages?</i></p>
+
+<p>Long story short, we can. We&rsquo;ve got C++ lambdas.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#2b91af">int</span> main(<span style="color:#2b91af">void</span>) {
+	<span style="color:#008000">// sequence
+</span><span style="color:#008000"></span>	<span style="color:#00f">auto</span> swap = [](<span style="color:#2b91af">int</span> *a, <span style="color:#2b91af">int</span> *b) {
+		<span style="color:#2b91af">int</span> temp = *a;
+		*a = *b;
+		*b = temp;
+	};
+	
+	<span style="color:#00f">auto</span> reverse = [](vector&lt;<span style="color:#2b91af">int</span>&gt; &amp; arr) {
+		<span style="color:#2b91af">int</span> i = 0, j = arr.size() - 1;
+		<span style="color:#00f">while</span> (i &lt; j)
+			swap(arr[i++], arr[j--]);
+	};
+	<span style="color:#008000">// calls reverse
+</span><span style="color:#008000"></span>}</code></pre></div>
+<p>We can do this as well.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">auto</span> reverse = [](vector&lt;<span style="color:#2b91af">int</span>&gt; &amp;arr) {
+	<span style="color:#00f">auto</span> swap = [](<span style="color:#2b91af">int</span> *a, <span style="color:#2b91af">int</span> *b) {
+		<span style="color:#2b91af">int</span> temp = *a;
+		*a = *b;
+		*b = temp;
+	};
+	<span style="color:#2b91af">int</span> i = 0, j = arr.size() - 1;
+	<span style="color:#00f">while</span> (i &lt; j)
+		swap(arr[i++], arr[j--]);
+};</code></pre></div>
+<p>The <code>reverse</code> variable gets a datatype of <code>function&lt;void(vector&lt;int&gt; &amp;)&gt;</code> and the <code>swap</code> variable gets a dataype of <code>function&lt;void(int *, int *)&gt;</code>.</p>
+
+<h3 id="what-about-recursion">What about recursion?</h3>
+
+<p>Recursion is a bit tricky. The following code doesn&rsquo;t work.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">auto</span> factorial = [](<span style="color:#2b91af">int</span> n) {
+	<span style="color:#00f">if</span> (n &lt;= 1) <span style="color:#00f">return</span> 1;
+	<span style="color:#00f">return</span> n * factorial(n - 1);
+};</code></pre></div>
+<p>It doesn&rsquo;t work for various reasons. One of the reason is that the <code>factorial</code> lambda function isn&rsquo;t captured at all. To capture it, we just have to pass the same in the capture clause, <code>[&amp;]</code>. The <code>&amp;</code> says to pass everything as a reference.
+Another reason is that the return type is not known at all. <code>auto</code> can&rsquo;t deduce the type. we know what the if statement does, returns <code>1</code>, but we&rsquo;re not sure what the <code>else</code> statement would do. At least our compiler doesn&rsquo;t know.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">function&lt;<span style="color:#2b91af">int</span>(<span style="color:#2b91af">int</span>)&gt; factorial = [&amp;](<span style="color:#2b91af">int</span> n) {
+	<span style="color:#00f">if</span> (n &lt;= 1) <span style="color:#00f">return</span> 1;
+	<span style="color:#00f">return</span> n * factorial(n - 1);
+};</code></pre></div>
+<p><i>The only thing we&rsquo;ve gained by lambdas are just that they can be defined anywhere.</i></p>
+
+<p>Well that&rsquo;s not true though. <code>C++14</code> adds much more to it.</p>
+
+<p>In C++14, even the paramaters can be defined using <code>auto</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">auto</span> lambda = [](<span style="color:#00f">auto</span> x, <span style="color:#00f">auto</span> y) {
+	<span style="color:#00f">return</span> x + y;
+};</code></pre></div>
+<p>The above code will be equivalent to</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">struct</span> unnamed_lambda {
+	<span style="color:#00f">template</span>&lt;<span style="color:#00f">typename</span> T, <span style="color:#00f">typename</span> U&gt;
+		<span style="color:#00f">auto</span> <span style="color:#00f">operator</span>()(T x, U y) <span style="color:#00f">const</span> {
+			<span style="color:#00f">return</span> x + y;
+		}
+	};
+};
+<span style="color:#00f">auto</span> lambda = unnamed_lambda{};</code></pre></div>
+<p>The actual problem with lambdas are recursions. As said earlier we can define a <code>function&lt;&gt;</code> type and create a lambda function, but the problem with using <code>function&lt;&gt;</code> type is that <code>std::function</code> has performance issues because it does heap allocations.</p>
+
+<p>So the recursions in lambdas are applicable only when you define a <code>function&lt;&gt;</code> type. That was true until C++11. But as C++14 allowed the parameters to have <code>auto</code> declaration, we can pass the lambda function itself as an argument.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">auto</span> factorial = [](<span style="color:#00f">auto</span> &amp;&amp;self, <span style="color:#00f">auto</span> n) {
+	<span style="color:#00f">if</span> (n &lt;= 1) <span style="color:#00f">return</span> 1;
+	<span style="color:#00f">return</span> n * self(self, n - 1);
+};
+
+<span style="color:#008000">// usage: 
+</span><span style="color:#008000"></span>factorial(factorial, 5);</code></pre></div>
+<p>The <code>&amp;&amp;</code> is an RValue reference. We can ignore it, but as we&rsquo;re not chaning it, we can just pass it as a reference. And look, we don&rsquo;t have to capture the function itself for recursion as the function is captured as an argument.</p>
+
+</main>
+  <footer>
+  <script>renderMathInElement(document.body);</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>renderMathInElement(document.body);</script>
+
+  
+  <hr/>
+  &copy; <a href="http://www.gnaneshkunal.com">Gnanesh Kunal</a> 2018 | <a href="https://github.com/gnaneshkunal">Github</a> | <a href="mailto:gnaneshkunal@outlook.com">Mail</a> | <a href="https://twitter.com/gnaneshkunal">Twitter</a>
+  
+  </footer>
+  </body>
+</html>
+

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Categories | GK&#39;s Blog</title>
+    <title>Cpp | GK&#39;s Blog</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
@@ -41,57 +41,38 @@
     </nav>
 
 
-<h1>Categories</h1>
 
-<ul class="terms">
+<h1>Cpp</h1>
+
+
+
+
+
+<div id="riddle">
+</div>
+<script type="text/javascript">
+ (function () {
+     var xmlhttp;
+     
+     xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function(){
+	 if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+	     var riddleDOM = document.getElementById("riddle");
+	     var r = JSON.parse(xmlhttp.responseText).riddle;
+	     console.log(r);
+	     riddleDOM.innerHTML = r.q;
+	 }
+     }
+     xmlhttp.open("GET", 'https://edwardnigma.herokuapp.com/riddle?a=0', true);
+     xmlhttp.send();
+ })();
+</script>
+
+<ul>
   
   <li>
-    <a href="/categories/algorithms">
-      Algorithms
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/categories/blog">
-      Blog
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/categories/internet-of-things">
-      Internet Of Things
-    </a>
-    (1)
-  </li>
-  
-  <li>
-    <a href="/categories/machine-learning">
-      Machine Learning
-    </a>
-    (3)
-  </li>
-  
-  <li>
-    <a href="/categories/programming-languages">
-      Programming Languages
-    </a>
-    (3)
-  </li>
-  
-  <li>
-    <a href="/categories/system-administration">
-      System Administration
-    </a>
-    (2)
-  </li>
-  
-  <li>
-    <a href="/categories/text-editor">
-      Text Editor
-    </a>
-    (1)
+    <span class="date">2018/09/07</span>
+    <a href="/post/2018/09/07/c---lambdas-and-recursion/">C&#43;&#43; Lambdas and Recursion</a>
   </li>
   
 </ul>

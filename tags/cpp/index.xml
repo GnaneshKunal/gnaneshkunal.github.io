@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cpp on GK&#39;s Blog</title>
+    <link>/tags/cpp/</link>
+    <description>Recent content in Cpp on GK&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Sep 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/cpp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C&#43;&#43; Lambdas and Recursion</title>
+      <link>/post/2018/09/07/c---lambdas-and-recursion/</link>
+      <pubDate>Fri, 07 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/09/07/c---lambdas-and-recursion/</guid>
+      <description>Let me say I want to reverse a sequence of elements. First I&amp;rsquo;ve to define a function.
+One definition:
+int main (void) { // sequence 	void reverse (vector&amp;lt;int&amp;gt; &amp;amp;arr) { int i = 0, j = arr.size() - 1; while (i &amp;lt; j) { int temp = arr[i]; arr[i++] = arr[j]; arr[j--] = temp; } } // calls reverse 	return 0; } But you can&amp;rsquo;t do that in C++.</description>
+    </item>
+    
+  </channel>
+</rss>
