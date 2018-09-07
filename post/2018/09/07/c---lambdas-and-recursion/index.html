@@ -95,7 +95,7 @@ file.cpp:21:3: error: no matching <span style="color:#00f">function</span> <span
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[monster@monster tmp]$ clang++ file.cpp &amp;&amp; ./a.out
 9 8 7 6 5 4 3 2 1 
 [monster@monster tmp]$ </code></pre></div>
-<p>It would be better to be modular and write a swap function. Note, we can&rsquo;t write the <code>swap</code> function inside reverse function as it isn&rsquo;t allowed. The standard says a forward declaration is a must but it works without that in modern compilers.</p>
+<p>It would be better to be modular and write a swap function. Note, we can&rsquo;t write the <code>swap</code> function inside the reverse function as it isn&rsquo;t allowed. The standard says a forward declaration is a must but it works without that in modern compilers.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#2b91af">void</span> swap(<span style="color:#2b91af">int</span> *a, <span style="color:#2b91af">int</span> *b) {
 	<span style="color:#2b91af">int</span> temp = *a;
 	*a = *b;
@@ -157,7 +157,7 @@ Another reason is that the return type is not known at all. <code>auto</code> ca
 
 <p>Well that&rsquo;s not true though. <code>C++14</code> adds much more to it.</p>
 
-<p>In C++14, even the paramaters can be defined using <code>auto</code>.</p>
+<p>In C++14, even the parameters can be defined using <code>auto</code>.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">auto</span> lambda = [](<span style="color:#00f">auto</span> x, <span style="color:#00f">auto</span> y) {
 	<span style="color:#00f">return</span> x + y;
 };</code></pre></div>
@@ -170,7 +170,7 @@ Another reason is that the return type is not known at all. <code>auto</code> ca
 	};
 };
 <span style="color:#00f">auto</span> lambda = unnamed_lambda{};</code></pre></div>
-<p>The actual problem with lambdas are recursions. As said earlier we can define a <code>function&lt;&gt;</code> type and create a lambda function, but the problem with using <code>function&lt;&gt;</code> type is that <code>std::function</code> has performance issues because it does heap allocations.</p>
+<p>The actual problem with lambdas is recursions. As said earlier we can define a <code>function&lt;&gt;</code> type and create a lambda function, but the problem with using <code>function&lt;&gt;</code> type is that <code>std::function</code> has performance issues because it does heap allocations.</p>
 
 <p>So the recursions in lambdas are applicable only when you define a <code>function&lt;&gt;</code> type. That was true until C++11. But as C++14 allowed the parameters to have <code>auto</code> declaration, we can pass the lambda function itself as an argument.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00f">auto</span> factorial = [](<span style="color:#00f">auto</span> &amp;&amp;self, <span style="color:#00f">auto</span> n) {
@@ -180,7 +180,7 @@ Another reason is that the return type is not known at all. <code>auto</code> ca
 
 <span style="color:#008000">// usage: 
 </span><span style="color:#008000"></span>factorial(factorial, 5);</code></pre></div>
-<p>The <code>&amp;&amp;</code> is an RValue reference. We can ignore it, but as we&rsquo;re not chaning it, we can just pass it as a reference. And look, we don&rsquo;t have to capture the function itself for recursion as the function is captured as an argument.</p>
+<p>The <code>&amp;&amp;</code> is an RValue reference. We can ignore it, but as we&rsquo;re not changing it, we can just pass it as a reference. And look, we don&rsquo;t have to capture the function itself for recursion as the function is captured as an argument.</p>
 
 </main>
   <footer>
