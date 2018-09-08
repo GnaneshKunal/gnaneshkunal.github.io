@@ -147,8 +147,25 @@ file.cpp:21:3: error: no matching <span style="color:#00f">function</span> <span
 	<span style="color:#00f">if</span> (n &lt;= 1) <span style="color:#00f">return</span> 1;
 	<span style="color:#00f">return</span> n * factorial(n - 1);
 };</code></pre></div>
-<p>It doesn&rsquo;t work for various reasons. One of the reason is that the <code>factorial</code> lambda function isn&rsquo;t captured at all. To capture it, we just have to pass the same in the capture clause, <code>[&amp;]</code>. The <code>&amp;</code> says to pass everything as a reference.
-Another reason is that the return type is not known at all. <code>auto</code> can&rsquo;t deduce the type. we know what the if statement does, returns <code>1</code>, but we&rsquo;re not sure what the <code>else</code> statement would do. At least our compiler doesn&rsquo;t know.</p>
+<p>It doesn&rsquo;t work for various reasons.</p>
+
+<p>One of reason is that the return type is not known at all. <code>auto</code> can&rsquo;t deduce the type. we know what the if statement does, returns <code>1</code>, but we&rsquo;re not sure what the <code>else</code> statement would do. At least our compiler doesn&rsquo;t know.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">te.cpp:9:19: error: variable <span style="color:#a31515">&#39;factorial&#39;</span> declared with deduced type <span style="color:#a31515">&#39;auto&#39;</span>
+      cannot appear in its own initializer
+                     <span style="color:#00f">return</span> n * factorial(n - 1);
+                                ^
+1 error generated.</code></pre></div>
+<p>Another the reason is that the <code>factorial</code> lambda function isn&rsquo;t captured at all. To capture it, we just have to pass the same in the capture clause, <code>[&amp;]</code>. The <code>&amp;</code> says to pass everything as a reference.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">file.cpp:9:19: error: variable <span style="">&#39;</span>factorial<span style="">&#39;</span> cannot be implicitly captured in a
+      lambda with no capture-<span style="color:#00f">default</span> specified
+                     <span style="color:#00f">return</span> n * factorial(n - 1);
+                                ^
+file.cpp:7:22: note: <span style="">&#39;</span>factorial<span style="">&#39;</span> declared here
+  function&lt;<span style="color:#2b91af">int</span>(<span style="color:#2b91af">int</span>)&gt; factorial = [](<span style="color:#2b91af">int</span> n) {
+                     ^
+file.cpp:7:34: note: lambda expression begins here
+  function&lt;<span style="color:#2b91af">int</span>(<span style="color:#2b91af">int</span>)&gt; factorial = [](<span style="color:#2b91af">int</span> n) {</code></pre></div>
+<p>Finally this would be our definition.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">function&lt;<span style="color:#2b91af">int</span>(<span style="color:#2b91af">int</span>)&gt; factorial = [&amp;](<span style="color:#2b91af">int</span> n) {
 	<span style="color:#00f">if</span> (n &lt;= 1) <span style="color:#00f">return</span> 1;
 	<span style="color:#00f">return</span> n * factorial(n - 1);
