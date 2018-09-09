@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Install packages &amp; libraries on your local paths - Gnanesh Kunal</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gnanesh Kunal" />
+    <meta name="description" content="Configure local paths." />
+    <meta name="keywords" content="Packages" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Gnanesh Kunal</a></h1>
+        <p>y² mod p = ⟮x³ +7⟯ mod p</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+	  <!--
+          <li><a href="/tags/">Tags</a></li>
+	  -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/gnaneshkunal">GitHub</a></li>
+	  <li><a href="https://www.dropbox.com/s/jx879x3nt299ol8/resumegk.pdf?raw=1">Resume</a></li>
+	  <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+	<!--
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="gnaneshkunal.com">
+        </form>
+	-->
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>Install packages &amp; libraries on your local paths</h1>
+<p>
+Fedora is my favorite Linux distribution which is sponsored by Red Hat.
+Fedora 28 is out with a lot of features. Instead of upgrading my fedora
+using <code>dnf-plugin-system-upgrade</code> or the <code>GNOME Software</code> way, I'd
+always like to download the ISO and install it from a USB Flash Drive
+(cause that returns a pointer to the ISO and I could use it anywhere
+(ಠ⌣ಠ)). 
+</p>
+
+<p>
+I have a love/hate relationship is with the Red Hat's
+<code>Automatic Partition</code> which usually leaves with just 50GB for the
+<code>Computer</code> (<code>/</code>) and the rest for your <code>$HOME</code>. So I usually do
+<code>Manual Partition</code> and give the partitions the right space. But
+<code>Automatic Partitions</code> will save you some time by automatically giving
+other partitions the right amount of space.
+</p>
+
+<p>
+This time, I opted for <code>Automatic Partition</code> and now I'm left with just
+52.6GB. Actually its just 42.7GB after doing <code>dnf upgrade</code>. In my past,
+the first time when I've given Fedora a try, I used it for more days
+than I thought I would and I was struggling with &lt;12GB of free space.
+That was the time, I thought, I wish I had known how to configure and
+install libraries on my local paths without letting everything existing
+packages down(<code>pkg-config</code>).
+</p>
+
+<p>
+Now, I've finally found a way to install libraries on my own path. I
+like to use <code>$HOME/.local/</code>.
+</p>
+
+<div id="outline-container-org592c4e5" class="outline-2">
+<h2 id="the-usual-way"><a id="org592c4e5"></a>The Usual way</h2>
+<div class="outline-text-2" id="text-the-usual-way">
+<p>
+Usually, When you compile libraries from source, the usual way would be
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">./configure
+make
+sudo make install
+</pre>
+</div>
+
+<p>
+or
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">./autogen.sh
+./configure
+make
+sudo make install
+</pre>
+</div>
+
+<p>
+Where do you think the libraries get installed?
+</p>
+
+<p>
+That's <code>/usr/local/include</code> for headers, <code>/usr/local/lib/</code> for your
+libraries that you can link with your programs. And also, <code>pkg-config</code>
+easily finds your libraries and packages.
+</p>
+
+<p>
+What if you have less space on your <code>Computer</code> or like to install a
+package in a different location (like as I said <code>$HOME/.local/</code>)?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge9c3348" class="outline-2">
+<h2 id="what-you-need-to-do"><a id="orge9c3348"></a>What You Need To Do</h2>
+<div class="outline-text-2" id="text-what-you-need-to-do">
+<p>
+Well, that's easy though. The <code>configure</code> script also has a <code>--prefix</code>
+argument that allows you to install the package on given path.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">./configure --prefix $HOME/.local
+make
+make install
+</pre>
+</div>
+
+<p>
+<b>Note that you don't need the sudo command</b>, as
+the <code>$HOME</code> doesn't require you to have <code>root</code> privileges.
+</p>
+
+<p>
+After installing
+</p>
+
+<pre class="example">
+[monster@monster json-c]$ whereis json-c
+json-c: /home/monster/.local/include/json-c
+</pre>
+
+<p>
+But will your packages be found and linked to other programs that use
+this packages?
+</p>
+
+<p>
+<b>Now I could finally install packages on my local paths.</b> (YAY) 
+<b>Will I be able to use it? The answer is NO.</b> (BOOO)
+</p>
+
+<p>
+You must add the path to your <code>$PATH</code> variable.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># ~.bashrc
+export PATH="$PATH:$HOME/.local/lib:$HOME/.local/share:$HOME/.local/include:$HOME/.local/bin"
+</pre>
+</div>
+
+<p>
+Sometimes you get complains about shared libraries.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># ~/.bashrc
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
+export LIBRARY_PATH="$LIBRARY_PATH:$HOME/.local/lib"
+</pre>
+</div>
+
+<p>
+Also, you love <code>pkg-config</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># ~/.bashrc
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig"
+</pre>
+</div>
+
+<p>
+When you manually compile, your <code>C/C++</code> compiler complains that it
+couldn't find the headers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"># ~/.bashrc
+export CPATH="$CPATH:$HOME/.local/include"
+export C_INCLUDE_PATH="$C_INCLUDE_PATH:$HOME/.local/include"
+export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$HOME/.local/include"
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5ea22a7" class="outline-4">
+<h4 id="useful-links"><a id="org5ea22a7"></a>Useful Links</h4>
+<div class="outline-text-4" id="text-useful-links">
+<ul class="org-ul">
+<li><a href="http://www.network-theory.co.uk/docs/gccintro/gccintro_23.html">GCC Environemnt Variables</a></li>
+<li><a href="https://askubuntu.com/questions/210210/pkg-config-path-environment-variable">pkg-config path Environment Variables</a></li>
+<li><a href="https://stackoverflow.com/questions/480764/linux-error-while-loading-shared-libraries-cannot-open-shared-object-file-no-s">Shared Libraries paths'</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2018-05-13</span>
+        <span title="last modification date" class="post-info">2018-09-09</span>
+        <span title="tags" class="post-info"><a href="/tags/packages/">Packages</a></span>
+        <span title="author" class="post-info">Gnanesh Kunal</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2018/05/13/install-packages-&amp;-libraries-on-your-local-paths";
+          var disqus_url = "https://gnaneshkunal.com/blog/2018/05/13/install-packages-&amp;-libraries-on-your-local-paths";
+          var disqus_shortname = 'gnanesh';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'duoshuo'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+       <div id="hashover"></div>
+       <script type="text/javascript" src="/hashover.php"></script>
+       <noscript>You must have JavaScript enabled to use the comments.</noscript>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:gnaneshkunal &lt;at&gt; outlook &lt;dot&gt; com">Gnanesh Kunal</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

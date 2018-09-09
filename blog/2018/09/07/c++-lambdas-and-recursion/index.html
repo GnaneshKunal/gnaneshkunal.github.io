@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>C++ Lambdas and Recursion - Gnanesh Kunal</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gnanesh Kunal" />
+    <meta name="description" content="Short note on C++&#39;s lambdas and recursion." />
+    <meta name="keywords" content="CPP, Programming Languages" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Gnanesh Kunal</a></h1>
+        <p>y² mod p = ⟮x³ +7⟯ mod p</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+	  <!--
+          <li><a href="/tags/">Tags</a></li>
+	  -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/gnaneshkunal">GitHub</a></li>
+	  <li><a href="https://www.dropbox.com/s/jx879x3nt299ol8/resumegk.pdf?raw=1">Resume</a></li>
+	  <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+	<!--
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="gnaneshkunal.com">
+        </form>
+	-->
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>C++ Lambdas and Recursion</h1>
+<p>
+Let me say I want to reverse a sequence of elements. First I've to
+define a function.
+</p>
+
+<p>
+One definition:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">int main (void) {
+    // sequence
+    void reverse (vector&lt;int&gt; &amp;arr) {
+	int i = 0, j = arr.size() - 1;
+	while (i &lt; j) {
+	    int temp = arr[i];
+	    arr[i++] = arr[j];
+	    arr[j--] = temp;
+	}
+    }
+    // calls reverse
+    return 0;
+}
+</pre>
+</div>
+
+<p>
+But you can't do that in C++. You compiler complains about it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">file.cpp:9:35: error: function definition is not allowed here
+  void reverse(vector&lt;int&gt; &amp; arr) {
+				  ^
+file.cpp:21:3: error: no matching function for call to 'reverse'
+  reverse(arr);
+  ^~~~~~~
+</pre>
+</div>
+
+<p>
+You can't define a function inside another function.
+</p>
+
+<p>
+So the only approach will be to define it elsewhere.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">void reverse (vector&lt;int&gt; &amp;arr) {
+    int i = 0, j = arr.size() - 1;
+    while (i &lt; j) {
+	int temp = arr[i];
+	arr[i++] = arr[j];
+	arr[j--] = temp;
+    }
+}
+
+int main (void) {
+    // sequence
+    // calls reverse
+    return 0;
+}
+</pre>
+</div>
+
+<p>
+This just works.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">[monster@monster tmp]$ clang++ file.cpp &amp;&amp; ./a.out
+9 8 7 6 5 4 3 2 1 
+[monster@monster tmp]$ 
+</pre>
+</div>
+
+<p>
+It would be better to be modular and write a swap function. Note, we
+can't write the <code>swap</code> function inside the reverse function as it isn't
+allowed. The standard says a forward declaration is a must but it works
+without that in modern compilers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void reverse (vector&lt;int&gt; &amp; arr) {
+    int i = 0, j = arr.size() - 1;
+    while (i &lt; j) {
+	swap(arr[i++], arr[j--]);
+    }
+}
+// main here
+</pre>
+</div>
+
+<p>
+<i>Can't we just have the fancy rule to declare function 
+anywhere like in many other dynamic and static languages?</i>
+</p>
+
+<p>
+Long story short, we can. We've got C++ lambdas.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">int main(void) {
+    // sequence
+    auto swap = [](int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+    };
+
+    auto reverse = [](vector&lt;int&gt; &amp; arr) {
+	int i = 0, j = arr.size() - 1;
+	while (i &lt; j)
+	    swap(arr[i++], arr[j--]);
+    };
+    // calls reverse
+}
+</pre>
+</div>
+
+<p>
+We can do this as well.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">auto reverse = [](vector&lt;int&gt; &amp;arr) {
+    auto swap = [](int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+    };
+    int i = 0, j = arr.size() - 1;
+    while (i &lt; j)
+	swap(arr[i++], arr[j--]);
+};
+</pre>
+</div>
+
+<p>
+The <code>reverse</code> variable gets a datatype of
+<code>function&lt;void(vector&lt;int&gt; &amp;)&gt;</code> and the <code>swap</code> variable gets a dataype
+of <code>function&lt;void(int *, int *)&gt;</code>.
+</p>
+
+<div id="outline-container-org92bad47" class="outline-2">
+<h2 id="what-about-recursion"><a id="org92bad47"></a>What about recursion?</h2>
+<div class="outline-text-2" id="text-what-about-recursion">
+<p>
+Recursion is a bit tricky. The following code doesn't work.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">auto factorial = [](int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+};
+</pre>
+</div>
+
+<p>
+It doesn't work for various reasons.
+</p>
+
+<p>
+One of reason is that the return type is not known at all. <code>auto</code> can't
+deduce the type. we know what the if statement does, returns <code>1</code>, but
+we're not sure what the <code>else</code> statement would do. At least our compiler
+doesn't know.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">file.cpp:9:19: error: variable 'factorial' declared with deduced type 'auto'
+      cannot appear in its own initializer
+		     return n * factorial(n - 1);
+				^
+1 error generated.
+</pre>
+</div>
+
+<p>
+Another the reason is that the <code>factorial</code> lambda function isn't
+captured at all. To capture it, we just have to pass the same in the
+capture clause, <code>[&amp;]</code>. The <code>&amp;</code> says to pass everything as a reference.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">file.cpp:9:19: error: variable 'factorial' cannot be implicitly captured in a
+      lambda with no capture-default specified
+		     return n * factorial(n - 1);
+				^
+file.cpp:7:22: note: 'factorial' declared here
+  function&lt;int(int)&gt; factorial = [](int n) {
+		     ^
+file.cpp:7:34: note: lambda expression begins here
+  function&lt;int(int)&gt; factorial = [](int n) {
+</pre>
+</div>
+
+<p>
+Finally this would be our definition.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">function&lt;int(int)&gt; factorial = [&amp;](int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+};
+</pre>
+</div>
+
+<p>
+<i>The only thing we've gained by lambdas are just that they
+can be defined anywhere.</i>
+</p>
+
+<p>
+Well that's not true though. <code>C++14</code> adds much more to it.
+</p>
+
+<p>
+In C++14, even the parameters can be defined using <code>auto</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">auto lambda = [](auto x, auto y) {
+    return x + y;
+};
+</pre>
+</div>
+
+<p>
+The above code will be equivalent to
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">struct unnamed_lambda {
+    template&lt;typename T, typename U&gt;
+	auto operator()(T x, U y) const {
+	    return x + y;
+	}
+    };
+};
+auto lambda = unnamed_lambda{};
+</pre>
+</div>
+
+<p>
+The actual problem with lambdas is recursions. As said earlier we can
+define a <code>function&lt;&gt;</code> type and create a lambda function, but the problem
+with using <code>function&lt;&gt;</code> type is that <code>std::function</code> has performance
+issues because it does heap allocations.
+</p>
+
+<p>
+So the recursions in lambdas are applicable only when you define a
+<code>function&lt;&gt;</code> type. That was true until C++11. But as C++14 allowed the
+parameters to have <code>auto</code> declaration, we can pass the lambda function
+itself as an argument.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C++">auto factorial = [](auto &amp;&amp;self, auto n) {
+    if (n &lt;= 1) return 1;
+    return n * self(self, n - 1);
+};
+
+// usage: 
+factorial(factorial, 5);
+</pre>
+</div>
+
+<p>
+The <code>&amp;&amp;</code> is an RValue reference. We can ignore it, but as we're not
+changing it, we can just pass it as a reference. And look, we don't have
+to capture the function itself for recursion as the function is captured
+as an argument.
+</p>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2018-09-07</span>
+        <span title="last modification date" class="post-info">2018-09-09</span>
+        <span title="tags" class="post-info"><a href="/tags/cpp/">CPP</a>, <a href="/tags/programming-languages/">Programming Languages</a></span>
+        <span title="author" class="post-info">Gnanesh Kunal</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2018/09/07/c++-lambdas-and-recursion";
+          var disqus_url = "https://gnaneshkunal.com/blog/2018/09/07/c++-lambdas-and-recursion";
+          var disqus_shortname = 'gnanesh';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'duoshuo'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+       <div id="hashover"></div>
+       <script type="text/javascript" src="/hashover.php"></script>
+       <noscript>You must have JavaScript enabled to use the comments.</noscript>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:gnaneshkunal &lt;at&gt; outlook &lt;dot&gt; com">Gnanesh Kunal</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

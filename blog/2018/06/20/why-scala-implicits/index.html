@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Why Scala Implicits - Gnanesh Kunal</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gnanesh Kunal" />
+    <meta name="description" content="Short note on why Implicits in Scala." />
+    <meta name="keywords" content="Programming Languages, Scala" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Gnanesh Kunal</a></h1>
+        <p>y² mod p = ⟮x³ +7⟯ mod p</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+	  <!--
+          <li><a href="/tags/">Tags</a></li>
+	  -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/gnaneshkunal">GitHub</a></li>
+	  <li><a href="https://www.dropbox.com/s/jx879x3nt299ol8/resumegk.pdf?raw=1">Resume</a></li>
+	  <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+	<!--
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="gnaneshkunal.com">
+        </form>
+	-->
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>Why Scala Implicits</h1>
+<p>
+There's a huge debate on Scala Implicits since they've introduced it to
+the language. Some people love it while some people comment it on making
+the code unpredictable. So should we use it?
+</p>
+
+<p>
+Before I tell you what <code>implicits</code> actually are, I'll tell you what they
+solve.
+</p>
+
+<p>
+If you have to store the details of a Person's name and age, there are
+two ways to do it.
+</p>
+
+<pre class="example">
+class Person(name: String, age: Int)
+</pre>
+
+<p>
+While this does the work we need, it's not the right way to do it. This
+simple declaration lacks a lot of features.
+</p>
+
+<p>
+To get most of all the features(mainly pattern matching) we have to
+declare a <code>case class</code>. So, Now the above code will be turned to:
+</p>
+
+<pre class="example">
+case class Person(name: String, age: Int)
+</pre>
+
+<p>
+Usage:
+</p>
+
+<pre class="example">
+Person("Gnanesh Kunal", 20)
+</pre>
+
+<p>
+The name here is just a simple string.
+</p>
+
+<p>
+It doesn't say anything about the person's <code>firstname</code> and <code>lastname</code>.
+We simply have to split the given string and must think the first item
+in the array corresponds to his first name. But that's still not the
+right way to do it. But for now, let me keep it simple and limit name to
+just a string.
+</p>
+
+<p>
+<i>It would be better if we have a separate datatype that defines
+something.</i> So, let's define some.
+</p>
+
+<pre class="example">
+case class Name(name: String) 
+case class Age(age: Int)
+</pre>
+
+<p>
+So now, let me use those datatypes.
+</p>
+
+<pre class="example">
+val name = Name("Gnanesh Kunal")
+val age = Age(20)
+val person = Person(name, age)
+</pre>
+
+<p>
+If you try running the above code, you would get a type mismatch error.
+</p>
+
+<pre class="example">
+scala&gt; val person = Person(name, age)
+&lt;console&gt;:33: error: type mismatch;
+ found   : Name
+ required: String
+       val person = Person(name, age)
+                           ^
+&lt;console&gt;:33: error: type mismatch;
+ found   : Age
+ required: Int
+       val person = Person(name, age)
+                                 ^
+</pre>
+
+<p>
+What we have known here is that the <code>name</code> and <code>age</code> variable have
+<code>Name</code> and <code>Age</code> datatypes respectively. But what we need is a <code>String</code>
+and <code>Int</code>. As I've told you earlier that using custom datatypes leads us
+to define many different data structures.
+</p>
+
+<p>
+The Person class must be re-implemented using the newer data types.
+</p>
+
+<pre class="example">
+case class Person(name: Name, age: Age)
+</pre>
+
+<p>
+This works now.
+</p>
+
+<pre class="example">
+scala&gt; Person(name, age)
+res1: Person = Person(Name(Gnanesh Kunal),Age(20))
+</pre>
+
+<p>
+But do you think the following code is gonna work?
+</p>
+
+<pre class="example">
+Person("Gnanesh Kunal", 20)
+</pre>
+
+<pre class="example">
+scala&gt; Person("Gnanesh Kunal", 20)
+&lt;console&gt;:30: error: type mismatch;
+ found   : String("Gnanesh Kunal")
+ required: Name
+       Person("Gnanesh Kunal", 20)
+              ^
+&lt;console&gt;:30: error: type mismatch;
+ found   : Int(20)
+ required: Age
+       Person("Gnanesh Kunal", 20)
+</pre>
+
+<p>
+The same error again. The object must be initialized like:
+</p>
+
+<pre class="example">
+Person(Name("Gnanesh Kunal"), Age(20))
+</pre>
+
+<p>
+Another implementation would be to try multiple constructors.
+</p>
+
+<pre class="example">
+case class Person(n: String, a: Int) {
+    var name: Name = Name(n)
+    var age: Age = Age(a)
+    def this(n: Name, a: Age) = this(n.name, a.age)
+}   
+</pre>
+
+<p>
+The parameters names have been changed to <code>n</code> and <code>a</code> since each
+parameter defined will become a property in Scala.
+</p>
+
+<p>
+Now let us try to create the objects.
+</p>
+
+<pre class="example">
+scala&gt; Person("Gnanesh Kunal", 20) # Yay!!
+res10: Person = Person(Gnanesh Kunal,20)
+
+scala&gt; Person(Name("Gnanesh Kunal"), Age(20)) # Boo!!
+&lt;console&gt;:30: error: type mismatch;
+ found   : Name
+ required: String
+       Person(Name("Gnanesh Kunal"), Age(20))
+                  ^
+&lt;console&gt;:30: error: type mismatch;
+ found   : Age
+ required: Int
+       Person(Name("Gnanesh Kunal"), Age(20))
+                                        ^
+</pre>
+
+<p>
+<i>Why does it still not work?</i>
+</p>
+
+<p>
+Well!! The <code>this(n: Name, a: Age)</code> is an auxiliary constructor. The
+<code>apply</code> methods which will be generated for <code>case class</code> objects won't
+be defined for them. To define a class with <code>Name</code> and <code>Age</code> as
+parameters types, we must use the <code>new</code> keyword.
+</p>
+
+<pre class="example">
+new Person(Name("Gnanesh Kunal"), Age(20))
+</pre>
+
+<p>
+To do something like <code>Person(Name("Gnanesh Kunal"), Age(20))</code> to work we
+must create a companion object.
+</p>
+
+<pre class="example">
+// Person class Implementation ...
+
+object Person {
+    def apply(n: Name, a: Int) = new Person(n.name, a.age) 
+}
+</pre>
+
+<p>
+Finally it works.
+</p>
+
+<pre class="example">
+scala&gt; Person("Gnanesh Kunal", 20)
+res14: Person = Person(Gnanesh Kunal,20)
+
+scala&gt; Person(Name("Gnanesh Kunal"), Age(20))
+res15: Person = Person(Gnanesh Kunal,20)
+</pre>
+
+<p>
+The complete above code to make the person class work.
+</p>
+
+<pre class="example">
+case class Name(name: String) 
+case class Age(age: Int)
+
+case class Person(n: String, a: Int) {
+    var name: Name = Name(n)
+    var age: Age = Age(a)
+    def this(n: Name, a: Age) = this(n.name, a.age)
+}
+
+object Person {
+    def apply(n: Name, a: Int) = new Person(n.name, a.age) 
+}
+</pre>
+
+<p>
+So much hassle to define a simple class, right?
+</p>
+
+<p>
+<b><i>Implicits to the rescue.</i></b>
+</p>
+
+<p>
+Implicits can be said as a syntactic sugar.
+</p>
+
+<p>
+Doing everything defined above under a minute.
+</p>
+
+<pre class="example">
+case class Name(name: String) 
+case class Age(age: Int)
+
+case class Person(name: Name, age: Age)
+
+implicit def strToName(name: String): Name = Name(name)
+implicit def intToAge(age: Int): Age = Age(age)
+</pre>
+
+<p>
+Everything fits.
+</p>
+
+<pre class="example">
+scala&gt; Person(Name("Gnanesh Kunal"), Age(20))
+res17: Person = Person(Name(Gnanesh Kunal),Age(20))
+
+scala&gt; Person("Gnanesh Kunal", 20)
+res18: Person = Person(Name(Gnanesh Kunal),Age(20))
+</pre>
+
+<p>
+The way <code>Person("Gnanesh Kunal", 20)</code> works are, first, the compiler
+will check the parameter types. The compiler expects the first parameter
+of type <code>Name</code> but finds the type <code>String</code> it'll be ready to throw an
+error. Before throwing an error, the compiler checks for some function
+which converts the object of type <code>String</code> to <code>Name</code>. Something like
+<code>s: String =&gt; Name</code>.
+</p>
+
+<p>
+So as we have defined a function which converts a <code>String</code> datatype to
+<code>Name</code> it calls the function for us automatically. To make the compiler
+to call the function we have to prefix the keyword <code>implicit</code>. Implicit
+functions can't we called explicitly.
+</p>
+
+<p>
+<i>cool</i> <code>☜(⌒▽⌒)☞</code>
+</p>
+
+<p>
+<code>implicit=s aren't just limited to functions, there's =implicit</code>
+variables, classes, objects etc.
+</p>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2018-06-20</span>
+        <span title="last modification date" class="post-info">2018-09-09</span>
+        <span title="tags" class="post-info"><a href="/tags/programming-languages/">Programming Languages</a>, <a href="/tags/scala/">Scala</a></span>
+        <span title="author" class="post-info">Gnanesh Kunal</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2018/06/20/why-scala-implicits";
+          var disqus_url = "https://gnaneshkunal.com/blog/2018/06/20/why-scala-implicits";
+          var disqus_shortname = 'gnanesh';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'duoshuo'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+       <div id="hashover"></div>
+       <script type="text/javascript" src="/hashover.php"></script>
+       <noscript>You must have JavaScript enabled to use the comments.</noscript>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:gnaneshkunal &lt;at&gt; outlook &lt;dot&gt; com">Gnanesh Kunal</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

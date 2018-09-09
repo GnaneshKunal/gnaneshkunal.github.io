@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Gnanesh Kunal</title>
+    <link>https://gnaneshkunal.com/</link>
+    <description>y² mod p = ⟮x³ +7⟯ mod p</description>
+    <pubDate>Sun, 09 Sep 2018 19:12:40 IST</pubDate>
+    <lastBuildDate>Sun, 09 Sep 2018 19:12:40 IST</lastBuildDate>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>Org-page static site generator (https://github.com/kelvinh/org-page)</generator>
+    <item>
+      <title>Applying Transfer Learning on ResNet using PyTorch</title>
+      <link>https://gnaneshkunal.com/blog/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch</link>
+      <description><![CDATA[Transfer Learning on a ResNet structure.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/04/06/applying-transfer-learning-on-resnet-using-pytorch</guid>
+    </item>
+    <item>
+      <title>C++ Lambdas and Recursion</title>
+      <link>https://gnaneshkunal.com/blog/2018/09/07/c++-lambdas-and-recursion</link>
+      <description><![CDATA[Short note on C++'s lambdas and recursion.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/09/07/c++-lambdas-and-recursion</guid>
+    </item>
+    <item>
+      <title>Dumped Spacemacs for Vanilla Emacs</title>
+      <link>https://gnaneshkunal.com/blog/2018/04/14/dumped-spacemacs-for-vanilla-emacs</link>
+      <description><![CDATA[Configuring Vanilla Emacs.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/04/14/dumped-spacemacs-for-vanilla-emacs</guid>
+    </item>
+    <item>
+      <title>Flashing your NodeMCU</title>
+      <link>https://gnaneshkunal.com/blog/2018/02/07/flashing-your-nodemcu</link>
+      <description><![CDATA[Description on Flashing NodeMCU.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/02/07/flashing-your-nodemcu</guid>
+    </item>
+    <item>
+      <title>Install packages &amp; libraries on your local paths</title>
+      <link>https://gnaneshkunal.com/blog/2018/05/13/install-packages-&amp;-libraries-on-your-local-paths</link>
+      <description><![CDATA[Configure local paths.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/05/13/install-packages-&amp;-libraries-on-your-local-paths</guid>
+    </item>
+    <item>
+      <title>Numpy vs. Python Lists</title>
+      <link>https://gnaneshkunal.com/blog/2018/02/05/numpy-vs-python-lists</link>
+      <description><![CDATA[Comparing Numpy aganist Python lists.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/02/05/numpy-vs-python-lists</guid>
+    </item>
+    <item>
+      <title>Using JavaScript packages that doesn&#39;t have types</title>
+      <link>https://gnaneshkunal.com/blog/2018/05/28/using-javascript-packages-that-doesnt-have-types</link>
+      <description><![CDATA[Using JS packages that doesn't have types.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/05/28/using-javascript-packages-that-doesnt-have-types</guid>
+    </item>
+    <item>
+      <title>What are containers!!</title>
+      <link>https://gnaneshkunal.com/blog/2017/08/24/what-are-containers</link>
+      <description><![CDATA[Short note on containers.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2017/08/24/what-are-containers</guid>
+    </item>
+    <item>
+      <title>Why Scala Implicits</title>
+      <link>https://gnaneshkunal.com/blog/2018/06/20/why-scala-implicits</link>
+      <description><![CDATA[Short note on why Implicits in Scala.]]></description>
+      <pubDate>2018-09-09</pubDate>
+      <guid>https://gnaneshkunal.com/blog/2018/06/20/why-scala-implicits</guid>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dumped Spacemacs for Vanilla Emacs - Gnanesh Kunal</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gnanesh Kunal" />
+    <meta name="description" content="Configuring Vanilla Emacs." />
+    <meta name="keywords" content="Emacs" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Gnanesh Kunal</a></h1>
+        <p>y² mod p = ⟮x³ +7⟯ mod p</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+	  <!--
+          <li><a href="/tags/">Tags</a></li>
+	  -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/gnaneshkunal">GitHub</a></li>
+	  <li><a href="https://www.dropbox.com/s/jx879x3nt299ol8/resumegk.pdf?raw=1">Resume</a></li>
+	  <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+	<!--
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="gnaneshkunal.com">
+        </form>
+	-->
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>Dumped Spacemacs for Vanilla Emacs</h1>
+<p>
+The startup time for <a href="http://spacemacs.org/">Spacemacs</a> used to be pretty high. So I've tried
+unsetting few layers, but the problem still persists.
+</p>
+
+<p>
+I'd planned on dumping Spacemacs but I've started my emacs journey with
+Spacemacs, So learning the underlying layer of emacs was too difficult
+to me.
+</p>
+
+<p>
+ I've seen myself deleting Spacemacs, giving a try on <a href="https://www.gnu.org/software/emacs/">Emacs</a> and coming
+back to Spacemacs again.
+</p>
+
+<p>
+Most of the times the common problems I've faced was <i><b>I can't find
+any packages.</b></i>
+</p>
+
+<p>
+I wish I've known about <b><a href="https://melpa.org/">Melpa</a> not showing me newer packages.</b> I've
+gone through the Melpa Installation steps, which was the starting
+point to configure Emacs with my own configuration.
+</p>
+
+<p>
+By copy pasting certain elisp commands on <i>.emacs</i> I've found elisp to
+be a lot simpler and I could clearly understand what's happening in
+the background as well.
+</p>
+
+<div id="outline-container-orgd8eefff" class="outline-2">
+<h2 id="autocomplete"><a id="orgd8eefff"></a>Autocomplete</h2>
+<div class="outline-text-2" id="text-autocomplete">
+<p>
+Autocomplete is a must. You really need it if you need some cool
+<code>auto-completition</code> for other languages as well.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">M-x package-install [RET] auto-complete [RET]
+</pre>
+</div>
+
+<pre class="example">
+;;.emacs
+;; Autocomplete
+(ac-config-default)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgdc3abaf" class="outline-2">
+<h2 id="cc"><a id="orgdc3abaf"></a>C/C++</h2>
+<div class="outline-text-2" id="text-cc">
+<p>
+I love clang. And you must love it too. <a href="https://github.com/Sarcasm/irony-mode">Irony</a> provides better editing
+experience for C and C++, and is based on <code>libclang</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">M-x package-install [RET] irony [RET]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-lisp">;;.emacs
+;; irony
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgee379c0" class="outline-2">
+<h2 id="python-mode"><a id="orgee379c0"></a>Python Mode</h2>
+<div class="outline-text-2" id="text-python-mode">
+<p>
+I'm using <code>anaconda-mode</code> as my python environment. The <a href="https://github.com/jorgenschaefer/elpy">elpy</a> is another python environment with <code>automatic code rules</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">M-x package-install [RET] anaconda-mode [RET]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-lisp">;;.emacs
+;; Anaconda-mode python
+(add-hook 'python-mode-hook' 'anaconda-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2524178" class="outline-2">
+<h2 id="web"><a id="org2524178"></a>Web</h2>
+<div class="outline-text-2" id="text-web">
+<p>
+You definitly need it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">M-x package-install [RET] web-mode [RET]
+M-x package-install [RET] tide [RET]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-lisp">;;.emacs
+;;; HTML
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; tide typescript
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+;; tide typescript
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge4cd1fa" class="outline-2">
+<h2 id="git"><a id="orge4cd1fa"></a>Git</h2>
+<div class="outline-text-2" id="text-git">
+<p>
+Finally.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">M-x package-install [RET] magit [RET]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-lisp">;;.emacs
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1749867" class="outline-2">
+<h2 id="melpa"><a id="org1749867"></a>Melpa</h2>
+<div class="outline-text-2" id="text-melpa">
+<p>
+Add the following in your <code>.emacs</code> and your are done.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+		    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (&lt; emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+(package-initialize)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8db772c" class="outline-2">
+<h2 id="spacemacs-theme"><a id="org8db772c"></a>Spacemacs-theme</h2>
+<div class="outline-text-2" id="text-spacemacs-theme">
+<p>
+If you love <code>spacemacs-theme</code>, then this one's for you
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">M-x package-install [RET] spacemacs-theme [RET]
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-lisp">;;.emacs
+(load-theme 'spacemacs-dark t)
+</pre>
+</div>
+
+<p>
+Thinks are a bit fast now though. The startup time has decreased by
+<b>75%</b>. I'm finally experiencing the same joy I've got while using spacemacs.
+</p>
+
+<p>
+Well, you could mail, play games, listen to songs and do most of the
+things without leaving <a href="https://www.gnu.org/software/emacs/">Emacs</a>.
+</p>
+
+<p>
+Hey, do You know you could even control butterflies without leaving
+emacs?
+</p>
+
+
+<div class="figure">
+<p><img src="/assets/blog/2018/04/14/dumped-spacemacs-for-vanilla-emacs/ds-butterfly.png" alt="ds-butterfly.png" />
+</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2018-04-14</span>
+        <span title="last modification date" class="post-info">2018-09-09</span>
+        <span title="tags" class="post-info"><a href="/tags/emacs/">Emacs</a></span>
+        <span title="author" class="post-info">Gnanesh Kunal</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2018/04/14/dumped-spacemacs-for-vanilla-emacs";
+          var disqus_url = "https://gnaneshkunal.com/blog/2018/04/14/dumped-spacemacs-for-vanilla-emacs";
+          var disqus_shortname = 'gnanesh';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'duoshuo'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+       <div id="hashover"></div>
+       <script type="text/javascript" src="/hashover.php"></script>
+       <noscript>You must have JavaScript enabled to use the comments.</noscript>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:gnaneshkunal &lt;at&gt; outlook &lt;dot&gt; com">Gnanesh Kunal</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

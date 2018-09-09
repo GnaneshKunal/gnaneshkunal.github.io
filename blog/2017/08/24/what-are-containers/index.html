@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>What are containers!! - Gnanesh Kunal</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gnanesh Kunal" />
+    <meta name="description" content="Short note on containers." />
+    <meta name="keywords" content="Containers, Docker" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Gnanesh Kunal</a></h1>
+        <p>y² mod p = ⟮x³ +7⟯ mod p</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+	  <!--
+          <li><a href="/tags/">Tags</a></li>
+	  -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/gnaneshkunal">GitHub</a></li>
+	  <li><a href="https://www.dropbox.com/s/jx879x3nt299ol8/resumegk.pdf?raw=1">Resume</a></li>
+	  <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+	<!--
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="gnaneshkunal.com">
+        </form>
+	-->
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>What are containers!!</h1>
+<p>
+“Have you ever come across people saying or found yourself saying, “It
+worked on my machine”? Well, Don't say you never said <i>it</i>, you did.”
+</p>
+
+<p>
+“Of course, everyone does, when I want to transfer my project to a new
+machine, I usually fall into <i>this</i> trap. Don't you say it too?”
+</p>
+
+<p>
+“Well, I <i>was</i>, but not these days.”
+</p>
+
+<p>
+“So what should we <i>do</i> to stop saying <i>it,</i> there's any special
+<a href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization">Operating System Virtualization</a> that works the same on every Machine?”
+</p>
+
+<p>
+“Well again, there's no such <i>thing</i> that works fine on every Machine,
+but there are <b><i>Containers</i></b>.” “What are <i>Containers</i>, Actually?”
+</p>
+
+<p>
+“<a href="https://en.wikipedia.org/wiki/Linux_containers">According to Wiki</a>, <b>Linux container</b> is a generic term for an
+implementation of <a href="https://en.wikipedia.org/wiki/Operating_system-level_virtualization">operating system-level virtualization</a> for the <a href="https://en.wikipedia.org/wiki/Linux">Linux</a>
+<a href="https://en.wikipedia.org/wiki/Operating_system">operating system</a>.”
+</p>
+
+<p>
+“I don't understand.”
+</p>
+
+<p>
+“Containers are <i>like</i> lightweight Virtual Machines. Unlike VMs,
+containers do bundle a light-weight operating system with the only
+libraries and settings required to make the software work. This makes
+for efficient, lightweight, self-contained systems and guarantees that
+software will always run the same, regardless of where it's deployed. If
+you need a windows container, that exists too.”
+</p>
+
+<p>
+“Can you talk a bit higher level than <i>this</i>?”
+</p>
+
+<p>
+“Containers are a way to wrap up an application into its own isolated
+box. For the application in its container, it has no knowledge of any
+other applications or processes that exist outside of its box.
+Everything the application depends on to run successfully also lives
+inside this container. Wherever the box may move, the application will
+always be satisfied because it is bundled up with everything it needs to
+run.”
+</p>
+
+<p>
+“So what about <i>its</i> <b>kernel</b>?”
+</p>
+
+<p>
+“The <i>Container-Manager</i> shares the current <b>System kernel</b>.”
+</p>
+
+<p>
+“Can you give me a basic working architecture?”
+</p>
+
+<p>
+“Imagine a kitchen. We pack up all the appliances and furniture, the
+pots and pans, the dish soap and hand towels. This is our container
+</p>
+
+
+<div class="figure">
+<p><img src="/assets/blog/2017/08/24/what-are-containers/wc-1.png" alt="wc-1.png" />
+</p>
+</div>
+
+<p>
+We can now take this container and drop it into whatever host apartment
+we want, and it will be the same kitchen. All we must do is connect
+lectricity and water to it, and then we're clear to start cooking
+(because we have all the appliances we need!)
+</p>
+
+
+<div class="figure">
+<p><img src="/assets/blog/2017/08/24/what-are-containers/wc-2.png" alt="wc-2.png" />
+</p>
+</div>
+
+<p>
+In much the same way, containers are like this kitchen. There can be
+different kinds of rooms as well as many of the same kinds of rooms.
+What matters is that the containers come packaged up with everything
+they need. <b>source:</b>
+<a href="https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/"><b><i>Microsoft</i></b></a>
+</p>
+
+<p>
+Hello there !
+</p>
+
+<p>
+“Well, that's amazing!! Is <i>that</i> the only problem it solves ?”
+</p>
+
+<p>
+“Tell me how do you deploy a full stack Web app, for example?”
+</p>
+
+<p>
+“Creating Instances for each Service in the stack, Installing Operating
+System for each Service, Configuring runtime environments for each
+Service, Adding security layer for each Service, and so on. And, the
+last and crucial <i>one</i> is connecting each Service to each other”
+</p>
+
+<p>
+“Well, All <i>that</i> takes is huge cost and time, right?”
+</p>
+
+<p>
+“Yeah!! But it's worth the time, right?”
+</p>
+
+<p>
+“What if <i>it</i> doesn't work the same?, And for example, if it's a Nginx
+server, the service that doesn't require much storage, affording it much
+storage wouldn't lead to a hardware wastage?, And each instance doesn't
+use 90% of the OS-library services, having all those unnecessary
+services in the instance would do any great? Would doing <i>that</i> be
+<i>okay</i>?”
+</p>
+
+<p>
+“That's really <i>not okay</i>. Is there any better ways to do <i>it</i>?”
+</p>
+
+<p>
+“There are better ways to do <i>that</i> in containers. You could build few
+containers, that your services need, and cluster <i>them</i> together while
+exposing only the service that needs to be exposed.”
+</p>
+
+<p>
+“Are <i>they</i> portable?”
+</p>
+
+<p>
+“Because the container has everything it needs to run your application,
+they are very portable and can run on any machine. You can create and
+test containers locally, then deploy that same container image to your
+private cloud, public cloud or service provider.”
+</p>
+
+<p>
+“Is there any app language restrictions?”
+</p>
+
+<p>
+“With containers, developers can build an app in any language. These
+apps are completely portable and can run anywhere --- laptop, desktop,
+server, private cloud, public cloud or service provider --- without any
+code changes.”
+</p>
+
+<p>
+“So you're telling me containers, doesn't just solve installing;
+configuring; adding security; etc., but also solves hardware wastage?”
+</p>
+
+<p>
+“Exactly!”
+</p>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2017-08-24</span>
+        <span title="last modification date" class="post-info">2018-09-09</span>
+        <span title="tags" class="post-info"><a href="/tags/containers/">Containers</a>, <a href="/tags/docker/">Docker</a></span>
+        <span title="author" class="post-info">Gnanesh Kunal</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2017/08/24/what-are-containers";
+          var disqus_url = "https://gnaneshkunal.com/blog/2017/08/24/what-are-containers";
+          var disqus_shortname = 'gnanesh';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'duoshuo'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+       <div id="hashover"></div>
+       <script type="text/javascript" src="/hashover.php"></script>
+       <noscript>You must have JavaScript enabled to use the comments.</noscript>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:gnaneshkunal &lt;at&gt; outlook &lt;dot&gt; com">Gnanesh Kunal</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Using JavaScript packages that doesn&#39;t have types - Gnanesh Kunal</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gnanesh Kunal" />
+    <meta name="description" content="Using JS packages that doesn&#39;t have types." />
+    <meta name="keywords" content="TypeScript, Programming Languages" />
+    <link rel="stylesheet" href="/media/css/main.css" type="text/css">
+    <link rel="stylesheet" href="/media/css/prettify.css" type="text/css">
+  </head>
+  <body class="container">
+    <div>
+      <header class="masthead">
+        <h1 class="masthead-title"><a href="/">Gnanesh Kunal</a></h1>
+        <p>y² mod p = ⟮x³ +7⟯ mod p</p>
+        <ul>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tags/">Tags</a></li>
+	  <!--
+          <li><a href="/tags/">Tags</a></li>
+	  -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="https://github.com/gnaneshkunal">GitHub</a></li>
+	  <li><a href="https://www.dropbox.com/s/jx879x3nt299ol8/resumegk.pdf?raw=1">Resume</a></li>
+	  <li><a href="http://amzn.in/j8KlRjG">Amazon-books</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+	<!--
+        <form method="get" id="searchform" action="//www.google.com/search">
+          <input type="text" class="field" name="q" id="s" placeholder="Search">
+          <input type="hidden" name="as_sitesearch" value="gnaneshkunal.com">
+        </form>
+	-->
+      </header>
+    </div>
+
+<div>
+<div class="post">
+<h1>Using JavaScript packages that doesn&#39;t have types</h1>
+<p>
+I write JavaScript, your write JavaScript, everyone writes JavaScript. I
+write TypeScript, but you may not write TypeScript.
+</p>
+
+<p>
+<i>"Oh!! Who cares?"</i>
+</p>
+
+<p>
+<i>"We do.</i>
+</p>
+
+<p>
+<i>"If that's the case, use an alternate library, you know, each second,
+a shit JS library is born OUTTA NOWHERE."</i>
+</p>
+
+<p>
+<i>"But I need your types.</i>
+</p>
+
+<p>
+JavaScript has too many packages that it even has two Google Maps
+Library(React). But only one of the library has Type Definitions. It's a
+pain to write your own definition file. You could dig the source code
+and contribute a type file or you could simply write a minimal one with
+functions that you use. Type file is almost all similar to a TS
+interface.
+</p>
+
+<p>
+A basic definition file would be like:
+</p>
+
+<pre class="example">
+// yourLibrary.d.ts
+declare module yourLibrary {
+    export interface objectName {
+        prop: type
+    }
+}
+</pre>
+
+<p>
+On top of your file, add the following statement:
+</p>
+
+<pre class="example">
+// someFile.ts
+/// &lt;reference path="./path/yourLibrary.d.ts" /&gt;
+</pre>
+
+<p>
+<i>But I've so many packages and writing a definition file for each
+package is tedious. I just want an ONE VS. ALL way.</i>
+</p>
+
+<p>
+Your definition file:
+</p>
+
+<pre class="example">
+// index.d.ts
+declare module "*";
+</pre>
+
+<p>
+Your statement:
+</p>
+
+<pre class="example">
+// someFile.ts
+/// &lt;reference path="./path/index.d.ts" /&gt;
+</pre>
+
+<p>
+The above statement turns off type checking for all the packages, so
+it's not recommended.
+</p>
+
+</div>
+</div>
+    <div>
+      <div class="post-meta">
+        <span title="post date" class="post-info">2018-05-28</span>
+        <span title="last modification date" class="post-info">2018-09-09</span>
+        <span title="tags" class="post-info"><a href="/tags/typescript/">TypeScript</a>, <a href="/tags/programming-languages/">Programming Languages</a></span>
+        <span title="author" class="post-info">Gnanesh Kunal</span>
+      </div>
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          //var disqus_developer = 1;
+          var disqus_identifier = "/blog/2018/05/28/using-javascript-packages-that-doesnt-have-types";
+          var disqus_url = "https://gnaneshkunal.com/blog/2018/05/28/using-javascript-packages-that-doesnt-have-types";
+          var disqus_shortname = 'gnanesh';
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="ds-thread"></div>
+        <script type="text/javascript">
+          var duoshuoQuery = {short_name:'duoshuo'};
+          (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = 'http://static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+        </script>
+       <div id="hashover"></div>
+       <script type="text/javascript" src="/hashover.php"></script>
+       <noscript>You must have JavaScript enabled to use the comments.</noscript>
+      </section>
+      <script src="//code.jquery.com/jquery-latest.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="/media/js/main.js"></script>
+      <div class="footer">
+        <p>Generated by <a href="http://www.gnu.org/software/emacs/">Emacs</a> 26.x (<a href="http://orgmode.org">Org mode</a> 9.x)</p>
+        <p>
+          Copyright &copy; 2012 - <span id="footerYear"></span> <a href="mailto:gnaneshkunal &lt;at&gt; outlook &lt;dot&gt; com">Gnanesh Kunal</a>
+          &nbsp;&nbsp;-&nbsp;&nbsp;
+          Powered by <a href="https://github.com/kelvinh/org-page" target="_blank">org-page</a>
+          <script type="text/javascript">document.getElementById("footerYear").innerHTML = (new Date()).getFullYear();</script>
+        </p>
+      </div>
+    </div>
+
+  </body>
+</html>
