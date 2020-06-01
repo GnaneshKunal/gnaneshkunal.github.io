@@ -1,5 +1,7 @@
 #+TITLE: Gnanesh's web logs
 
+-   2020-05-30
+  [[file:avahi-docker-non-root.org][mDNS, avahi and docker non-root containers]]
 -   2018-09-07
   [[file:cpp-recursive-lambdas.org][C++ Lambdas and Recursion]]
 -   2018-06-20
