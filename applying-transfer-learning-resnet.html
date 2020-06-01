@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-05-19 Tue 17:26 -->
+<!-- 2020-06-01 Mon 22:25 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Applying Transfer Learning on ResNet using PyTorch</title>
@@ -234,7 +234,7 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">Applying Transfer Learning on ResNet using PyTorch</h1>
 </header><p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;Apr 06, 2018&gt;</span></span>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2018-04-06 Fri&gt;</span></span>
 </p>
 
 <p>
@@ -250,8 +250,8 @@ Things I've learned:
 <li>Apply Transfer Learning</li>
 </ol>
 
-<div id="outline-container-org7f3def9" class="outline-2">
-<h2 id="dataset"><a id="org7f3def9"></a>DATASET</h2>
+<div id="outline-container-org3a6168e" class="outline-2">
+<h2 id="dataset"><a id="org3a6168e"></a>DATASET</h2>
 <div class="outline-text-2" id="text-dataset">
 <p>
 I've trained the model using Kaggle's classic dogs vs. cats dataset. The
@@ -284,8 +284,8 @@ So, I've arranged the dataset as the <code>ImageFolder</code> requires me to.
 </div>
 </div>
 
-<div id="outline-container-orgf613d7a" class="outline-2">
-<h2 id="model"><a id="orgf613d7a"></a>Model</h2>
+<div id="outline-container-org0b9e787" class="outline-2">
+<h2 id="model"><a id="org0b9e787"></a>Model</h2>
 <div class="outline-text-2" id="text-model">
 <p>
 The choice is arbitrary. I've considered some wired model. I don't know
@@ -317,8 +317,8 @@ is ResNet18. So, I've considered ResNet18 over my network.
 </div>
 </div>
 
-<div id="outline-container-orgc5473e7" class="outline-2">
-<h2 id="training"><a id="orgc5473e7"></a>Training</h2>
+<div id="outline-container-orge4aa028" class="outline-2">
+<h2 id="training"><a id="orge4aa028"></a>Training</h2>
 <div class="outline-text-2" id="text-training">
 <p>
 I've considered training my ResNet18 for the whole dataset. But the main
@@ -341,8 +341,8 @@ Choices I've got:
 </ul>
 </div>
 
-<div id="outline-container-orgd053bcb" class="outline-3">
-<h3 id="full-pretrained-model"><a id="orgd053bcb"></a>Full Pretrained Model</h3>
+<div id="outline-container-org0d7a151" class="outline-3">
+<h3 id="full-pretrained-model"><a id="org0d7a151"></a>Full Pretrained Model</h3>
 <div class="outline-text-3" id="text-full-pretrained-model">
 <p>
 I've got to tell you that using this is of no use. It just works. You
@@ -351,8 +351,8 @@ don't have to do anything. You just have to write the predict function.
 </div>
 </div>
 
-<div id="outline-container-orgcc3661a" class="outline-3">
-<h3 id="fine-tuning-the-convnet"><a id="orgcc3661a"></a>Fine-Tuning the ConvNet</h3>
+<div id="outline-container-org1538953" class="outline-3">
+<h3 id="fine-tuning-the-convnet"><a id="org1538953"></a>Fine-Tuning the ConvNet</h3>
 <div class="outline-text-3" id="text-fine-tuning-the-convnet">
 <p>
 Taking the whole network and retraining the parameters just looked cool
@@ -364,8 +364,8 @@ another time though. But the time consumption was really too much.
 </div>
 </div>
 
-<div id="outline-container-org54cbfbb" class="outline-3">
-<h3 id="convnet-as-fixed-feature-extractor"><a id="org54cbfbb"></a>ConvNet as fixed feature extractor</h3>
+<div id="outline-container-orgfe70610" class="outline-3">
+<h3 id="convnet-as-fixed-feature-extractor"><a id="orgfe70610"></a>ConvNet as fixed feature extractor</h3>
 <div class="outline-text-3" id="text-convnet-as-fixed-feature-extractor">
 <p>
 Taking the whole network and adding a final layer and training just
@@ -378,8 +378,8 @@ Fine-Tuning technique.
 </div>
 </div>
 
-<div id="outline-container-org67a23cc" class="outline-2">
-<h2 id="predictions"><a id="org67a23cc"></a>Predictions</h2>
+<div id="outline-container-org458dd60" class="outline-2">
+<h2 id="predictions"><a id="org458dd60"></a>Predictions</h2>
 <div class="outline-text-2" id="text-predictions">
 <p>
 I've got more than 91% of accuracy.
@@ -406,17 +406,17 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 </div>
 </div>
 
-<div id="outline-container-orgf9841c3" class="outline-2">
-<h2 id="orgf9841c3">Source Code</h2>
-<div class="outline-text-2" id="text-orgf9841c3">
+<div id="outline-container-orgdb6b0ff" class="outline-2">
+<h2 id="orgdb6b0ff">Source Code</h2>
+<div class="outline-text-2" id="text-orgdb6b0ff">
 <p>
 <a href="https://github.com/GnaneshKunal/dogs-vs-cats-classifier/">GnaneshKunal/dogs-vs-cats-classifier</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgcb5f1ce" class="outline-2">
-<h2 id="Useful Links"><a id="orgcb5f1ce"></a>Useful Links</h2>
+<div id="outline-container-org1cd9414" class="outline-2">
+<h2 id="Useful Links"><a id="org1cd9414"></a>Useful Links</h2>
 <div class="outline-text-2" id="text-Useful Links">
 <ol class="org-ol">
 <li><a href="https://cs231n.github.io/transfer-learning/">Transfer Learning</a></li>
