@@ -116,6 +116,7 @@
          :html-doctype "html5"
          :html-html5-fancy t
          :html-head "<link rel=\"stylesheet\" href=\"css/stylesheet.css\">"
+         :html-head-extra "<script data-goatcounter=\"https://gnanesh.goatcounter.com/count\" async src=\"//gc.zgo.at/count.js\"></script>"
          :html-postamble "
 <hr></hr>
 <div class=\"nav\">
@@ -125,7 +126,8 @@
 <li><a href=\"https://github.com/Gnaneshkunal\">GitHub</a></li>
 <li><a href=\"resume.pdf\">Resume</a></li>
 </ul>
-</div>"
+</div>
+"
          :with-creator t
          :with-date t
          )
