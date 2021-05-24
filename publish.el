@@ -148,16 +148,9 @@
           :recursive t)
         ("static"
          :base-directory "~/gk/non/"
-         :base-extension "pdf"
+         :base-extension "pdf\\|pub"
          :publishing-directory "~/gk/public/"
          :publishing-function org-publish-attachment
          :recursive t
          )
-        ("publickey"
-         :base-directory "~/gk/non/"
-         :base-extension "pub"
-         :publishing-directory "~/gk/public/"
-         :publishing-function org-publish-attachment
-         :recursive t
-         )
-        ("all" :components ("posts" "css" "img" "non-posts" "static" "publickey"))))
+        ("all" :components ("posts" "css" "img" "non-posts" "static"))))
