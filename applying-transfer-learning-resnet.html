@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-19 Fri 00:12 -->
+<!-- 2021-05-24 Mon 22:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Applying Transfer Learning on ResNet using PyTorch</title>
@@ -162,6 +162,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -182,13 +195,13 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
-<script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -251,8 +264,8 @@ Things I've learned:
 <li>Apply Transfer Learning</li>
 </ol>
 
-<div id="outline-container-orgac1c246" class="outline-2">
-<h2 id="dataset"><a id="orgac1c246"></a>DATASET</h2>
+<div id="outline-container-org27cbf7c" class="outline-2">
+<h2 id="dataset">DATASET</h2>
 <div class="outline-text-2" id="text-dataset">
 <p>
 I've trained the model using Kaggle's classic dogs vs. cats dataset. The
@@ -285,8 +298,8 @@ So, I've arranged the dataset as the <code>ImageFolder</code> requires me to.
 </div>
 </div>
 
-<div id="outline-container-org7a956ef" class="outline-2">
-<h2 id="model"><a id="org7a956ef"></a>Model</h2>
+<div id="outline-container-org9c02583" class="outline-2">
+<h2 id="model">Model</h2>
 <div class="outline-text-2" id="text-model">
 <p>
 The choice is arbitrary. I've considered some wired model. I don't know
@@ -318,8 +331,8 @@ is ResNet18. So, I've considered ResNet18 over my network.
 </div>
 </div>
 
-<div id="outline-container-org01f8ec7" class="outline-2">
-<h2 id="training"><a id="org01f8ec7"></a>Training</h2>
+<div id="outline-container-orga624131" class="outline-2">
+<h2 id="training">Training</h2>
 <div class="outline-text-2" id="text-training">
 <p>
 I've considered training my ResNet18 for the whole dataset. But the main
@@ -342,8 +355,8 @@ Choices I've got:
 </ul>
 </div>
 
-<div id="outline-container-org5b96519" class="outline-3">
-<h3 id="full-pretrained-model"><a id="org5b96519"></a>Full Pretrained Model</h3>
+<div id="outline-container-orgc398021" class="outline-3">
+<h3 id="full-pretrained-model">Full Pretrained Model</h3>
 <div class="outline-text-3" id="text-full-pretrained-model">
 <p>
 I've got to tell you that using this is of no use. It just works. You
@@ -352,8 +365,8 @@ don't have to do anything. You just have to write the predict function.
 </div>
 </div>
 
-<div id="outline-container-org2054888" class="outline-3">
-<h3 id="fine-tuning-the-convnet"><a id="org2054888"></a>Fine-Tuning the ConvNet</h3>
+<div id="outline-container-orgbdac36d" class="outline-3">
+<h3 id="fine-tuning-the-convnet">Fine-Tuning the ConvNet</h3>
 <div class="outline-text-3" id="text-fine-tuning-the-convnet">
 <p>
 Taking the whole network and retraining the parameters just looked cool
@@ -365,8 +378,8 @@ another time though. But the time consumption was really too much.
 </div>
 </div>
 
-<div id="outline-container-orged76f68" class="outline-3">
-<h3 id="convnet-as-fixed-feature-extractor"><a id="orged76f68"></a>ConvNet as fixed feature extractor</h3>
+<div id="outline-container-orgbfcbe8c" class="outline-3">
+<h3 id="convnet-as-fixed-feature-extractor">ConvNet as fixed feature extractor</h3>
 <div class="outline-text-3" id="text-convnet-as-fixed-feature-extractor">
 <p>
 Taking the whole network and adding a final layer and training just
@@ -379,8 +392,8 @@ Fine-Tuning technique.
 </div>
 </div>
 
-<div id="outline-container-org69f47f3" class="outline-2">
-<h2 id="predictions"><a id="org69f47f3"></a>Predictions</h2>
+<div id="outline-container-orgfa9c118" class="outline-2">
+<h2 id="predictions">Predictions</h2>
 <div class="outline-text-2" id="text-predictions">
 <p>
 I've got more than 91% of accuracy.
@@ -407,17 +420,17 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 </div>
 </div>
 
-<div id="outline-container-org7414fdc" class="outline-2">
-<h2 id="org7414fdc">Source Code</h2>
-<div class="outline-text-2" id="text-org7414fdc">
+<div id="outline-container-orgbcba0d4" class="outline-2">
+<h2 id="orgbcba0d4">Source Code</h2>
+<div class="outline-text-2" id="text-orgbcba0d4">
 <p>
 <a href="https://github.com/GnaneshKunal/dogs-vs-cats-classifier/">GnaneshKunal/dogs-vs-cats-classifier</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8785716" class="outline-2">
-<h2 id="Useful Links"><a id="org8785716"></a>Useful Links</h2>
+<div id="outline-container-org7adc67f" class="outline-2">
+<h2 id="Useful Links">Useful Links</h2>
 <div class="outline-text-2" id="text-Useful Links">
 <ol class="org-ol">
 <li><a href="https://cs231n.github.io/transfer-learning/">Transfer Learning</a></li>
@@ -437,6 +450,7 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
 <li><a href="resume.pdf">Resume</a></li>
+<li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
 </div>

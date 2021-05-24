@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-19 Fri 00:12 -->
+<!-- 2021-05-24 Mon 22:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flashing your NodeMCU</title>
@@ -162,6 +162,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -182,13 +195,13 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
-<script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -316,8 +329,8 @@ Steps that you must do: 0. Update your Firmware 1. Verify your Firmware
 <li>Test with a small Program</li>
 </ol>
 
-<div id="outline-container-org2a25d56" class="outline-2">
-<h2 id="update-your-firmware"><a id="org2a25d56"></a>UPDATE YOUR FIRMWARE</h2>
+<div id="outline-container-org9f8d0cd" class="outline-2">
+<h2 id="update-your-firmware">UPDATE YOUR FIRMWARE</h2>
 <div class="outline-text-2" id="text-update-your-firmware">
 <ol class="org-ol">
 <li><p>
@@ -384,8 +397,8 @@ Hard resetting via RTS pin...
 </div>
 </div>
 
-<div id="outline-container-orgcd1feae" class="outline-2">
-<h2 id="verify-your-firmware"><a id="orgcd1feae"></a>VERIFY YOUR FIRMWARE</h2>
+<div id="outline-container-orgeaee1ae" class="outline-2">
+<h2 id="verify-your-firmware">VERIFY YOUR FIRMWARE</h2>
 <div class="outline-text-2" id="text-verify-your-firmware">
 <ol class="org-ol">
 <li>Install the CP2102 driver from
@@ -461,15 +474,15 @@ the micro-USB port.</li>
 </div>
 </div>
 
-<div id="outline-container-orgea07815" class="outline-2">
-<h2 id="final-program"><a id="orgea07815"></a>FINAL PROGRAM</h2>
+<div id="outline-container-orgf241f7c" class="outline-2">
+<h2 id="final-program">FINAL PROGRAM</h2>
 <div class="outline-text-2" id="text-final-program">
 </div>
 </div>
 
-<div id="outline-container-org09cc749" class="outline-2">
-<h2 id="org09cc749">NodeMCU uses Lua programming language, which is a cross breed of</h2>
-<div class="outline-text-2" id="text-org09cc749">
+<div id="outline-container-org8fee1fb" class="outline-2">
+<h2 id="org8fee1fb">NodeMCU uses Lua programming language, which is a cross breed of</h2>
+<div class="outline-text-2" id="text-org8fee1fb">
 <p>
 Node.js and python. When booting the device will look for a file called
 init.lua and executes the file.
@@ -483,24 +496,24 @@ Copy/paste the following code
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua"><span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">Config</span>
-<span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">pin</span> = 4            <span style="color: #8D8D84;">--</span><span style="color: #8D8D84; font-style: italic;">&gt; GPIO2</span>
-<span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">value</span> = gpio.LOW
-<span style="color: #0000FF;">local</span> <span style="color: #BA36A5;">duration</span> = 1000    <span style="color: #8D8D84;">--</span><span style="color: #8D8D84; font-style: italic;">&gt; 1 second</span>
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">Function toggles LED state</span>
-<span style="color: #0000FF;">function</span> <span style="color: #006699;">toggleLED</span> ()
-<span style="color: #0000FF;">if</span> value == gpio.LOW <span style="color: #0000FF;">then</span>
+<pre class="src src-lua">-- Config
+local pin = 4            --&gt; GPIO2
+local value = gpio.LOW
+local duration = 1000    --&gt; 1 second
+-- Function toggles LED state
+function toggleLED ()
+if value == gpio.LOW then
     value = gpio.HIGH
-<span style="color: #0000FF;">else</span>
+else
     value = gpio.LOW
-<span style="color: #0000FF;">end</span>
+end
 
 gpio.write(pin, value)
-<span style="color: #0000FF;">end</span>
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">Initialise the pin</span>
+end
+-- Initialise the pin
 gpio.mode(pin, gpio.OUTPUT)
 gpio.write(pin, value)
-<span style="color: #8D8D84;">-- </span><span style="color: #8D8D84; font-style: italic;">Create an interval</span>
+-- Create an interval
 tmr.alarm(0, duration, 1, toggleLED)
 </pre>
 </div></li>
@@ -542,6 +555,7 @@ blinking.</li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
 <li><a href="resume.pdf">Resume</a></li>
+<li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-19 Fri 00:12 -->
+<!-- 2021-05-24 Mon 22:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Numpy vs. Python Lists</title>
@@ -162,6 +162,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -182,13 +195,13 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
-<script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -276,8 +289,8 @@ Finally, I've felt comfortable and could clearly understand what is
 happening in the background (cause, Machine Learning is all about Math).
 </p>
 
-<div id="outline-container-org87c3a12" class="outline-2">
-<h2 id="implementing-stochastic-gradient-descent"><a id="org87c3a12"></a>Implementing Stochastic Gradient Descent</h2>
+<div id="outline-container-org3ab8371" class="outline-2">
+<h2 id="implementing-stochastic-gradient-descent">Implementing Stochastic Gradient Descent</h2>
 <div class="outline-text-2" id="text-implementing-stochastic-gradient-descent">
 <p>
 Stochastic gradient descent is actually scanning through the training
@@ -300,13 +313,13 @@ example.
 </div>
 
 
-<div id="outline-container-org071ab3a" class="outline-3">
-<h3 id="a-dumb-stochastic-gradient-descent-implementation"><a id="org071ab3a"></a>A dumb Stochastic Gradient Descent Implementation</h3>
+<div id="outline-container-org1bfb7ba" class="outline-3">
+<h3 id="a-dumb-stochastic-gradient-descent-implementation">A dumb Stochastic Gradient Descent Implementation</h3>
 <div class="outline-text-3" id="text-a-dumb-stochastic-gradient-descent-implementation">
 </div>
 
-<div id="outline-container-org149a462" class="outline-4">
-<h4 id="using-lists"><a id="org149a462"></a>Using Lists:</h4>
+<div id="outline-container-org5bbcf07" class="outline-4">
+<h4 id="using-lists">Using Lists:</h4>
 <div class="outline-text-4" id="text-using-lists">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(v, w):
@@ -341,8 +354,8 @@ So, the benchmark results
 </div>
 </div>
 
-<div id="outline-container-orgca47d98" class="outline-4">
-<h4 id="using-numpy"><a id="orgca47d98"></a>Using Numpy:</h4>
+<div id="outline-container-org2ab571a" class="outline-4">
+<h4 id="using-numpy">Using Numpy:</h4>
 <div class="outline-text-4" id="text-using-numpy">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
@@ -388,6 +401,7 @@ faster.
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
 <li><a href="resume.pdf">Resume</a></li>
+<li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
 </div>
