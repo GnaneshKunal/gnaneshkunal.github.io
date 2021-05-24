@@ -36,3 +36,7 @@ touch:
 								@touch org/avahi-docker-non-root.org
 
 prepare: clean touch
+
+release:
+								@echo "Releasing from `generator` branch to `master` branch..."
+								git push origin `git subtree split --prefix public generator`:master --force
