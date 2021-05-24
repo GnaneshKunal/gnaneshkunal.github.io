@@ -84,6 +84,7 @@
          :html-doctype "html5"
          :html-html5-fancy t
          :html-head "<link rel=\"stylesheet\" href=\"css/stylesheet.css\">"
+         :html-head-extra "<link rel=\"stylesheet\" media=\"screen\" href=\"https://fontlibrary.org//face/source-sans-pro\" type=\"text/css\"/><link rel=\"stylesheet\" media=\"screen\" href=\"https://fontlibrary.org//face/source-code-pro\" type=\"text/css\"/><script data-goatcounter=\"https://gnanesh.goatcounter.com/count\" async src=\"//gc.zgo.at/count.js\"></script>"
          :html-postamble "
 <hr></hr>
 <div class=\"nav\">
@@ -92,6 +93,7 @@
 <li><a href=\"about.html\">About</a></li>
 <li><a href=\"https://github.com/Gnaneshkunal\">GitHub</a></li>
 <li><a href=\"resume.pdf\">Resume</a></li>
+<li><a href=\"key.pub\">PGP</a></li>
 </ul>
 </div>"
          :with-creator t
@@ -116,7 +118,7 @@
          :html-doctype "html5"
          :html-html5-fancy t
          :html-head "<link rel=\"stylesheet\" href=\"css/stylesheet.css\">"
-         :html-head-extra "<script data-goatcounter=\"https://gnanesh.goatcounter.com/count\" async src=\"//gc.zgo.at/count.js\"></script>"
+         :html-head-extra "<link rel=\"stylesheet\" media=\"screen\" href=\"https://fontlibrary.org//face/source-sans-pro\" type=\"text/css\"/><link rel=\"stylesheet\" media=\"screen\" href=\"https://fontlibrary.org//face/source-code-pro\" type=\"text/css\"/><script data-goatcounter=\"https://gnanesh.goatcounter.com/count\" async src=\"//gc.zgo.at/count.js\"></script>"
          :html-postamble "
 <hr></hr>
 <div class=\"nav\">
@@ -125,6 +127,7 @@
 <li><a href=\"about.html\">About</a></li>
 <li><a href=\"https://github.com/Gnaneshkunal\">GitHub</a></li>
 <li><a href=\"resume.pdf\">Resume</a></li>
+<li><a href=\"key.pub\">PGP</a></li>
 </ul>
 </div>
 "
@@ -150,4 +153,11 @@
          :publishing-function org-publish-attachment
          :recursive t
          )
-        ("all" :components ("posts" "css" "img" "non-posts" "static"))))
+        ("publickey"
+         :base-directory "~/gk/non/"
+         :base-extension "pub"
+         :publishing-directory "~/gk/public/"
+         :publishing-function org-publish-attachment
+         :recursive t
+         )
+        ("all" :components ("posts" "css" "img" "non-posts" "static" "publickey"))))

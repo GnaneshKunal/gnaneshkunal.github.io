@@ -21,3 +21,18 @@ clean:
 								@rm -rvf *.elc
 								@rm -rvf public/img/* public/*.html public/css/*
 								@rm -rvf ~/.org-timestamps/*
+
+touch:
+								@echo "Touching files.."
+								@touch org/what-are-containers.org
+								@touch org/numpy-vs-lists.org
+								@touch org/flashing-nodemcu.org
+								@touch org/applying-transfer-learning-resnet.org
+								@touch org/dumped-spacemacs.org
+								@touch org/local-paths.org
+								@touch org/using-js-pkgs-without-types.org
+								@touch org/why-scala-implicits.org
+								@touch org/cpp-recursive-lambdas.org
+								@touch org/avahi-docker-non-root.org
+
+prepare: clean touch

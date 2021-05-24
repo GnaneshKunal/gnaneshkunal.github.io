@@ -2,6 +2,9 @@ body {
     max-width: 750px;
     margin: auto;
     padding: 0px 30px 0px 30px;
+    font-family: 'SourceSansProRegular';
+    font-weight: normal;
+    font-style: normal;
 }
 
 header .title {
@@ -10,16 +13,27 @@ header .title {
 
 #content ul {
     padding: 0;
+    /* list-style: none; */
+}
+
+/* index page list style */
+body > div#content > ul:nth-child(2) li:nth-child(odd) {
+    background-color: #f4f4f4;
+}
+
+body > div#content > ul li {
     list-style: none;
+    font-family: 'SourceCodeProRegular';
+
 }
 
-#content ul li {
-    font-family: mono;
-    padding-bottom: 5px;
+body > div#content > ul > li > a {
+    margin-left: 3%;
+    font-family: 'SourceSansProRegular';
 }
 
-#content ul li a {
-    font-family: 'DejaVu Serif';
+code {
+    font-family: 'SouceCodeProRegular';
 }
 
 .nav ul {

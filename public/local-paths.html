@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-19 Fri 00:12 -->
+<!-- 2021-05-24 Mon 22:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install packages &amp; libraries on your local paths</title>
@@ -162,6 +162,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -182,13 +195,13 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
-<script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -271,8 +284,8 @@ Now, I've finally found a way to install libraries on my own path. I
 like to use <code>$HOME/.local/</code>.
 </p>
 
-<div id="outline-container-org583fd3e" class="outline-2">
-<h2 id="the-usual-way"><a id="org583fd3e"></a>The Usual way</h2>
+<div id="outline-container-orgce77067" class="outline-2">
+<h2 id="the-usual-way">The Usual way</h2>
 <div class="outline-text-2" id="text-the-usual-way">
 <p>
 Usually, When you compile libraries from source, the usual way would be
@@ -314,8 +327,8 @@ package in a different location (like as I said <code>$HOME/.local/</code>)?
 </div>
 </div>
 
-<div id="outline-container-orgc940abd" class="outline-2">
-<h2 id="what-you-need-to-do"><a id="orgc940abd"></a>What You Need To Do</h2>
+<div id="outline-container-orgb89fc29" class="outline-2">
+<h2 id="what-you-need-to-do">What You Need To Do</h2>
 <div class="outline-text-2" id="text-what-you-need-to-do">
 <p>
 Well, that's easy though. The <code>configure</code> script also has a <code>--prefix</code>
@@ -399,8 +412,8 @@ couldn't find the headers.
 </div>
 </div>
 
-<div id="outline-container-orgcd4cbc0" class="outline-4">
-<h4 id="useful-links"><a id="orgcd4cbc0"></a>Useful Links</h4>
+<div id="outline-container-org39def12" class="outline-4">
+<h4 id="useful-links">Useful Links</h4>
 <div class="outline-text-4" id="text-useful-links">
 <ul class="org-ul">
 <li><a href="http://www.network-theory.co.uk/docs/gccintro/gccintro_23.html">GCC Environemnt Variables</a></li>
@@ -420,6 +433,7 @@ couldn't find the headers.
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
 <li><a href="resume.pdf">Resume</a></li>
+<li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
 </div>

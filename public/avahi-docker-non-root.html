@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-06-19 Fri 00:12 -->
+<!-- 2021-05-24 Mon 22:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>mDNS, avahi and docker non-root containers</title>
@@ -162,6 +162,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -182,13 +195,13 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
-<script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -235,7 +248,7 @@ for the JavaScript code in this tag.
 <header>
 <h1 class="title">mDNS, avahi and docker non-root containers</h1>
 </header><p>
-<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-06-01 Mon&gt;</span></span>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2020-05-30 Sat&gt;</span></span>
 </p>
 
 <p>
@@ -323,9 +336,9 @@ cluster starts a new node with a different IP address to take up
 <code>node1.my-awesome-cluster.local</code>. This is called <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>.
 </p>
 
-<div id="outline-container-org41e891c" class="outline-2">
-<h2 id="org41e891c">Why do we need a hostname resolver for local networks?</h2>
-<div class="outline-text-2" id="text-org41e891c">
+<div id="outline-container-org4b59282" class="outline-2">
+<h2 id="org4b59282">Why do we need a hostname resolver for local networks?</h2>
+<div class="outline-text-2" id="text-org4b59282">
 <p>
 Earlier you used to connect to the cluster using the IP address of the
 cluster and it worked. Now when you tell your application to connect
@@ -344,9 +357,9 @@ DNS helps you to resolve the domain name to the cluster IP address.
 </div>
 </div>
 
-<div id="outline-container-org8564d0a" class="outline-2">
-<h2 id="org8564d0a">mDNS</h2>
-<div class="outline-text-2" id="text-org8564d0a">
+<div id="outline-container-org1bc4818" class="outline-2">
+<h2 id="org1bc4818">mDNS</h2>
+<div class="outline-text-2" id="text-org1bc4818">
 <p>
 To solve this problem we have <a href="https://en.wikipedia.org/wiki/Multicast_DNS">mDNS</a>. mDNS is a protocol that resolves
 hostname to IP addresses within a small network that lacks the name
@@ -358,9 +371,9 @@ configuration should be changed.
 </p>
 </div>
 
-<div id="outline-container-org05653a3" class="outline-3">
-<h3 id="org05653a3">Example</h3>
-<div class="outline-text-3" id="text-org05653a3">
+<div id="outline-container-org47630b6" class="outline-3">
+<h3 id="org47630b6">Example</h3>
+<div class="outline-text-3" id="text-org47630b6">
 <p>
 Lets try out an example.
 </p>
@@ -372,9 +385,9 @@ Enterprise cluster.
 </p>
 </div>
 
-<div id="outline-container-org6ddd0b8" class="outline-4">
-<h4 id="org6ddd0b8">Why Redis Enterprise docker image?</h4>
-<div class="outline-text-4" id="text-org6ddd0b8">
+<div id="outline-container-org975b782" class="outline-4">
+<h4 id="org975b782">Why Redis Enterprise docker image?</h4>
+<div class="outline-text-4" id="text-org975b782">
 <p>
 The reason why I have chosen Redis Enterprise docker image is that it
 aligns well with the previous cluster example. With Redis Enterprise
@@ -436,7 +449,7 @@ can give your cluster FQDN like this.
 
 
 <figure>
-<img src="img/mdns-redis-cluster-conf.png" alt="mdns-redis-cluster-conf.png">
+<img src="img/mdns-redis-cluster-conf.png" alt="mdns-redis-cluster-conf.png"> 
 
 </figure>
 
@@ -607,9 +620,9 @@ Now lets try to add mDNS.
 </div>
 </div>
 
-<div id="outline-container-orgfb77ed6" class="outline-2">
-<h2 id="orgfb77ed6">Avahi</h2>
-<div class="outline-text-2" id="text-orgfb77ed6">
+<div id="outline-container-orgb71c1ec" class="outline-2">
+<h2 id="orgb71c1ec">Avahi</h2>
+<div class="outline-text-2" id="text-orgb71c1ec">
 <p>
 <a href="https://en.wikipedia.org/wiki/Avahi_(software)">Avahi</a> is a free zero-configuration implementation of the mDNS
 protocol. Let's try to add it.
@@ -714,9 +727,9 @@ resolves <code>redis-12000.mycluster.local</code>.
 </div>
 </div>
 
-<div id="outline-container-org3d73000" class="outline-2">
-<h2 id="org3d73000">Running the container as non-root user</h2>
-<div class="outline-text-2" id="text-org3d73000">
+<div id="outline-container-org0d2f4fd" class="outline-2">
+<h2 id="org0d2f4fd">Running the container as non-root user</h2>
+<div class="outline-text-2" id="text-org0d2f4fd">
 <p>
 Now let's talk about the
 security.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> Many container
@@ -943,16 +956,16 @@ this <a href="https://github.com/GnaneshKunal/avahi-docker-non-root">repository<
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><a href="https://hub.docker.com/r/redislabs/redis/">Redis Enterprise Software</a> is enterprise grade,
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara"><a href="https://hub.docker.com/r/redislabs/redis/">Redis Enterprise Software</a> is enterprise grade,
 distributed, in-memory NoSQL database server, fully compatible with
-open source Redis by Redis Labs.</div></div>
+open source Redis by Redis Labs.</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><a href="https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html">Bitnami Engineering</a>: Why
-non-root containers are important for security</div></div>
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara"><a href="https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html">Bitnami Engineering</a>: Why
+non-root containers are important for security</p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><code>avahi-daemon.conf</code> has many
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara"><code>avahi-daemon.conf</code> has many
 configurations and we don't need it in our application, so I'm just
-setting the <code>enable-dbus</code> to <code>no</code>.</div></div>
+setting the <code>enable-dbus</code> to <code>no</code>.</p></div></div>
 
 
 </div>
@@ -966,6 +979,7 @@ setting the <code>enable-dbus</code> to <code>no</code>.</div></div>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
 <li><a href="resume.pdf">Resume</a></li>
+<li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
 </div>

@@ -5,7 +5,21 @@
 #+LANGUAGE:    en
 #+OPTIONS:     H:3 num:nil toc:nil \n:nil ::t |:t ^:nil -:nil f:t *:t <:t
 
-Hi, folks, I'm Gnanesh.
+Language agnostic engineer skilled at software development with
+experience of understanding the requirements and tackling ownership of
+designing, building and maintaining the solutions. *Interested in
+distributed systems and databases.*
 
-I live in India and work as a [[https://www.linkedin.com/in/gnanesh-kunal/][Software Engineer]].
+In my free time, I contribute to OSS, grok programming languages (and
+its internals), trace distributed systems and live in multiple
+operating systems and work as a saint in the church of Emacs.
 
+I live in India and work as a [[https://www.linkedin.com/in/gnanesh-kunal/][Senior Software Engineer]].
+
+You can contact me via any of the following means:
+- [[mailto:gnaneshkunal@outlook.com][E-mail]]
+- [[https://twitter.com/GnaneshKunal][Twitter]]
+
+My PGP key is published at [[./key.pub][key.pub]].
+
+The key fingerprint is =3A9D 3599 1D7F 5F65 B0AE  596F 80CA 7AE9 4058 3689=.
