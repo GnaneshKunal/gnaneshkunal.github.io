@@ -7,12 +7,13 @@
 
 Language agnostic engineer skilled at software development with
 experience of understanding the requirements and tackling ownership of
-designing, building and maintaining the solutions. *Interested in
-distributed systems and databases.*
+designing, building and maintaining the solutions.
 
-In my free time, I contribute to OSS, grok programming languages (and
-its internals), trace distributed systems and live in multiple
-operating systems and work as a saint in the church of Emacs.
+In my free time, I read novels and contribute to OSS. I'm currently
+interested in Distributed systems, databases, BSDs.
+# In my free time, I contribute to OSS, grok programming languages (and
+# its internals), trace distributed systems and live in multiple
+# operating systems and work as a saint in the church of Emacs.
 
 I live in India and work as a [[https://www.linkedin.com/in/gnanesh-kunal/][Senior Software Engineer]].
 

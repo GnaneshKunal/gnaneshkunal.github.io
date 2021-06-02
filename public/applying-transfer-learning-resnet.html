@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-24 Mon 22:15 -->
+<!-- 2021-06-02 Wed 12:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Applying Transfer Learning on ResNet using PyTorch</title>
@@ -264,7 +264,7 @@ Things I've learned:
 <li>Apply Transfer Learning</li>
 </ol>
 
-<div id="outline-container-org27cbf7c" class="outline-2">
+<div id="outline-container-org2e2fa1d" class="outline-2">
 <h2 id="dataset">DATASET</h2>
 <div class="outline-text-2" id="text-dataset">
 <p>
@@ -298,7 +298,7 @@ So, I've arranged the dataset as the <code>ImageFolder</code> requires me to.
 </div>
 </div>
 
-<div id="outline-container-org9c02583" class="outline-2">
+<div id="outline-container-orgccc20f6" class="outline-2">
 <h2 id="model">Model</h2>
 <div class="outline-text-2" id="text-model">
 <p>
@@ -307,19 +307,19 @@ what to name it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">self</span>.conv1 = nn.Conv2d(3, 8, 5)
-<span style="color: #0000FF;">self</span>.pool = nn.MaxPool(2, 2)
-<span style="color: #0000FF;">self</span>.conv2 = nn.Conv2d(8, 16, 3)
-<span style="color: #0000FF;">self</span>.conv3 = nn.Conv2d(16, 32, 3)
-<span style="color: #0000FF;">self</span>.conv4 = nn.Conv2d(32, 64, 3)
-<span style="color: #0000FF;">self</span>.conv5 = nn.Conv2d(64, 64, 3)
+<pre class="src src-python"><span style="color: #20b2aa; font-weight: bold;">self</span>.conv1 = nn.Conv2d(3, 8, 5)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.pool = nn.MaxPool(2, 2)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.conv2 = nn.Conv2d(8, 16, 3)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.conv3 = nn.Conv2d(16, 32, 3)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.conv4 = nn.Conv2d(32, 64, 3)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.conv5 = nn.Conv2d(64, 64, 3)
 
-<span style="color: #0000FF;">self</span>.fc1 = nn.Linear(64 * 5 * 5, 1000)
-<span style="color: #0000FF;">self</span>.fc2 = nn.Linear(1000, 500)
-<span style="color: #0000FF;">self</span>.fc3 = nn.Linear(500, 120)
-<span style="color: #0000FF;">self</span>.fc4 = nn.Linear(120, 84)
-<span style="color: #0000FF;">self</span>.fc5 = nn.Linear(84, 10)
-<span style="color: #0000FF;">self</span>.fc6 = nn.Linear(10, 2)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.fc1 = nn.Linear(64 * 5 * 5, 1000)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.fc2 = nn.Linear(1000, 500)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.fc3 = nn.Linear(500, 120)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.fc4 = nn.Linear(120, 84)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.fc5 = nn.Linear(84, 10)
+<span style="color: #20b2aa; font-weight: bold;">self</span>.fc6 = nn.Linear(10, 2)
 </pre>
 </div>
 
@@ -331,7 +331,7 @@ is ResNet18. So, I've considered ResNet18 over my network.
 </div>
 </div>
 
-<div id="outline-container-orga624131" class="outline-2">
+<div id="outline-container-org497dcf6" class="outline-2">
 <h2 id="training">Training</h2>
 <div class="outline-text-2" id="text-training">
 <p>
@@ -355,7 +355,7 @@ Choices I've got:
 </ul>
 </div>
 
-<div id="outline-container-orgc398021" class="outline-3">
+<div id="outline-container-org181a103" class="outline-3">
 <h3 id="full-pretrained-model">Full Pretrained Model</h3>
 <div class="outline-text-3" id="text-full-pretrained-model">
 <p>
@@ -365,7 +365,7 @@ don't have to do anything. You just have to write the predict function.
 </div>
 </div>
 
-<div id="outline-container-orgbdac36d" class="outline-3">
+<div id="outline-container-orgfaf31e8" class="outline-3">
 <h3 id="fine-tuning-the-convnet">Fine-Tuning the ConvNet</h3>
 <div class="outline-text-3" id="text-fine-tuning-the-convnet">
 <p>
@@ -378,7 +378,7 @@ another time though. But the time consumption was really too much.
 </div>
 </div>
 
-<div id="outline-container-orgbfcbe8c" class="outline-3">
+<div id="outline-container-org1cfc980" class="outline-3">
 <h3 id="convnet-as-fixed-feature-extractor">ConvNet as fixed feature extractor</h3>
 <div class="outline-text-3" id="text-convnet-as-fixed-feature-extractor">
 <p>
@@ -392,7 +392,7 @@ Fine-Tuning technique.
 </div>
 </div>
 
-<div id="outline-container-orgfa9c118" class="outline-2">
+<div id="outline-container-org2990fc2" class="outline-2">
 <h2 id="predictions">Predictions</h2>
 <div class="outline-text-2" id="text-predictions">
 <p>
@@ -420,16 +420,16 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 </div>
 </div>
 
-<div id="outline-container-orgbcba0d4" class="outline-2">
-<h2 id="orgbcba0d4">Source Code</h2>
-<div class="outline-text-2" id="text-orgbcba0d4">
+<div id="outline-container-orgb44b6a2" class="outline-2">
+<h2 id="orgb44b6a2">Source Code</h2>
+<div class="outline-text-2" id="text-orgb44b6a2">
 <p>
 <a href="https://github.com/GnaneshKunal/dogs-vs-cats-classifier/">GnaneshKunal/dogs-vs-cats-classifier</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7adc67f" class="outline-2">
+<div id="outline-container-org96730be" class="outline-2">
 <h2 id="Useful Links">Useful Links</h2>
 <div class="outline-text-2" id="text-Useful Links">
 <ol class="org-ol">
@@ -449,7 +449,7 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Resume</a></li>
+<li><a href="resume.pdf">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>

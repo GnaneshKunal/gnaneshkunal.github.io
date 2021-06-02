@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-24 Mon 22:15 -->
+<!-- 2021-06-02 Wed 12:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why Scala Implicits</title>
@@ -268,7 +268,7 @@ two ways to do it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">class Person(name: String, age: Int)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Person</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>, age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>)
 </pre>
 </div>
 
@@ -283,7 +283,7 @@ declare a <code>case class</code>. So, Now the above code will be turned to:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">case class Person(name: String, age: Int)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Person</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>, age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>)
 </pre>
 </div>
 
@@ -292,7 +292,7 @@ Usage:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">Person("Gnanesh Kunal", 20)
+<pre class="src src-scala"><span style="color: #1e90ff;">Person</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, <span style="color: #1e90ff;">20</span>)
 </pre>
 </div>
 
@@ -314,8 +314,8 @@ something.</i> So, let's define some.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">case class Name(name: String) 
-case class Age(age: Int)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Name</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>) 
+<span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Age</span>(age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>)
 </pre>
 </div>
 
@@ -324,9 +324,9 @@ So now, let me use those datatypes.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">val name = Name("Gnanesh Kunal")
-val age = Age(20)
-val person = Person(name, age)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">val</span> <span style="color: #9acd32;">name</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Name</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>)
+<span style="color: #20b2aa; font-weight: bold;">val</span> <span style="color: #9acd32;">age</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Age</span>(<span style="color: #1e90ff;">20</span>)
+<span style="color: #20b2aa; font-weight: bold;">val</span> <span style="color: #9acd32;">person</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Person</span>(name, age)
 </pre>
 </div>
 
@@ -361,7 +361,7 @@ The Person class must be re-implemented using the newer data types.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">case class Person(name: Name, age: Age)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Person</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span>, age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span>)
 </pre>
 </div>
 
@@ -380,21 +380,21 @@ But do you think the following code is gonna work?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">Person("Gnanesh Kunal", 20)
+<pre class="src src-scala"><span style="color: #1e90ff;">Person</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, <span style="color: #1e90ff;">20</span>)
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-sh">scala&gt; Person(<span style="color: #008000;">"Gnanesh Kunal"</span>, 20)
+<pre class="src src-sh">scala&gt; Person(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, 20)
 &lt;console&gt;:30: error: type mismatch;
- found   : String(<span style="color: #008000;">"Gnanesh Kunal"</span>)
+ found   : String(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>)
  required: Name
-       Person(<span style="color: #008000;">"Gnanesh Kunal"</span>, 20)
+       Person(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, 20)
               ^
 &lt;console&gt;:30: error: type mismatch;
  found   : Int(20)
  required: Age
-       Person(<span style="color: #008000;">"Gnanesh Kunal"</span>, 20)
+       Person(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, 20)
 </pre>
 </div>
 
@@ -403,7 +403,7 @@ The same error again. The object must be initialized like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">Person(Name("Gnanesh Kunal"), Age(20))
+<pre class="src src-scala"><span style="color: #1e90ff;">Person</span>(<span style="color: #1e90ff;">Name</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), <span style="color: #1e90ff;">Age</span>(<span style="color: #1e90ff;">20</span>))
 </pre>
 </div>
 
@@ -412,10 +412,10 @@ Another implementation would be to try multiple constructors.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">case class Person(n: String, a: Int) {
-    var name: Name = Name(n)
-    var age: Age = Age(a)
-    def this(n: Name, a: Age) = this(n.name, a.age)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Person</span>(n<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>, a<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">var</span> <span style="color: #ff69b4; font-weight: bold;">name</span><span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Name</span>(n)
+    <span style="color: #20b2aa; font-weight: bold;">var</span> <span style="color: #ff69b4; font-weight: bold;">age</span><span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Age</span>(a)
+    <span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #20b2aa; font-weight: bold;">this</span>(n<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span>, a<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span>) <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #20b2aa; font-weight: bold;">this</span>(n.name, a.age)
 }   
 </pre>
 </div>
@@ -430,19 +430,19 @@ Now let us try to create the objects.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">scala&gt; Person(<span style="color: #008000;">"Gnanesh Kunal"</span>, 20) <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Yay!!</span>
+<pre class="src src-sh">scala&gt; Person(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, 20) <span style="color: #cd853f;"># </span><span style="color: #cd853f;">Yay!!</span>
 res10: Person = Person(Gnanesh Kunal,20)
 
-scala&gt; Person(Name(<span style="color: #008000;">"Gnanesh Kunal"</span>), Age(20)) <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Boo!!</span>
+scala&gt; Person(Name(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), Age(20)) <span style="color: #cd853f;"># </span><span style="color: #cd853f;">Boo!!</span>
 &lt;console&gt;:30: error: type mismatch;
  found   : Name
  required: String
-       Person(Name(<span style="color: #008000;">"Gnanesh Kunal"</span>), Age(20))
+       Person(Name(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), Age(20))
                   ^
 &lt;console&gt;:30: error: type mismatch;
  found   : Age
  required: Int
-       Person(Name(<span style="color: #008000;">"Gnanesh Kunal"</span>), Age(20))
+       Person(Name(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), Age(20))
                                         ^
 </pre>
 </div>
@@ -459,7 +459,7 @@ parameters types, we must use the <code>new</code> keyword.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">new Person(Name("Gnanesh Kunal"), Age(20))
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">new</span> <span style="color: #9370db;">Person</span>(<span style="color: #1e90ff;">Name</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), <span style="color: #1e90ff;">Age</span>(<span style="color: #1e90ff;">20</span>))
 </pre>
 </div>
 
@@ -469,10 +469,10 @@ must create a companion object.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">// Person class Implementation ...
+<pre class="src src-scala"><span style="color: #cd853f;">// </span><span style="color: #cd853f;">Person class Implementation ...</span>
 
-object Person {
-    def apply(n: Name, a: Int) = new Person(n.name, a.age) 
+<span style="color: #20b2aa; font-weight: bold;">object</span> <span style="color: #1e90ff;">Person</span> {
+    <span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">apply</span>(n<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span>, a<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>) <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #20b2aa; font-weight: bold;">new</span> <span style="color: #9370db;">Person</span>(n.name, a.age) 
 }
 </pre>
 </div>
@@ -482,10 +482,10 @@ Finally it works.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">scala&gt; Person(<span style="color: #008000;">"Gnanesh Kunal"</span>, 20)
+<pre class="src src-sh">scala&gt; Person(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, 20)
 res14: Person = Person(Gnanesh Kunal,20)
 
-scala&gt; Person(Name(<span style="color: #008000;">"Gnanesh Kunal"</span>), Age(20))
+scala&gt; Person(Name(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), Age(20))
 res15: Person = Person(Gnanesh Kunal,20)
 </pre>
 </div>
@@ -495,17 +495,17 @@ The complete above code to make the person class work.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">case class Name(name: String) 
-case class Age(age: Int)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Name</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>) 
+<span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Age</span>(age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>)
 
-case class Person(n: String, a: Int) {
-    var name: Name = Name(n)
-    var age: Age = Age(a)
-    def this(n: Name, a: Age) = this(n.name, a.age)
+<span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Person</span>(n<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>, a<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">var</span> <span style="color: #ff69b4; font-weight: bold;">name</span><span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Name</span>(n)
+    <span style="color: #20b2aa; font-weight: bold;">var</span> <span style="color: #ff69b4; font-weight: bold;">age</span><span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Age</span>(a)
+    <span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #20b2aa; font-weight: bold;">this</span>(n<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span>, a<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span>) <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #20b2aa; font-weight: bold;">this</span>(n.name, a.age)
 }
 
-object Person {
-    def apply(n: Name, a: Int) = new Person(n.name, a.age) 
+<span style="color: #20b2aa; font-weight: bold;">object</span> <span style="color: #1e90ff;">Person</span> {
+    <span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">apply</span>(n<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span>, a<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>) <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #20b2aa; font-weight: bold;">new</span> <span style="color: #9370db;">Person</span>(n.name, a.age) 
 }
 </pre>
 </div>
@@ -527,13 +527,13 @@ Doing everything defined above under a minute.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">case class Name(name: String) 
-case class Age(age: Int)
+<pre class="src src-scala"><span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Name</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>) 
+<span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Age</span>(age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>)
 
-case class Person(name: Name, age: Age)
+<span style="color: #20b2aa; font-weight: bold;">case</span> <span style="color: #20b2aa; font-weight: bold;">class</span> <span style="color: #9370db;">Person</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span>, age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span>)
 
-implicit def strToName(name: String): Name = Name(name)
-implicit def intToAge(age: Int): Age = Age(age)
+<span style="color: #76ee00;">implicit</span> <span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">strToName</span>(name<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">String</span>)<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Name</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Name</span>(name)
+<span style="color: #76ee00;">implicit</span> <span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">intToAge</span>(age<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Int</span>)<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Age</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Age</span>(age)
 </pre>
 </div>
 
@@ -542,11 +542,11 @@ Everything fits.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scala">scala&gt; Person(Name("Gnanesh Kunal"), Age(20))
-res17: Person = Person(Name(Gnanesh Kunal),Age(20))
+<pre class="src src-scala">scala&gt; <span style="color: #1e90ff;">Person</span>(<span style="color: #1e90ff;">Name</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>), <span style="color: #1e90ff;">Age</span>(<span style="color: #1e90ff;">20</span>))
+res17<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Person</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Person</span>(<span style="color: #1e90ff;">Name</span>(<span style="color: #1e90ff;">Gnanesh</span> <span style="color: #1e90ff;">Kunal</span>),<span style="color: #1e90ff;">Age</span>(<span style="color: #1e90ff;">20</span>))
 
-scala&gt; Person("Gnanesh Kunal", 20)
-res18: Person = Person(Name(Gnanesh Kunal),Age(20))
+scala&gt; <span style="color: #1e90ff;">Person</span>(<span style="color: #ffa07a;">"Gnanesh Kunal"</span>, <span style="color: #1e90ff;">20</span>)
+res18<span style="color: #20b2aa; font-weight: bold;">:</span> <span style="color: #9370db;">Person</span> <span style="color: #20b2aa; font-weight: bold;">=</span> <span style="color: #1e90ff;">Person</span>(<span style="color: #1e90ff;">Name</span>(<span style="color: #1e90ff;">Gnanesh</span> <span style="color: #1e90ff;">Kunal</span>),<span style="color: #1e90ff;">Age</span>(<span style="color: #1e90ff;">20</span>))
 </pre>
 </div>
 
