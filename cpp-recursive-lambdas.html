@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-05-24 Mon 22:15 -->
+<!-- 2021-06-02 Wed 12:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C++ Lambdas and Recursion</title>
@@ -261,18 +261,18 @@ One definition:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span> (<span style="color: #6434A3;">void</span>) {
-    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">sequence</span>
-    <span style="color: #6434A3;">void</span> <span style="color: #BA36A5;">reverse</span> (<span style="color: #6434A3;">vector</span>&lt;<span style="color: #6434A3;">int</span>&gt; &amp;arr) {
-        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0, <span style="color: #BA36A5;">j</span> = arr.size() - 1;
-        <span style="color: #0000FF;">while</span> (i &lt; j) {
-            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">temp</span> = arr[i];
+<pre class="src src-cpp"><span style="color: #9370db;">int</span> <span style="color: #00ff7f;">main</span> (<span style="color: #9370db;">void</span>) {
+    <span style="color: #cd853f;">// </span><span style="color: #cd853f;">sequence</span>
+    <span style="color: #9370db;">void</span> <span style="color: #9acd32;">reverse</span> (<span style="color: #9370db;">vector</span>&lt;<span style="color: #9370db;">int</span>&gt; &amp;arr) {
+        <span style="color: #9370db;">int</span> <span style="color: #9acd32;">i</span> = 0, <span style="color: #9acd32;">j</span> = arr.size() - 1;
+        <span style="color: #20b2aa; font-weight: bold;">while</span> (i &lt; j) {
+            <span style="color: #9370db;">int</span> <span style="color: #9acd32;">temp</span> = arr[i];
             arr[i++] = arr[j];
             arr[j--] = temp;
         }
     }
-    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">calls reverse</span>
-    <span style="color: #0000FF;">return</span> 0;
+    <span style="color: #cd853f;">// </span><span style="color: #cd853f;">calls reverse</span>
+    <span style="color: #20b2aa; font-weight: bold;">return</span> 0;
 }
 </pre>
 </div>
@@ -282,10 +282,10 @@ But you can't do that in cpp. You compiler complains about it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">file.cpp:9:35: error: <span style="color: #0000FF;">function</span> <span style="color: #006699;">definition</span> is not allowed here
+<pre class="src src-sh">file.cpp:9:35: error: <span style="color: #20b2aa; font-weight: bold;">function</span> <span style="color: #00ff7f;">definition</span> is not allowed here
   void reverse(vector&lt;int&gt; &amp; arr) {
                                   ^
-file.cpp:21:3: error: no matching <span style="color: #0000FF;">function</span> <span style="color: #006699;">for</span> call to <span style="color: #008000;">'reverse'</span>
+file.cpp:21:3: error: no matching <span style="color: #20b2aa; font-weight: bold;">function</span> <span style="color: #00ff7f;">for</span> call to <span style="color: #ffa07a;">'reverse'</span>
   reverse(arr);
   ^~~~~~~
 </pre>
@@ -300,19 +300,19 @@ So the only approach will be to define it elsewhere.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #6434A3;">void</span> <span style="color: #006699;">reverse</span> (<span style="color: #6434A3;">vector</span>&lt;<span style="color: #6434A3;">int</span>&gt; &amp;<span style="color: #BA36A5;">arr</span>) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0, <span style="color: #BA36A5;">j</span> = arr.size() - 1;
-    <span style="color: #0000FF;">while</span> (i &lt; j) {
-        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">temp</span> = arr[i];
+<pre class="src src-cpp"><span style="color: #9370db;">void</span> <span style="color: #00ff7f;">reverse</span> (<span style="color: #9370db;">vector</span>&lt;<span style="color: #9370db;">int</span>&gt; &amp;<span style="color: #9acd32;">arr</span>) {
+    <span style="color: #9370db;">int</span> <span style="color: #9acd32;">i</span> = 0, <span style="color: #9acd32;">j</span> = arr.size() - 1;
+    <span style="color: #20b2aa; font-weight: bold;">while</span> (i &lt; j) {
+        <span style="color: #9370db;">int</span> <span style="color: #9acd32;">temp</span> = arr[i];
         arr[i++] = arr[j];
         arr[j--] = temp;
     }
 }
 
-<span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span> (<span style="color: #6434A3;">void</span>) {
-    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">sequence</span>
-    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">calls reverse</span>
-    <span style="color: #0000FF;">return</span> 0;
+<span style="color: #9370db;">int</span> <span style="color: #00ff7f;">main</span> (<span style="color: #9370db;">void</span>) {
+    <span style="color: #cd853f;">// </span><span style="color: #cd853f;">sequence</span>
+    <span style="color: #cd853f;">// </span><span style="color: #cd853f;">calls reverse</span>
+    <span style="color: #20b2aa; font-weight: bold;">return</span> 0;
 }
 </pre>
 </div>
@@ -336,19 +336,19 @@ without that in modern compilers.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #6434A3;">void</span> <span style="color: #006699;">swap</span>(<span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">a</span>, <span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">b</span>) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">temp</span> = *a;
+<pre class="src src-cpp"><span style="color: #9370db;">void</span> <span style="color: #00ff7f;">swap</span>(<span style="color: #9370db;">int</span> *<span style="color: #9acd32;">a</span>, <span style="color: #9370db;">int</span> *<span style="color: #9acd32;">b</span>) {
+    <span style="color: #9370db;">int</span> <span style="color: #9acd32;">temp</span> = *a;
     *a = *b;
     *b = temp;
 }
 
-<span style="color: #6434A3;">void</span> <span style="color: #006699;">reverse</span> (<span style="color: #6434A3;">vector</span>&lt;<span style="color: #6434A3;">int</span>&gt; &amp;<span style="color: #BA36A5;">arr</span>) {
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0, <span style="color: #BA36A5;">j</span> = arr.size() - 1;
-    <span style="color: #0000FF;">while</span> (i &lt; j) {
+<span style="color: #9370db;">void</span> <span style="color: #00ff7f;">reverse</span> (<span style="color: #9370db;">vector</span>&lt;<span style="color: #9370db;">int</span>&gt; &amp;<span style="color: #9acd32;">arr</span>) {
+    <span style="color: #9370db;">int</span> <span style="color: #9acd32;">i</span> = 0, <span style="color: #9acd32;">j</span> = arr.size() - 1;
+    <span style="color: #20b2aa; font-weight: bold;">while</span> (i &lt; j) {
         swap(arr[i++], arr[j--]);
     }
 }
-<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">main here</span>
+<span style="color: #cd853f;">// </span><span style="color: #cd853f;">main here</span>
 </pre>
 </div>
 
@@ -362,20 +362,20 @@ Long story short, we can. We've got cpp lambdas.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #6434A3;">int</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">void</span>) {
-    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">sequence</span>
-    <span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">swap</span> = [](<span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">a</span>, <span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">b</span>) {
-        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">temp</span> = *a;
+<pre class="src src-cpp"><span style="color: #9370db;">int</span> <span style="color: #00ff7f;">main</span>(<span style="color: #9370db;">void</span>) {
+    <span style="color: #cd853f;">// </span><span style="color: #cd853f;">sequence</span>
+    <span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">swap</span> = [](<span style="color: #9370db;">int</span> *<span style="color: #9acd32;">a</span>, <span style="color: #9370db;">int</span> *<span style="color: #9acd32;">b</span>) {
+        <span style="color: #9370db;">int</span> <span style="color: #9acd32;">temp</span> = *a;
         *a = *b;
         *b = temp;
     };
 
-    <span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">reverse</span> = [<span style="color: #D0372D;">swap</span>](<span style="color: #6434A3;">vector</span>&lt;<span style="color: #6434A3;">int</span>&gt; &amp; <span style="color: #BA36A5;">arr</span>) {
-        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0, <span style="color: #BA36A5;">j</span> = arr.size() - 1;
-        <span style="color: #0000FF;">while</span> (i &lt; j)
+    <span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">reverse</span> = [<span style="color: #1e90ff;">swap</span>](<span style="color: #9370db;">vector</span>&lt;<span style="color: #9370db;">int</span>&gt; &amp; <span style="color: #9acd32;">arr</span>) {
+        <span style="color: #9370db;">int</span> <span style="color: #9acd32;">i</span> = 0, <span style="color: #9acd32;">j</span> = arr.size() - 1;
+        <span style="color: #20b2aa; font-weight: bold;">while</span> (i &lt; j)
             swap(arr[i++], arr[j--]);
     };
-    <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">calls reverse</span>
+    <span style="color: #cd853f;">// </span><span style="color: #cd853f;">calls reverse</span>
 }
 </pre>
 </div>
@@ -385,14 +385,14 @@ We can do this as well.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">reverse</span> = [](<span style="color: #6434A3;">vector</span>&lt;<span style="color: #6434A3;">int</span>&gt; &amp;<span style="color: #BA36A5;">arr</span>) {
-    <span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">swap</span> = [](<span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">a</span>, <span style="color: #6434A3;">int</span> *<span style="color: #BA36A5;">b</span>) {
-        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">temp</span> = *a;
+<pre class="src src-cpp"><span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">reverse</span> = [](<span style="color: #9370db;">vector</span>&lt;<span style="color: #9370db;">int</span>&gt; &amp;<span style="color: #9acd32;">arr</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">swap</span> = [](<span style="color: #9370db;">int</span> *<span style="color: #9acd32;">a</span>, <span style="color: #9370db;">int</span> *<span style="color: #9acd32;">b</span>) {
+        <span style="color: #9370db;">int</span> <span style="color: #9acd32;">temp</span> = *a;
         *a = *b;
         *b = temp;
     };
-    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 0, <span style="color: #BA36A5;">j</span> = arr.size() - 1;
-    <span style="color: #0000FF;">while</span> (i &lt; j)
+    <span style="color: #9370db;">int</span> <span style="color: #9acd32;">i</span> = 0, <span style="color: #9acd32;">j</span> = arr.size() - 1;
+    <span style="color: #20b2aa; font-weight: bold;">while</span> (i &lt; j)
         swap(arr[i++], arr[j--]);
 };
 </pre>
@@ -404,7 +404,7 @@ The <code>reverse</code> variable gets a datatype of
 of <code>function&lt;void(int *, int *)&gt;</code>.
 </p>
 
-<div id="outline-container-orga78f214" class="outline-2">
+<div id="outline-container-orgd079122" class="outline-2">
 <h2 id="what-about-recursion">What about recursion?</h2>
 <div class="outline-text-2" id="text-what-about-recursion">
 <p>
@@ -412,9 +412,9 @@ Recursion is a bit tricky. The following code doesn't work.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">factorial</span> = [](<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">n</span>) {
-    <span style="color: #0000FF;">if</span> (n &lt;= 1) <span style="color: #0000FF;">return</span> 1;
-    <span style="color: #0000FF;">return</span> n * factorial(n - 1);
+<pre class="src src-cpp"><span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">factorial</span> = [](<span style="color: #9370db;">int</span> <span style="color: #9acd32;">n</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">if</span> (n &lt;= 1) <span style="color: #20b2aa; font-weight: bold;">return</span> 1;
+    <span style="color: #20b2aa; font-weight: bold;">return</span> n * factorial(n - 1);
 };
 </pre>
 </div>
@@ -431,9 +431,9 @@ doesn't know.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">file.cpp:9:19: error: variable <span style="color: #008000;">'factorial'</span> declared with deduced type <span style="color: #008000;">'auto'</span>
-      cannot appear<span style="color: #0000FF;"> in</span> its own initializer
-                     <span style="color: #0000FF;">return</span> n * factorial(n - 1);
+<pre class="src src-sh">file.cpp:9:19: error: variable <span style="color: #ffa07a;">'factorial'</span> declared with deduced type <span style="color: #ffa07a;">'auto'</span>
+      cannot appear<span style="color: #20b2aa; font-weight: bold;"> in</span> its own initializer
+                     <span style="color: #20b2aa; font-weight: bold;">return</span> n * factorial(n - 1);
                                 ^
 1 error generated.
 </pre>
@@ -446,15 +446,15 @@ capture clause, <code>[&amp;]</code>. The <code>&amp;</code> says to pass everyt
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp">file.<span style="color: #D0372D;">cpp</span>:9:19: error: variable <span style="color: #ff0000; font-weight: bold;">'</span>factorial<span style="color: #ff0000; font-weight: bold;">'</span> cannot be implicitly captured in a
-      lambda with no capture-<span style="color: #0000FF;">default</span> specified
-                     <span style="color: #0000FF;">return</span> n * factorial(n - 1);
+<pre class="src src-cpp">file.<span style="color: #1e90ff;">cpp</span>:9:19: error: variable <span style="color: #ff69b4; font-weight: bold;">'</span>factorial<span style="color: #ff69b4; font-weight: bold;">'</span> cannot be implicitly captured in a
+      lambda with no capture-<span style="color: #20b2aa; font-weight: bold;">default</span> specified
+                     <span style="color: #20b2aa; font-weight: bold;">return</span> n * factorial(n - 1);
                                 ^
-file.cpp:7:22: note: <span style="color: #ff0000; font-weight: bold;">'</span>factorial<span style="color: #ff0000; font-weight: bold;">'</span> declared here
-  <span style="color: #6434A3;">function</span>&lt;<span style="color: #6434A3;">int</span>(<span style="color: #6434A3;">int</span>)&gt; factorial = [](<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">n</span>) {
+file.cpp:7:22: note: <span style="color: #ff69b4; font-weight: bold;">'</span>factorial<span style="color: #ff69b4; font-weight: bold;">'</span> declared here
+  <span style="color: #9370db;">function</span>&lt;<span style="color: #9370db;">int</span>(<span style="color: #9370db;">int</span>)&gt; factorial = [](<span style="color: #9370db;">int</span> <span style="color: #9acd32;">n</span>) {
                      ^
 file.cpp:7:34: note: lambda expression begins here
-  <span style="color: #6434A3;">function</span>&lt;<span style="color: #6434A3;">int</span>(<span style="color: #6434A3;">int</span>)&gt; factorial = [](<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">n</span>) {
+  <span style="color: #9370db;">function</span>&lt;<span style="color: #9370db;">int</span>(<span style="color: #9370db;">int</span>)&gt; factorial = [](<span style="color: #9370db;">int</span> <span style="color: #9acd32;">n</span>) {
 </pre>
 </div>
 
@@ -463,9 +463,9 @@ Finally this would be our definition.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #6434A3;">function</span>&lt;<span style="color: #6434A3;">int</span>(<span style="color: #6434A3;">int</span>)&gt; <span style="color: #BA36A5;">factorial</span> = [&amp;](<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">n</span>) {
-    <span style="color: #0000FF;">if</span> (n &lt;= 1) <span style="color: #0000FF;">return</span> 1;
-    <span style="color: #0000FF;">return</span> n * factorial(n - 1);
+<pre class="src src-cpp"><span style="color: #9370db;">function</span>&lt;<span style="color: #9370db;">int</span>(<span style="color: #9370db;">int</span>)&gt; <span style="color: #9acd32;">factorial</span> = [&amp;](<span style="color: #9370db;">int</span> <span style="color: #9acd32;">n</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">if</span> (n &lt;= 1) <span style="color: #20b2aa; font-weight: bold;">return</span> 1;
+    <span style="color: #20b2aa; font-weight: bold;">return</span> n * factorial(n - 1);
 };
 </pre>
 </div>
@@ -484,8 +484,8 @@ In cpp14, even the parameters can be defined using <code>auto</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">lambda</span> = [](<span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">x</span>, <span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">y</span>) {
-    <span style="color: #0000FF;">return</span> x + y;
+<pre class="src src-cpp"><span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">lambda</span> = [](<span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">x</span>, <span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">y</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">return</span> x + y;
 };
 </pre>
 </div>
@@ -495,14 +495,14 @@ The above code will be equivalent to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">struct</span> <span style="color: #6434A3;">unnamed_lambda</span> {
-    <span style="color: #0000FF;">template</span>&lt;<span style="color: #0000FF;">typename</span> <span style="color: #6434A3;">T</span>, <span style="color: #0000FF;">typename</span> <span style="color: #6434A3;">U</span>&gt;
-        <span style="color: #0000FF;">auto</span> <span style="color: #0000FF;">operator</span><span style="color: #006699;">()</span>(<span style="color: #6434A3;">T</span> <span style="color: #BA36A5;">x</span>, <span style="color: #6434A3;">U</span> <span style="color: #BA36A5;">y</span>) <span style="color: #0000FF;">const</span> {
-            <span style="color: #0000FF;">return</span> x + y;
+<pre class="src src-cpp"><span style="color: #20b2aa; font-weight: bold;">struct</span> <span style="color: #9370db;">unnamed_lambda</span> {
+    <span style="color: #20b2aa; font-weight: bold;">template</span>&lt;<span style="color: #20b2aa; font-weight: bold;">typename</span> <span style="color: #9370db;">T</span>, <span style="color: #20b2aa; font-weight: bold;">typename</span> <span style="color: #9370db;">U</span>&gt;
+        <span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #20b2aa; font-weight: bold;">operator</span><span style="color: #00ff7f;">()</span>(<span style="color: #9370db;">T</span> <span style="color: #9acd32;">x</span>, <span style="color: #9370db;">U</span> <span style="color: #9acd32;">y</span>) <span style="color: #20b2aa; font-weight: bold;">const</span> {
+            <span style="color: #20b2aa; font-weight: bold;">return</span> x + y;
         }
     };
 };
-<span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">lambda</span> = unnamed_lambda{};
+<span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">lambda</span> = unnamed_lambda{};
 </pre>
 </div>
 
@@ -521,12 +521,12 @@ itself as an argument.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-cpp"><span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">factorial</span> = [](<span style="color: #0000FF;">auto</span> &amp;&amp;<span style="color: #BA36A5;">self</span>, <span style="color: #0000FF;">auto</span> <span style="color: #BA36A5;">n</span>) {
-    <span style="color: #0000FF;">if</span> (n &lt;= 1) <span style="color: #0000FF;">return</span> 1;
-    <span style="color: #0000FF;">return</span> n * self(self, n - 1);
+<pre class="src src-cpp"><span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">factorial</span> = [](<span style="color: #20b2aa; font-weight: bold;">auto</span> &amp;&amp;<span style="color: #9acd32;">self</span>, <span style="color: #20b2aa; font-weight: bold;">auto</span> <span style="color: #9acd32;">n</span>) {
+    <span style="color: #20b2aa; font-weight: bold;">if</span> (n &lt;= 1) <span style="color: #20b2aa; font-weight: bold;">return</span> 1;
+    <span style="color: #20b2aa; font-weight: bold;">return</span> n * self(self, n - 1);
 };
 
-<span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">usage: </span>
+<span style="color: #cd853f;">// </span><span style="color: #cd853f;">usage: </span>
 factorial(factorial, 5);
 </pre>
 </div>
@@ -548,7 +548,7 @@ as an argument.
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Resume</a></li>
+<li><a href="resume.pdf">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
