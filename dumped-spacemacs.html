@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-02 Wed 12:49 -->
+<!-- 2021-06-10 Thu 07:48 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dumped Spacemacs for Vanilla Emacs</title>
@@ -284,7 +284,7 @@ be a lot simpler and I could clearly understand what's happening in
 the background as well.
 </p>
 
-<div id="outline-container-orga00d0e2" class="outline-2">
+<div id="outline-container-org024a2de" class="outline-2">
 <h2 id="autocomplete">Autocomplete</h2>
 <div class="outline-text-2" id="text-autocomplete">
 <p>
@@ -298,15 +298,15 @@ Autocomplete is a must. You really need it if you need some cool
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cd853f;">;;</span><span style="color: #cd853f;">.emacs</span>
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">Autocomplete</span>
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Autocomplete</span>
 (ac-config-default)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgdb96d50" class="outline-2">
+<div id="outline-container-org20d2703" class="outline-2">
 <h2 id="cc">C/C++</h2>
 <div class="outline-text-2" id="text-cc">
 <p>
@@ -320,8 +320,8 @@ experience for C and C++, and is based on <code>libclang</code>.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cd853f;">;;</span><span style="color: #cd853f;">.emacs</span>
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">irony</span>
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">irony</span>
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -333,7 +333,7 @@ experience for C and C++, and is based on <code>libclang</code>.
 </div>
 </div>
 
-<div id="outline-container-org5a9c45c" class="outline-2">
+<div id="outline-container-org13b7738" class="outline-2">
 <h2 id="python-mode">Python Mode</h2>
 <div class="outline-text-2" id="text-python-mode">
 <p>
@@ -346,15 +346,15 @@ I'm using <code>anaconda-mode</code> as my python environment. The <a href="http
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cd853f;">;;</span><span style="color: #cd853f;">.emacs</span>
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">Anaconda-mode python</span>
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Anaconda-mode python</span>
 (add-hook 'python-mode-hook' 'anaconda-mode)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge473be5" class="outline-2">
+<div id="outline-container-orgeb6c2b0" class="outline-2">
 <h2 id="web">Web</h2>
 <div class="outline-text-2" id="text-web">
 <p>
@@ -368,39 +368,39 @@ M-x package-install [RET] tide [RET]
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cd853f;">;;</span><span style="color: #cd853f;">.emacs</span>
-<span style="color: #cd853f;">;;; </span><span style="color: #cd853f;">HTML</span>
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;;; </span><span style="color: #8D8D84; font-style: italic;">HTML</span>
 
-(<span style="color: #20b2aa; font-weight: bold;">require</span> '<span style="color: #1e90ff;">web-mode</span>)
-(add-to-list 'auto-mode-alist '(<span style="color: #ffa07a;">"\\.html?\\'"</span> . web-mode))
+(<span style="color: #0000FF;">require</span> '<span style="color: #D0372D;">web-mode</span>)
+(add-to-list 'auto-mode-alist '(<span style="color: #008000;">"\\.html?\\'"</span> . web-mode))
 
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">tide typescript</span>
-(<span style="color: #20b2aa; font-weight: bold;">defun</span> <span style="color: #00ff7f;">setup-tide-mode</span> ()
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">tide typescript</span>
+(<span style="color: #0000FF;">defun</span> <span style="color: #006699;">setup-tide-mode</span> ()
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  <span style="color: #cd853f;">;; </span><span style="color: #cd853f;">company is an optional dependency. You have to</span>
-  <span style="color: #cd853f;">;; </span><span style="color: #cd853f;">install it separately via package-install</span>
-  <span style="color: #cd853f;">;; </span><span style="color: #cd853f;">`M-x package-install [ret] company`</span>
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">company is an optional dependency. You have to</span>
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">install it separately via package-install</span>
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">`M-x package-install [ret] company`</span>
   (company-mode +1))
 
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">aligns annotation to the right hand side</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">aligns annotation to the right hand side</span>
 (setq company-tooltip-align-annotations t)
 
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">formats the buffer before saving</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">formats the buffer before saving</span>
 (add-hook 'before-save-hook 'tide-format-before-save)
 
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">tide typescript</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">tide typescript</span>
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6cf41b6" class="outline-2">
+<div id="outline-container-orga4d9c37" class="outline-2">
 <h2 id="git">Git</h2>
 <div class="outline-text-2" id="text-git">
 <p>
@@ -413,15 +413,15 @@ Finally.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cd853f;">;;</span><span style="color: #cd853f;">.emacs</span>
-<span style="color: #cd853f;">;; </span><span style="color: #cd853f;">magit</span>
-(global-set-key (kbd <span style="color: #ffa07a;">"C-x g"</span>) 'magit-status)
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">magit</span>
+(global-set-key (kbd <span style="color: #008000;">"C-x g"</span>) 'magit-status)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd9d9fa4" class="outline-2">
+<div id="outline-container-org2c8fe0f" class="outline-2">
 <h2 id="melpa">Melpa</h2>
 <div class="outline-text-2" id="text-melpa">
 <p>
@@ -429,23 +429,23 @@ Add the following in your <code>.emacs</code> and your are done.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="color: #20b2aa; font-weight: bold;">require</span> '<span style="color: #1e90ff;">package</span>)
-(<span style="color: #20b2aa; font-weight: bold;">let*</span> ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+<pre class="src src-lisp">(<span style="color: #0000FF;">require</span> '<span style="color: #D0372D;">package</span>)
+(<span style="color: #0000FF;">let*</span> ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
-       (proto (<span style="color: #20b2aa; font-weight: bold;">if</span> no-ssl <span style="color: #ffa07a;">"http"</span> <span style="color: #ffa07a;">"https"</span>)))
-  <span style="color: #cd853f;">;; </span><span style="color: #cd853f;">Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
-  (add-to-list 'package-archives (cons <span style="color: #ffa07a;">"melpa"</span> (concat proto <span style="color: #ffa07a;">"://melpa.org/packages/"</span>)) t)
-  <span style="color: #cd853f;">;;</span><span style="color: #cd853f;">(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)</span>
-  (<span style="color: #20b2aa; font-weight: bold;">when</span> (&lt; emacs-major-version 24)
-    <span style="color: #cd853f;">;; </span><span style="color: #cd853f;">For important compatibility libraries like cl-lib</span>
-    (add-to-list 'package-archives '(<span style="color: #ffa07a;">"gnu"</span> . (concat proto <span style="color: #ffa07a;">"://elpa.gnu.org/packages/"</span>)))))
+       (proto (<span style="color: #0000FF;">if</span> no-ssl <span style="color: #008000;">"http"</span> <span style="color: #008000;">"https"</span>)))
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
+  (add-to-list 'package-archives (cons <span style="color: #008000;">"melpa"</span> (concat proto <span style="color: #008000;">"://melpa.org/packages/"</span>)) t)
+  <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)</span>
+  (<span style="color: #0000FF;">when</span> (&lt; emacs-major-version 24)
+    <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">For important compatibility libraries like cl-lib</span>
+    (add-to-list 'package-archives '(<span style="color: #008000;">"gnu"</span> . (concat proto <span style="color: #008000;">"://elpa.gnu.org/packages/"</span>)))))
 (package-initialize)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org2cf1f7c" class="outline-2">
+<div id="outline-container-org94314f8" class="outline-2">
 <h2 id="spacemacs-theme">Spacemacs-theme</h2>
 <div class="outline-text-2" id="text-spacemacs-theme">
 <p>
@@ -458,7 +458,7 @@ If you love <code>spacemacs-theme</code>, then this one's for you
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #cd853f;">;;</span><span style="color: #cd853f;">.emacs</span>
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
 (load-theme 'spacemacs-dark t)
 </pre>
 </div>

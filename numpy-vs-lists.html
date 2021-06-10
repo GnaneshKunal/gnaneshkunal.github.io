@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-02 Wed 12:49 -->
+<!-- 2021-06-10 Thu 07:48 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Numpy vs. Python Lists</title>
@@ -289,7 +289,7 @@ Finally, I've felt comfortable and could clearly understand what is
 happening in the background (cause, Machine Learning is all about Math).
 </p>
 
-<div id="outline-container-org21c0234" class="outline-2">
+<div id="outline-container-orgf14fd1f" class="outline-2">
 <h2 id="implementing-stochastic-gradient-descent">Implementing Stochastic Gradient Descent</h2>
 <div class="outline-text-2" id="text-implementing-stochastic-gradient-descent">
 <p>
@@ -313,32 +313,32 @@ example.
 </div>
 
 
-<div id="outline-container-orge0ab45d" class="outline-3">
+<div id="outline-container-org8cb9db3" class="outline-3">
 <h3 id="a-dumb-stochastic-gradient-descent-implementation">A dumb Stochastic Gradient Descent Implementation</h3>
 <div class="outline-text-3" id="text-a-dumb-stochastic-gradient-descent-implementation">
 </div>
 
-<div id="outline-container-org30611f2" class="outline-4">
+<div id="outline-container-org92c84f7" class="outline-4">
 <h4 id="using-lists">Using Lists:</h4>
 <div class="outline-text-4" id="text-using-lists">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">dot</span>(v, w):
-    <span style="color: #20b2aa; font-weight: bold;">return</span> <span style="color: #76ee00;">sum</span>(v_i * w_i <span style="color: #20b2aa; font-weight: bold;">for</span> v_i, w_i <span style="color: #20b2aa; font-weight: bold;">in</span> <span style="color: #76ee00;">zip</span>(v, w))
+<pre class="src src-python"><span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(v, w):
+    <span style="color: #0000FF;">return</span> <span style="color: #006FE0;">sum</span>(v_i * w_i <span style="color: #0000FF;">for</span> v_i, w_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(v, w))
 
-<span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">predict_multi</span>(x_i, beta):
-    <span style="color: #20b2aa; font-weight: bold;">return</span> dot(x_i, beta)
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">predict_multi</span>(x_i, beta):
+    <span style="color: #0000FF;">return</span> dot(x_i, beta)
 
-<span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">error_multi</span>(beta, x, y):
-    <span style="color: #20b2aa; font-weight: bold;">return</span> y - predict_multi(x, beta)
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">error_multi</span>(beta, x, y):
+    <span style="color: #0000FF;">return</span> y - predict_multi(x, beta)
 
-<span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">stochastic_gradient_descent</span>(x, y, theta, learning_rate=0.001):
-    <span style="color: #20b2aa; font-weight: bold;">for</span> _ <span style="color: #20b2aa; font-weight: bold;">in</span> <span style="color: #76ee00;">range</span>(1500):
-        <span style="color: #20b2aa; font-weight: bold;">for</span> x_i, y_i <span style="color: #20b2aa; font-weight: bold;">in</span> <span style="color: #76ee00;">zip</span>(x, y):
-            <span style="color: #9acd32;">i</span> = 0
-            <span style="color: #20b2aa; font-weight: bold;">for</span> x_ii, theta_i <span style="color: #20b2aa; font-weight: bold;">in</span> <span style="color: #76ee00;">zip</span>(x_i, theta):
-                <span style="color: #9acd32;">theta</span>[i] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
-                <span style="color: #9acd32;">i</span> += 1
-    <span style="color: #20b2aa; font-weight: bold;">return</span> theta
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">stochastic_gradient_descent</span>(x, y, theta, learning_rate=0.001):
+    <span style="color: #0000FF;">for</span> _ <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(1500):
+        <span style="color: #0000FF;">for</span> x_i, y_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x, y):
+            <span style="color: #BA36A5;">i</span> = 0
+            <span style="color: #0000FF;">for</span> x_ii, theta_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x_i, theta):
+                <span style="color: #BA36A5;">theta</span>[i] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
+                <span style="color: #BA36A5;">i</span> += 1
+    <span style="color: #0000FF;">return</span> theta
 </pre>
 </div>
 
@@ -354,17 +354,17 @@ So, the benchmark results
 </div>
 </div>
 
-<div id="outline-container-orgb983149" class="outline-4">
+<div id="outline-container-org6f7b876" class="outline-4">
 <h4 id="using-numpy">Using Numpy:</h4>
 <div class="outline-text-4" id="text-using-numpy">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #20b2aa; font-weight: bold;">import</span> numpy <span style="color: #20b2aa; font-weight: bold;">as</span> np
+<pre class="src src-python"><span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
 
-<span style="color: #20b2aa; font-weight: bold;">def</span> <span style="color: #00ff7f;">stochastic_gradient_descent_np</span>(x, y, theta, learning_rate=0.001):
-    <span style="color: #20b2aa; font-weight: bold;">for</span> _ <span style="color: #20b2aa; font-weight: bold;">in</span> <span style="color: #76ee00;">range</span>(1500):
-        <span style="color: #20b2aa; font-weight: bold;">for</span> x_i, y_i <span style="color: #20b2aa; font-weight: bold;">in</span> <span style="color: #76ee00;">zip</span>(x, y):
-            <span style="color: #9acd32;">theta</span> = theta - learning_rate * (np.<span style="color: #76ee00;">sum</span>(x_i * theta) - y_i) * x_i
-    <span style="color: #20b2aa; font-weight: bold;">return</span> theta
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">stochastic_gradient_descent_np</span>(x, y, theta, learning_rate=0.001):
+    <span style="color: #0000FF;">for</span> _ <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(1500):
+        <span style="color: #0000FF;">for</span> x_i, y_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x, y):
+            <span style="color: #BA36A5;">theta</span> = theta - learning_rate * (np.<span style="color: #006FE0;">sum</span>(x_i * theta) - y_i) * x_i
+    <span style="color: #0000FF;">return</span> theta
 </pre>
 </div>
 
