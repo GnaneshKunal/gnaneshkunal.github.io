@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-02 Wed 12:49 -->
+<!-- 2021-06-10 Thu 07:48 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flashing your NodeMCU</title>
@@ -329,7 +329,7 @@ Steps that you must do: 0. Update your Firmware 1. Verify your Firmware
 <li>Test with a small Program</li>
 </ol>
 
-<div id="outline-container-org34ef5d8" class="outline-2">
+<div id="outline-container-org800b722" class="outline-2">
 <h2 id="update-your-firmware">UPDATE YOUR FIRMWARE</h2>
 <div class="outline-text-2" id="text-update-your-firmware">
 <ol class="org-ol">
@@ -386,7 +386,7 @@ Configuring flash size...
 Auto-detected Flash size: 4MB
 Flash params set to 0x0240
 Compressed 450072 bytes to 290528...
-Wrote 450072 bytes (290528 compressed) at 0x00000000<span style="color: #20b2aa; font-weight: bold;"> in</span> 6.6 seconds (effective 543.0 kbit/s)...
+Wrote 450072 bytes (290528 compressed) at 0x00000000<span style="color: #0000FF;"> in</span> 6.6 seconds (effective 543.0 kbit/s)...
 Hash of data verified.
 Leaving...
 Hard resetting via RTS pin...
@@ -397,7 +397,7 @@ Hard resetting via RTS pin...
 </div>
 </div>
 
-<div id="outline-container-org0f1cfdf" class="outline-2">
+<div id="outline-container-org228d67d" class="outline-2">
 <h2 id="verify-your-firmware">VERIFY YOUR FIRMWARE</h2>
 <div class="outline-text-2" id="text-verify-your-firmware">
 <ol class="org-ol">
@@ -408,14 +408,14 @@ Then extract the tarball and run the makefile
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">[monster@monster ~]$ tar xvzf <span style="color: #ffa07a;">'/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source.tar.gz'</span>
+<pre class="src src-sh">[monster@monster ~]$ tar xvzf <span style="color: #008000;">'/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source.tar.gz'</span>
 [monster@monster ~]$ cd Linu*Source
 [monster@monster Linux_3.x.x_4.x.x_VCP_Driver_Source]$ make
-make -C /lib/modules/<span style="color: #fa8072;">`uname -r`</span>/build <span style="color: #9acd32;">M</span>=/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source modules
-make[1]: Entering directory <span style="color: #ffa07a;">'/usr/src/kernels/4.14.16-300.fc27.x86_64'</span>
+make -C /lib/modules/<span style="color: #FF1493;">`uname -r`</span>/build <span style="color: #BA36A5;">M</span>=/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source modules
+make[1]: Entering directory <span style="color: #008000;">'/usr/src/kernels/4.14.16-300.fc27.x86_64'</span>
   Building modules, stage 2.
   MODPOST 1 modules
-make[1]: Leaving directory <span style="color: #ffa07a;">'/usr/src/kernels/4.14.16-300.fc27.x86_64'</span>
+make[1]: Leaving directory <span style="color: #008000;">'/usr/src/kernels/4.14.16-300.fc27.x86_64'</span>
 [monster@monster Linux_3.x.x_4.x.x_VCP_Driver_Source]$
 </pre>
 </div></li>
@@ -426,9 +426,9 @@ Additional Configurations
 
 <div class="org-src-container">
 <pre class="src src-sh">[monster@monster ~]$ modprobe cp210x
-[monster@monster ~]$ export <span style="color: #9acd32;">DISPLAY</span>=:0
+[monster@monster ~]$ export <span style="color: #BA36A5;">DISPLAY</span>=:0
 [monster@monster ~]$ xhost + localhost
-[monster@monster ~]$ export <span style="color: #9acd32;">DISPLAY</span>=<span style="color: #ffa07a;">":0.0"</span>
+[monster@monster ~]$ export <span style="color: #BA36A5;">DISPLAY</span>=<span style="color: #008000;">":0.0"</span>
 [monster@monster ~]$ xhost +local:all
 [monster@monster ~]$ xhost +inet:&lt;your_ip_address&gt;
 </pre>
@@ -474,15 +474,15 @@ the micro-USB port.</li>
 </div>
 </div>
 
-<div id="outline-container-org5f03e71" class="outline-2">
+<div id="outline-container-orgb337ea3" class="outline-2">
 <h2 id="final-program">FINAL PROGRAM</h2>
 <div class="outline-text-2" id="text-final-program">
 </div>
 </div>
 
-<div id="outline-container-org3e9674d" class="outline-2">
-<h2 id="org3e9674d">NodeMCU uses Lua programming language, which is a cross breed of</h2>
-<div class="outline-text-2" id="text-org3e9674d">
+<div id="outline-container-orgc445b46" class="outline-2">
+<h2 id="orgc445b46">NodeMCU uses Lua programming language, which is a cross breed of</h2>
+<div class="outline-text-2" id="text-orgc445b46">
 <p>
 Node.js and python. When booting the device will look for a file called
 init.lua and executes the file.
