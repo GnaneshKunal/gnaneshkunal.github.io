@@ -4,9 +4,12 @@
 <!-- 2021-06-24 Thu 14:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gnanesh's web logs</title>
+<title>In browser, we trust!</title>
 <meta name="generator" content="Org mode">
-<meta name="author" content="Gnanesh">
+<meta name="author" content="Gnanesh Kunal">
+<meta name="description" content="In browsers we trust!."
+>
+<meta name="keywords" content="Networking, Web, HTTP">
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -243,32 +246,183 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <header>
-<h1 class="title">Gnanesh's web logs</h1>
-</header><ul class="org-ul">
-<li>2021-06-24
-<a href="in-browsers-we-trust.html">In browser, we trust!</a></li>
-<li>2020-05-30
-<a href="avahi-docker-non-root.html">mDNS, avahi and docker non-root containers</a></li>
-<li>2018-09-07
-<a href="cpp-recursive-lambdas.html">C++ Lambdas and Recursion</a></li>
-<li>2018-06-20
-<a href="why-scala-implicits.html">Why Scala Implicits</a></li>
-<li>2018-05-28
-<a href="using-js-pkgs-without-types.html">Using JavaScript packages that doesn't have types</a></li>
-<li>2018-05-13
-<a href="local-paths.html">Install packages &amp; libraries on your local paths</a></li>
-<li>2018-04-14
-<a href="dumped-spacemacs.html">Dumped Spacemacs for Vanilla Emacs</a></li>
-<li>2018-04-06
-<a href="applying-transfer-learning-resnet.html">Applying Transfer Learning on ResNet using PyTorch</a></li>
-<li>2018-02-07
-<a href="flashing-nodemcu.html">Flashing your NodeMCU</a></li>
-<li>2018-02-05
-<a href="numpy-vs-lists.html">Numpy vs. Python Lists</a></li>
-<li>2017-08-24
-<a href="what-are-containers.html">What are containers!!</a></li>
-</ul>
+<h1 class="title">In browser, we trust!</h1>
+</header><p>
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-24 Thu&gt;</span></span>
+</p>
+
+<p>
+<b><b>We tend to trust in a lot of things. Implicitly and explicitly.</b></b>
+</p>
+
+<p>
+With evolving web technologies, you might think its getting secure. It
+actually is but there's a catch. HTTP is a stateless protocol. So each
+request is independent. In order to create a session, the server
+should store the info and the client should then authenticate itself
+in subsequent requests using the info.
+</p>
+
+<p>
+How does the info get stored in client safely?
+</p>
+
+<div id="outline-container-orgc19748a" class="outline-2">
+<h2 id="orgc19748a">Introducing localStorage.</h2>
+<div class="outline-text-2" id="text-orgc19748a">
+<p>
+localStorage is a mechanism in browsers that allows you to store
+key-value pairs in the browser with no expiration date. The data will
+persist even after the browser window is closed.
+</p>
+
+<p>
+The browser actually isolates localStorage of each domain. So other
+domains can't read the storage of another domain, so its secure in
+someway. But the main problem is when your app allows executing user
+input in the client side. Since JS can access the localStorage, the
+attacker might execute some JS code that reads and sends the
+localStorage data. It fails easily.
+</p>
 </div>
+</div>
+
+
+<div id="outline-container-orgbe06e6d" class="outline-2">
+<h2 id="orgbe06e6d">Introducing HTTP cookie</h2>
+<div class="outline-text-2" id="text-orgbe06e6d">
+<p>
+HTTP cookies are small blocks of data created by a web server while a
+user is browsing a website and placed on the user's device by the
+browser. Cookies are placed on the device used to access a website,
+and more than one cookie may be placed on a user’s device during a
+session.
+</p>
+
+<p>
+Cookies are isolated across domains too. But still, the cookie is
+readable by JS so your site and users are still vulnerable.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgab018ec" class="outline-2">
+<h2 id="orgab018ec">Introducing httpOnly cookie.</h2>
+<div class="outline-text-2" id="text-orgab018ec">
+<p>
+<code>httpOnly</code> flag in the cookie doesn't allow JS to access the
+cookie. So the attacker can no longer steal the cookie. This is
+great. 
+</p>
+
+<p>
+If your user visits <code>evil.com</code> and if <code>evil.com</code> makes a simple
+fetch<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>, the
+request can be made behalf of you since the cookie is automatically
+sent when the request it. This is a serious problem.
+</p>
+
+<p>
+Also you might need sites to make requests to your site and block the
+rest.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2fcdac3" class="outline-2">
+<h2 id="org2fcdac3">Introducing CORS</h2>
+<div class="outline-text-2" id="text-org2fcdac3">
+<p>
+You might have heard about CORS. CORS is a way to tell your browser
+from your server that you are fine with accepting requests from a list
+of domains. Using CORS, if <code>evil.com</code> makes a request to your site
+using the cookie, your browser doesn't allow to read the response but
+the request will be successful. And your browser doesn't allow the
+client to set <code>Origin</code> header value.
+</p>
+
+<p>
+CORS just solved half of the problem. The major problem is that, if
+you have an API that does modification like <code>fetch("mywebsite/delete",
+{ include:"credentials" })</code>, the data will actually be deleted. CORS
+doesn't stop the browser from making requests.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org38ac4e3" class="outline-2">
+<h2 id="org38ac4e3">Introducing CSRF</h2>
+<div class="outline-text-2" id="text-org38ac4e3">
+<p>
+CSRF token<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> is a unique, unpredictable value that is generated by the
+server and sent back to client and expects the client to pass the
+token in subsequent requests.
+</p>
+
+<p>
+CSRF token has wide varieties. Per-session, per-request, per-form
+etc.,
+</p>
+
+<p>
+If the server expects CSRF token in requests, <code>evil.com</code> can no longer
+make any requests to your site. Also, even if your site executes JS
+and got the CSRF token, the token won't be valid for other requests or
+APIs or forms. All it can do execute what the request is intended
+for.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge2c4c52" class="outline-2">
+<h2 id="orge2c4c52">Summary</h2>
+<div class="outline-text-2" id="text-orge2c4c52">
+<p>
+Use httpOnly flag in (auth) cookie and enable CORS with your allowed
+third-party domains and use double-submit CSRF token<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> to secure your site.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8a62806" class="outline-2">
+<h2 id="org8a62806">In browser, we trust.</h2>
+<div class="outline-text-2" id="text-org8a62806">
+<p>
+Browser isolates localStorage by domain, cookies, doesn't allow JS to
+read httpOnly cookies, doesn't allow the client to set the <code>Origin</code>
+header, doesn't allow to read a response if it doesn't have CORS
+header etc.,
+</p>
+
+<p>
+It is what makes things secure.
+</p>
+
+<p>
+<b>So for a browser to be privacy first, it first has to be more modern
+ and bug free.</b>
+</p>
+
+<p>
+You can also find the tweet <a href="https://twitter.com/GnaneshKunal/status/1407992282523967488">here</a>.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#sending_a_request_with_credentials_included">Sending a fetch request with credentials included.</a></p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara"><a href="https://portswigger.net/web-security/csrf/tokens">CSRF tokens</a></p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara"><a href="https://kylebebak.github.io/post/csrf-protection#double-submit-cookie">Double submit
+cookie</a></p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 
 <hr></hr>
