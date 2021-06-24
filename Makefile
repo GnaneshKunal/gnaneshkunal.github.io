@@ -34,9 +34,13 @@ touch:
 								@touch org/why-scala-implicits.org
 								@touch org/cpp-recursive-lambdas.org
 								@touch org/avahi-docker-non-root.org
+								@touch org/in-browsers-we-trust.org
 
 prepare: clean touch
 
-release:
-								@echo "Releasing from `generator` branch to `master` branch..."
+submit:
+								@echo "Pushing changes to 'generator' branch"
+								git push origin generator --force
+release: submit
+								@echo "Releasing from 'generator' branch to 'master' branch..."
 								git push origin `git subtree split --prefix public generator`:master --force
