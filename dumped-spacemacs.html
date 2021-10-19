@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-10-19 Tue 18:50 -->
+<!-- 2021-10-19 Tue 21:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dumped Spacemacs for Vanilla Emacs</title>
@@ -274,8 +274,8 @@ Autocomplete is a must. You really need it if you need some cool
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp">;;.emacs
-;; Autocomplete
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Autocomplete</span>
 (ac-config-default)
 </pre>
 </div>
@@ -296,8 +296,8 @@ experience for C and C++, and is based on <code>libclang</code>.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp">;;.emacs
-;; irony
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">irony</span>
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -322,8 +322,8 @@ I'm using <code>anaconda-mode</code> as my python environment. The <a href="http
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp">;;.emacs
-;; Anaconda-mode python
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Anaconda-mode python</span>
 (add-hook 'python-mode-hook' 'anaconda-mode)
 </pre>
 </div>
@@ -344,32 +344,32 @@ M-x package-install [RET] tide [RET]
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp">;;.emacs
-;;; HTML
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;;; </span><span style="color: #8D8D84; font-style: italic;">HTML</span>
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(<span style="color: #0000FF;">require</span> '<span style="color: #D0372D;">web-mode</span>)
+(add-to-list 'auto-mode-alist '(<span style="color: #008000;">"\\.html?\\'"</span> . web-mode))
 
-;; tide typescript
-(defun setup-tide-mode ()
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">tide typescript</span>
+(<span style="color: #0000FF;">defun</span> <span style="color: #006699;">setup-tide-mode</span> ()
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">company is an optional dependency. You have to</span>
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">install it separately via package-install</span>
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">`M-x package-install [ret] company`</span>
   (company-mode +1))
 
-;; aligns annotation to the right hand side
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">aligns annotation to the right hand side</span>
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">formats the buffer before saving</span>
 (add-hook 'before-save-hook 'tide-format-before-save)
 
-;; tide typescript
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">tide typescript</span>
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 </pre>
 </div>
@@ -389,9 +389,9 @@ Finally.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp">;;.emacs
-;; magit
-(global-set-key (kbd "C-x g") 'magit-status)
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">magit</span>
+(global-set-key (kbd <span style="color: #008000;">"C-x g"</span>) 'magit-status)
 </pre>
 </div>
 </div>
@@ -405,16 +405,16 @@ Add the following in your <code>.emacs</code> and your are done.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-		    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  (when (&lt; emacs-major-version 24)
-    ;; For important compatibility libraries like cl-lib
-    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+<pre class="src src-lisp">(<span style="color: #0000FF;">require</span> '<span style="color: #D0372D;">package</span>)
+(<span style="color: #0000FF;">let*</span> ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (<span style="color: #0000FF;">if</span> no-ssl <span style="color: #008000;">"http"</span> <span style="color: #008000;">"https"</span>)))
+  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
+  (add-to-list 'package-archives (cons <span style="color: #008000;">"melpa"</span> (concat proto <span style="color: #008000;">"://melpa.org/packages/"</span>)) t)
+  <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)</span>
+  (<span style="color: #0000FF;">when</span> (&lt; emacs-major-version 24)
+    <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">For important compatibility libraries like cl-lib</span>
+    (add-to-list 'package-archives '(<span style="color: #008000;">"gnu"</span> . (concat proto <span style="color: #008000;">"://elpa.gnu.org/packages/"</span>)))))
 (package-initialize)
 </pre>
 </div>
@@ -434,7 +434,7 @@ If you love <code>spacemacs-theme</code>, then this one's for you
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp">;;.emacs
+<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
 (load-theme 'spacemacs-dark t)
 </pre>
 </div>
@@ -456,7 +456,7 @@ emacs?
 
 
 
-<figure id="org7480f80">
+<figure id="org3f24d86">
 <img src="img/ds-butterfly.png" alt="ds-butterfly.png">
 
 </figure>
@@ -471,7 +471,7 @@ emacs?
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Resume</a></li>
+<li><a href="resume.pdf">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>

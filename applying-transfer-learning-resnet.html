@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-10-19 Tue 18:50 -->
+<!-- 2021-10-19 Tue 21:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Applying Transfer Learning on ResNet using PyTorch</title>
@@ -283,19 +283,19 @@ what to name it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">self.conv1 = nn.Conv2d(3, 8, 5)
-self.pool = nn.MaxPool(2, 2)
-self.conv2 = nn.Conv2d(8, 16, 3)
-self.conv3 = nn.Conv2d(16, 32, 3)
-self.conv4 = nn.Conv2d(32, 64, 3)
-self.conv5 = nn.Conv2d(64, 64, 3)
+<pre class="src src-python"><span style="color: #0000FF;">self</span>.conv1 = nn.Conv2d(3, 8, 5)
+<span style="color: #0000FF;">self</span>.pool = nn.MaxPool(2, 2)
+<span style="color: #0000FF;">self</span>.conv2 = nn.Conv2d(8, 16, 3)
+<span style="color: #0000FF;">self</span>.conv3 = nn.Conv2d(16, 32, 3)
+<span style="color: #0000FF;">self</span>.conv4 = nn.Conv2d(32, 64, 3)
+<span style="color: #0000FF;">self</span>.conv5 = nn.Conv2d(64, 64, 3)
 
-self.fc1 = nn.Linear(64 * 5 * 5, 1000)
-self.fc2 = nn.Linear(1000, 500)
-self.fc3 = nn.Linear(500, 120)
-self.fc4 = nn.Linear(120, 84)
-self.fc5 = nn.Linear(84, 10)
-self.fc6 = nn.Linear(10, 2)
+<span style="color: #0000FF;">self</span>.fc1 = nn.Linear(64 * 5 * 5, 1000)
+<span style="color: #0000FF;">self</span>.fc2 = nn.Linear(1000, 500)
+<span style="color: #0000FF;">self</span>.fc3 = nn.Linear(500, 120)
+<span style="color: #0000FF;">self</span>.fc4 = nn.Linear(120, 84)
+<span style="color: #0000FF;">self</span>.fc5 = nn.Linear(84, 10)
+<span style="color: #0000FF;">self</span>.fc6 = nn.Linear(10, 2)
 </pre>
 </div>
 
@@ -376,7 +376,7 @@ I've got more than 91% of accuracy.
 </p>
 
 
-<figure id="org23cc9cf">
+<figure id="org46c7d48">
 <img src="img/cnn1.png" alt="cnn1.png">
 
 </figure>
@@ -389,16 +389,16 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 </p>
 
 
-<figure id="org0ea4a55">
+<figure id="orgcd2395b">
 <img src="img/cnn2.png" alt="cnn2.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgfd78d0f" class="outline-2">
-<h2 id="orgfd78d0f">Source Code</h2>
-<div class="outline-text-2" id="text-orgfd78d0f">
+<div id="outline-container-org75d9beb" class="outline-2">
+<h2 id="org75d9beb">Source Code</h2>
+<div class="outline-text-2" id="text-org75d9beb">
 <p>
 <a href="https://github.com/GnaneshKunal/dogs-vs-cats-classifier/">GnaneshKunal/dogs-vs-cats-classifier</a>
 </p>
@@ -425,7 +425,7 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Resume</a></li>
+<li><a href="resume.pdf">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
