@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-10-19 Tue 18:50 -->
+<!-- 2021-10-19 Tue 21:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install packages &amp; libraries on your local paths</title>
@@ -312,7 +312,7 @@ argument that allows you to install the package on given path.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">./configure --prefix $HOME/.local
+<pre class="src src-sh">./configure --prefix $<span style="color: #BA36A5;">HOME</span>/.local
 make
 make install
 </pre>
@@ -348,8 +348,8 @@ You must add the path to your <code>$PATH</code> variable.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"># ~.bashrc
-export PATH="$PATH:$HOME/.local/lib:$HOME/.local/share:$HOME/.local/include:$HOME/.local/bin"
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~.bashrc</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">PATH</span>=<span style="color: #008000;">"$PATH:$HOME/.local/lib:$HOME/.local/share:$HOME/.local/include:$HOME/.local/bin"</span>
 </pre>
 </div>
 
@@ -358,9 +358,9 @@ Sometimes you get complains about shared libraries.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"># ~/.bashrc
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.local/lib"
-export LIBRARY_PATH="$LIBRARY_PATH:$HOME/.local/lib"
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~/.bashrc</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">LD_LIBRARY_PATH</span>=<span style="color: #008000;">"$LD_LIBRARY_PATH:$HOME/.local/lib"</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">LIBRARY_PATH</span>=<span style="color: #008000;">"$LIBRARY_PATH:$HOME/.local/lib"</span>
 </pre>
 </div>
 
@@ -369,8 +369,8 @@ Also, you love <code>pkg-config</code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"># ~/.bashrc
-export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig"
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~/.bashrc</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">PKG_CONFIG_PATH</span>=<span style="color: #008000;">"$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig"</span>
 </pre>
 </div>
 
@@ -380,10 +380,10 @@ couldn't find the headers.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"># ~/.bashrc
-export CPATH="$CPATH:$HOME/.local/include"
-export C_INCLUDE_PATH="$C_INCLUDE_PATH:$HOME/.local/include"
-export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$HOME/.local/include"
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~/.bashrc</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">CPATH</span>=<span style="color: #008000;">"$CPATH:$HOME/.local/include"</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">C_INCLUDE_PATH</span>=<span style="color: #008000;">"$C_INCLUDE_PATH:$HOME/.local/include"</span>
+<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">CPLUS_INCLUDE_PATH</span>=<span style="color: #008000;">"$CPLUS_INCLUDE_PATH:$HOME/.local/include"</span>
 </pre>
 </div>
 </div>
@@ -408,7 +408,7 @@ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$HOME/.local/include"
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Resume</a></li>
+<li><a href="resume.pdf">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>

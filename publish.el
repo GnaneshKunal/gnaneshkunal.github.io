@@ -126,7 +126,7 @@
 <li><a href=\"index.html\">Home</a></li>
 <li><a href=\"about.html\">About</a></li>
 <li><a href=\"https://github.com/Gnaneshkunal\">GitHub</a></li>
-<li><a href=\"resume.pdf\">Resume</a></li>
+<li><a href=\"resume.pdf\">Résumé</a></li>
 <li><a href=\"key.pub\">PGP</a></li>
 </ul>
 </div>
@@ -154,3 +154,9 @@
          :recursive t
          )
         ("all" :components ("posts" "css" "img" "non-posts" "static"))))
+
+(use-package scala-mode
+  :ensure t)
+
+(use-package htmlize
+  :ensure t)

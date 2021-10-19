@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-10-19 Tue 18:50 -->
+<!-- 2021-10-19 Tue 21:41 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Using JavaScript packages that doesn't have types</title>
@@ -263,10 +263,10 @@ A basic definition file would be like:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-typescript">// yourLibrary.d.ts
-declare module yourLibrary {
-    export interface objectName {
-	prop: type
+<pre class="src src-typescript"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">yourLibrary.d.ts</span>
+<span style="color: #0000FF;">declare</span> <span style="color: #0000FF;">module</span> yourLibrary {
+    <span style="color: #0000FF;">export</span> <span style="color: #0000FF;">interface</span> <span style="color: #6434A3;">objectName</span> {
+        prop: <span style="color: #0000FF;">type</span>
     }
 }
 </pre>
@@ -277,8 +277,8 @@ On top of your file, add the following statement:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-typescript">// someFile.ts
-/// &lt;reference path="./path/yourLibrary.d.ts" /&gt;
+<pre class="src src-typescript"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">someFile.ts</span>
+<span style="color: #8D8D84;">/// </span><span style="color: #8D8D84; font-style: italic;">&lt;reference path="./path/yourLibrary.d.ts" /&gt;</span>
 </pre>
 </div>
 
@@ -292,8 +292,8 @@ Your definition file:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-typescript">// index.d.ts
-declare module "*";
+<pre class="src src-typescript"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">index.d.ts</span>
+<span style="color: #0000FF;">declare</span> <span style="color: #0000FF;">module</span> <span style="color: #008000;">"*"</span>;
 </pre>
 </div>
 
@@ -302,8 +302,8 @@ Your statement:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-typescript">// someFile.ts
-/// &lt;reference path="./path/index.d.ts" /&gt;
+<pre class="src src-typescript"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">someFile.ts</span>
+<span style="color: #8D8D84;">/// </span><span style="color: #8D8D84; font-style: italic;">&lt;reference path="./path/index.d.ts" /&gt;</span>
 </pre>
 </div>
 
@@ -320,7 +320,7 @@ it's not recommended.
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Resume</a></li>
+<li><a href="resume.pdf">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
