@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-24 Thu 14:53 -->
+<!-- 2021-10-19 Tue 18:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Numpy vs. Python Lists</title>
@@ -41,7 +41,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -53,7 +53,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -197,50 +197,26 @@
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -289,7 +265,7 @@ Finally, I've felt comfortable and could clearly understand what is
 happening in the background (cause, Machine Learning is all about Math).
 </p>
 
-<div id="outline-container-org9bc308b" class="outline-2">
+<div id="outline-container-implementing-stochastic-gradient-descent" class="outline-2">
 <h2 id="implementing-stochastic-gradient-descent">Implementing Stochastic Gradient Descent</h2>
 <div class="outline-text-2" id="text-implementing-stochastic-gradient-descent">
 <p>
@@ -313,32 +289,32 @@ example.
 </div>
 
 
-<div id="outline-container-org4c3bbfc" class="outline-3">
+<div id="outline-container-a-dumb-stochastic-gradient-descent-implementation" class="outline-3">
 <h3 id="a-dumb-stochastic-gradient-descent-implementation">A dumb Stochastic Gradient Descent Implementation</h3>
 <div class="outline-text-3" id="text-a-dumb-stochastic-gradient-descent-implementation">
 </div>
 
-<div id="outline-container-org23c395b" class="outline-4">
+<div id="outline-container-using-lists" class="outline-4">
 <h4 id="using-lists">Using Lists:</h4>
 <div class="outline-text-4" id="text-using-lists">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(v, w):
-    <span style="color: #0000FF;">return</span> <span style="color: #006FE0;">sum</span>(v_i * w_i <span style="color: #0000FF;">for</span> v_i, w_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(v, w))
+<pre class="src src-python">def dot(v, w):
+    return sum(v_i * w_i for v_i, w_i in zip(v, w))
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">predict_multi</span>(x_i, beta):
-    <span style="color: #0000FF;">return</span> dot(x_i, beta)
+def predict_multi(x_i, beta):
+    return dot(x_i, beta)
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">error_multi</span>(beta, x, y):
-    <span style="color: #0000FF;">return</span> y - predict_multi(x, beta)
+def error_multi(beta, x, y):
+    return y - predict_multi(x, beta)
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">stochastic_gradient_descent</span>(x, y, theta, learning_rate=0.001):
-    <span style="color: #0000FF;">for</span> _ <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(1500):
-        <span style="color: #0000FF;">for</span> x_i, y_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x, y):
-            <span style="color: #BA36A5;">i</span> = 0
-            <span style="color: #0000FF;">for</span> x_ii, theta_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x_i, theta):
-                <span style="color: #BA36A5;">theta</span>[i] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
-                <span style="color: #BA36A5;">i</span> += 1
-    <span style="color: #0000FF;">return</span> theta
+def stochastic_gradient_descent(x, y, theta, learning_rate=0.001):
+    for _ in range(1500):
+	for x_i, y_i in zip(x, y):
+	    i = 0
+	    for x_ii, theta_i in zip(x_i, theta):
+		theta[i] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
+		i += 1
+    return theta
 </pre>
 </div>
 
@@ -348,23 +324,23 @@ So, the benchmark results
 
 <div class="org-src-container">
 <pre class="src src-sh">%timeit stochastic_gradient_descent(multi_data, daily_minutes_good, theta)
-1.85 s &#177; 21.6 ms per loop (mean &#177; std. dev. of 7 runs, 1 loop each)
+1.85 s ± 21.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org06fd469" class="outline-4">
+<div id="outline-container-using-numpy" class="outline-4">
 <h4 id="using-numpy">Using Numpy:</h4>
 <div class="outline-text-4" id="text-using-numpy">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
+<pre class="src src-python">import numpy as np
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">stochastic_gradient_descent_np</span>(x, y, theta, learning_rate=0.001):
-    <span style="color: #0000FF;">for</span> _ <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(1500):
-        <span style="color: #0000FF;">for</span> x_i, y_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x, y):
-            <span style="color: #BA36A5;">theta</span> = theta - learning_rate * (np.<span style="color: #006FE0;">sum</span>(x_i * theta) - y_i) * x_i
-    <span style="color: #0000FF;">return</span> theta
+def stochastic_gradient_descent_np(x, y, theta, learning_rate=0.001):
+    for _ in range(1500):
+	for x_i, y_i in zip(x, y):
+	    theta = theta - learning_rate * (np.sum(x_i * theta) - y_i) * x_i
+    return theta
 </pre>
 </div>
 
@@ -379,7 +355,7 @@ Benchmark using Numpy:
 
 <div class="org-src-container">
 <pre class="src src-sh">%timeit stochastic_gradient_descent_np(np_multi_data, np_daily, np_theta)
-1.96 s &#177; 7.53 ms per loop (mean &#177; std. dev. of 7 runs, 1 loop each)
+1.96 s ± 7.53 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre>
 </div>
 
@@ -400,7 +376,7 @@ faster.
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Résumé</a></li>
+<li><a href="resume.pdf">Resume</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>

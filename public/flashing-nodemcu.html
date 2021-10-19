@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-24 Thu 14:53 -->
+<!-- 2021-10-19 Tue 18:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Flashing your NodeMCU</title>
@@ -41,7 +41,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -53,7 +53,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -197,50 +197,26 @@
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -273,7 +249,7 @@ WIFI module (ESP8266) NodeMCU comes with.
 </p>
 
 
-<figure>
+<figure id="orgafaf808">
 <img src="img/node-mcu.png" alt="node-mcu.png">
 
 </figure>
@@ -329,7 +305,7 @@ Steps that you must do: 0. Update your Firmware 1. Verify your Firmware
 <li>Test with a small Program</li>
 </ol>
 
-<div id="outline-container-orgadf4203" class="outline-2">
+<div id="outline-container-update-your-firmware" class="outline-2">
 <h2 id="update-your-firmware">UPDATE YOUR FIRMWARE</h2>
 <div class="outline-text-2" id="text-update-your-firmware">
 <ol class="org-ol">
@@ -386,7 +362,7 @@ Configuring flash size...
 Auto-detected Flash size: 4MB
 Flash params set to 0x0240
 Compressed 450072 bytes to 290528...
-Wrote 450072 bytes (290528 compressed) at 0x00000000<span style="color: #0000FF;"> in</span> 6.6 seconds (effective 543.0 kbit/s)...
+Wrote 450072 bytes (290528 compressed) at 0x00000000 in 6.6 seconds (effective 543.0 kbit/s)...
 Hash of data verified.
 Leaving...
 Hard resetting via RTS pin...
@@ -397,7 +373,7 @@ Hard resetting via RTS pin...
 </div>
 </div>
 
-<div id="outline-container-org3b7ee73" class="outline-2">
+<div id="outline-container-verify-your-firmware" class="outline-2">
 <h2 id="verify-your-firmware">VERIFY YOUR FIRMWARE</h2>
 <div class="outline-text-2" id="text-verify-your-firmware">
 <ol class="org-ol">
@@ -408,14 +384,14 @@ Then extract the tarball and run the makefile
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">[monster@monster ~]$ tar xvzf <span style="color: #008000;">'/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source.tar.gz'</span>
+<pre class="src src-sh">[monster@monster ~]$ tar xvzf '/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source.tar.gz'
 [monster@monster ~]$ cd Linu*Source
 [monster@monster Linux_3.x.x_4.x.x_VCP_Driver_Source]$ make
-make -C /lib/modules/<span style="color: #FF1493;">`uname -r`</span>/build <span style="color: #BA36A5;">M</span>=/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source modules
-make[1]: Entering directory <span style="color: #008000;">'/usr/src/kernels/4.14.16-300.fc27.x86_64'</span>
+make -C /lib/modules/`uname -r`/build M=/home/monster/Linux_3.x.x_4.x.x_VCP_Driver_Source modules
+make[1]: Entering directory '/usr/src/kernels/4.14.16-300.fc27.x86_64'
   Building modules, stage 2.
   MODPOST 1 modules
-make[1]: Leaving directory <span style="color: #008000;">'/usr/src/kernels/4.14.16-300.fc27.x86_64'</span>
+make[1]: Leaving directory '/usr/src/kernels/4.14.16-300.fc27.x86_64'
 [monster@monster Linux_3.x.x_4.x.x_VCP_Driver_Source]$
 </pre>
 </div></li>
@@ -426,9 +402,9 @@ Additional Configurations
 
 <div class="org-src-container">
 <pre class="src src-sh">[monster@monster ~]$ modprobe cp210x
-[monster@monster ~]$ export <span style="color: #BA36A5;">DISPLAY</span>=:0
+[monster@monster ~]$ export DISPLAY=:0
 [monster@monster ~]$ xhost + localhost
-[monster@monster ~]$ export <span style="color: #BA36A5;">DISPLAY</span>=<span style="color: #008000;">":0.0"</span>
+[monster@monster ~]$ export DISPLAY=":0.0"
 [monster@monster ~]$ xhost +local:all
 [monster@monster ~]$ xhost +inet:&lt;your_ip_address&gt;
 </pre>
@@ -451,7 +427,7 @@ Run the ESPlorer using the following command.
 </ol>
 
 
-<figure>
+<figure id="org57f8d79">
 <img src="img/node-mcu1.png" alt="node-mcu1.png">
 
 </figure>
@@ -467,22 +443,22 @@ the micro-USB port.</li>
 </ol>
 
 
-<figure>
+<figure id="org5af3400">
 <img src="img/node-mcu2.png" alt="node-mcu2.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-org29ee1f6" class="outline-2">
+<div id="outline-container-final-program" class="outline-2">
 <h2 id="final-program">FINAL PROGRAM</h2>
 <div class="outline-text-2" id="text-final-program">
 </div>
 </div>
 
-<div id="outline-container-orgdc52695" class="outline-2">
-<h2 id="orgdc52695">NodeMCU uses Lua programming language, which is a cross breed of</h2>
-<div class="outline-text-2" id="text-orgdc52695">
+<div id="outline-container-org4ff63d3" class="outline-2">
+<h2 id="org4ff63d3">NodeMCU uses Lua programming language, which is a cross breed of</h2>
+<div class="outline-text-2" id="text-org4ff63d3">
 <p>
 Node.js and python. When booting the device will look for a file called
 init.lua and executes the file.
@@ -522,7 +498,7 @@ tmr.alarm(0, duration, 1, toggleLED)
 </ol>
 
 
-<figure>
+<figure id="org7d9f563">
 <img src="img/node-mcu3.png" alt="node-mcu3.png">
 
 </figure>
@@ -534,7 +510,7 @@ blinking.</li>
 </ol>
 
 
-<figure>
+<figure id="org136d0cf">
 <img src="img/node-mcu4.png" alt="node-mcu4.png">
 
 </figure>
@@ -554,7 +530,7 @@ blinking.</li>
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Résumé</a></li>
+<li><a href="resume.pdf">Resume</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>

@@ -15,7 +15,7 @@ interested in Distributed systems, databases, BSDs.
 # its internals), trace distributed systems and live in multiple
 # operating systems and work as a saint in the church of Emacs.
 
-I live in India and work as a [[https://www.linkedin.com/in/gnanesh-kunal/][Senior Software Engineer]].
+I live in India and work as a [[https://www.linkedin.com/in/gnanesh-kunal/][Software Engineer]].
 
 You can contact me via any of the following means:
 - [[mailto:gnaneshkunal@outlook.com][E-mail]]
