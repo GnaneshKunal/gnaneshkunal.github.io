@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-24 Thu 14:53 -->
+<!-- 2021-10-19 Tue 18:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>In browser, we trust!</title>
@@ -41,7 +41,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -53,7 +53,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -197,50 +197,26 @@
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -267,9 +243,9 @@ in subsequent requests using the info.
 How does the info get stored in client safely?
 </p>
 
-<div id="outline-container-orgc19748a" class="outline-2">
-<h2 id="orgc19748a">Introducing localStorage.</h2>
-<div class="outline-text-2" id="text-orgc19748a">
+<div id="outline-container-orgff24f70" class="outline-2">
+<h2 id="orgff24f70">Introducing localStorage.</h2>
+<div class="outline-text-2" id="text-orgff24f70">
 <p>
 localStorage is a mechanism in browsers that allows you to store
 key-value pairs in the browser with no expiration date. The data will
@@ -288,9 +264,9 @@ localStorage data. It fails easily.
 </div>
 
 
-<div id="outline-container-orgbe06e6d" class="outline-2">
-<h2 id="orgbe06e6d">Introducing HTTP cookie</h2>
-<div class="outline-text-2" id="text-orgbe06e6d">
+<div id="outline-container-orgd832797" class="outline-2">
+<h2 id="orgd832797">Introducing HTTP cookie</h2>
+<div class="outline-text-2" id="text-orgd832797">
 <p>
 HTTP cookies are small blocks of data created by a web server while a
 user is browsing a website and placed on the user's device by the
@@ -306,9 +282,9 @@ readable by JS so your site and users are still vulnerable.
 </div>
 </div>
 
-<div id="outline-container-orgab018ec" class="outline-2">
-<h2 id="orgab018ec">Introducing httpOnly cookie.</h2>
-<div class="outline-text-2" id="text-orgab018ec">
+<div id="outline-container-org5ae600e" class="outline-2">
+<h2 id="org5ae600e">Introducing httpOnly cookie.</h2>
+<div class="outline-text-2" id="text-org5ae600e">
 <p>
 <code>httpOnly</code> flag in the cookie doesn't allow JS to access the
 cookie. So the attacker can no longer steal the cookie. This is
@@ -329,9 +305,9 @@ rest.
 </div>
 </div>
 
-<div id="outline-container-org2fcdac3" class="outline-2">
-<h2 id="org2fcdac3">Introducing CORS</h2>
-<div class="outline-text-2" id="text-org2fcdac3">
+<div id="outline-container-org1544b55" class="outline-2">
+<h2 id="org1544b55">Introducing CORS</h2>
+<div class="outline-text-2" id="text-org1544b55">
 <p>
 You might have heard about CORS. CORS is a way to tell your browser
 from your server that you are fine with accepting requests from a list
@@ -350,9 +326,9 @@ doesn't stop the browser from making requests.
 </div>
 </div>
 
-<div id="outline-container-org38ac4e3" class="outline-2">
-<h2 id="org38ac4e3">Introducing CSRF</h2>
-<div class="outline-text-2" id="text-org38ac4e3">
+<div id="outline-container-orgff09a6c" class="outline-2">
+<h2 id="orgff09a6c">Introducing CSRF</h2>
+<div class="outline-text-2" id="text-orgff09a6c">
 <p>
 CSRF token<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> is a unique, unpredictable value that is generated by the
 server and sent back to client and expects the client to pass the
@@ -375,9 +351,9 @@ for.
 </div>
 
 
-<div id="outline-container-orge2c4c52" class="outline-2">
-<h2 id="orge2c4c52">Summary</h2>
-<div class="outline-text-2" id="text-orge2c4c52">
+<div id="outline-container-orgc16ff63" class="outline-2">
+<h2 id="orgc16ff63">Summary</h2>
+<div class="outline-text-2" id="text-orgc16ff63">
 <p>
 Use httpOnly flag in (auth) cookie and enable CORS with your allowed
 third-party domains and use double-submit CSRF token<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> to secure your site.
@@ -385,9 +361,9 @@ third-party domains and use double-submit CSRF token<sup><a id="fnr.3" class="fo
 </div>
 </div>
 
-<div id="outline-container-org8a62806" class="outline-2">
-<h2 id="org8a62806">In browser, we trust.</h2>
-<div class="outline-text-2" id="text-org8a62806">
+<div id="outline-container-org1cee641" class="outline-2">
+<h2 id="org1cee641">In browser, we trust.</h2>
+<div class="outline-text-2" id="text-org1cee641">
 <p>
 Browser isolates localStorage by domain, cookies, doesn't allow JS to
 read httpOnly cookies, doesn't allow the client to set the <code>Origin</code>
@@ -431,7 +407,7 @@ cookie</a></p></div></div>
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Résumé</a></li>
+<li><a href="resume.pdf">Resume</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>

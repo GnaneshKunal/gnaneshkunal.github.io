@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-06-24 Thu 14:53 -->
+<!-- 2021-10-19 Tue 18:50 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dumped Spacemacs for Vanilla Emacs</title>
@@ -41,7 +41,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -53,7 +53,7 @@
     padding: 3px;
     border: 1px solid black;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
@@ -197,50 +197,26 @@
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -284,7 +260,7 @@ be a lot simpler and I could clearly understand what's happening in
 the background as well.
 </p>
 
-<div id="outline-container-orgcc052c3" class="outline-2">
+<div id="outline-container-autocomplete" class="outline-2">
 <h2 id="autocomplete">Autocomplete</h2>
 <div class="outline-text-2" id="text-autocomplete">
 <p>
@@ -298,15 +274,15 @@ Autocomplete is a must. You really need it if you need some cool
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Autocomplete</span>
+<pre class="src src-lisp">;;.emacs
+;; Autocomplete
 (ac-config-default)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org36197ab" class="outline-2">
+<div id="outline-container-cc" class="outline-2">
 <h2 id="cc">C/C++</h2>
 <div class="outline-text-2" id="text-cc">
 <p>
@@ -320,8 +296,8 @@ experience for C and C++, and is based on <code>libclang</code>.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">irony</span>
+<pre class="src src-lisp">;;.emacs
+;; irony
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -333,7 +309,7 @@ experience for C and C++, and is based on <code>libclang</code>.
 </div>
 </div>
 
-<div id="outline-container-org42168fa" class="outline-2">
+<div id="outline-container-python-mode" class="outline-2">
 <h2 id="python-mode">Python Mode</h2>
 <div class="outline-text-2" id="text-python-mode">
 <p>
@@ -346,15 +322,15 @@ I'm using <code>anaconda-mode</code> as my python environment. The <a href="http
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Anaconda-mode python</span>
+<pre class="src src-lisp">;;.emacs
+;; Anaconda-mode python
 (add-hook 'python-mode-hook' 'anaconda-mode)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgecfbeb9" class="outline-2">
+<div id="outline-container-web" class="outline-2">
 <h2 id="web">Web</h2>
 <div class="outline-text-2" id="text-web">
 <p>
@@ -368,39 +344,39 @@ M-x package-install [RET] tide [RET]
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
-<span style="color: #8D8D84;">;;; </span><span style="color: #8D8D84; font-style: italic;">HTML</span>
+<pre class="src src-lisp">;;.emacs
+;;; HTML
 
-(<span style="color: #0000FF;">require</span> '<span style="color: #D0372D;">web-mode</span>)
-(add-to-list 'auto-mode-alist '(<span style="color: #008000;">"\\.html?\\'"</span> . web-mode))
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">tide typescript</span>
-(<span style="color: #0000FF;">defun</span> <span style="color: #006699;">setup-tide-mode</span> ()
+;; tide typescript
+(defun setup-tide-mode ()
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">company is an optional dependency. You have to</span>
-  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">install it separately via package-install</span>
-  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">`M-x package-install [ret] company`</span>
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
   (company-mode +1))
 
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">aligns annotation to the right hand side</span>
+;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">formats the buffer before saving</span>
+;; formats the buffer before saving
 (add-hook 'before-save-hook 'tide-format-before-save)
 
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">tide typescript</span>
+;; tide typescript
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5f31748" class="outline-2">
+<div id="outline-container-git" class="outline-2">
 <h2 id="git">Git</h2>
 <div class="outline-text-2" id="text-git">
 <p>
@@ -413,15 +389,15 @@ Finally.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
-<span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">magit</span>
-(global-set-key (kbd <span style="color: #008000;">"C-x g"</span>) 'magit-status)
+<pre class="src src-lisp">;;.emacs
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf39b978" class="outline-2">
+<div id="outline-container-melpa" class="outline-2">
 <h2 id="melpa">Melpa</h2>
 <div class="outline-text-2" id="text-melpa">
 <p>
@@ -429,23 +405,23 @@ Add the following in your <code>.emacs</code> and your are done.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(<span style="color: #0000FF;">require</span> '<span style="color: #D0372D;">package</span>)
-(<span style="color: #0000FF;">let*</span> ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (<span style="color: #0000FF;">if</span> no-ssl <span style="color: #008000;">"http"</span> <span style="color: #008000;">"https"</span>)))
-  <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired</span>
-  (add-to-list 'package-archives (cons <span style="color: #008000;">"melpa"</span> (concat proto <span style="color: #008000;">"://melpa.org/packages/"</span>)) t)
-  <span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)</span>
-  (<span style="color: #0000FF;">when</span> (&lt; emacs-major-version 24)
-    <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">For important compatibility libraries like cl-lib</span>
-    (add-to-list 'package-archives '(<span style="color: #008000;">"gnu"</span> . (concat proto <span style="color: #008000;">"://elpa.gnu.org/packages/"</span>)))))
+<pre class="src src-lisp">(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+		    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (&lt; emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9836651" class="outline-2">
+<div id="outline-container-spacemacs-theme" class="outline-2">
 <h2 id="spacemacs-theme">Spacemacs-theme</h2>
 <div class="outline-text-2" id="text-spacemacs-theme">
 <p>
@@ -458,7 +434,7 @@ If you love <code>spacemacs-theme</code>, then this one's for you
 </div>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #8D8D84;">;;</span><span style="color: #8D8D84; font-style: italic;">.emacs</span>
+<pre class="src src-lisp">;;.emacs
 (load-theme 'spacemacs-dark t)
 </pre>
 </div>
@@ -480,7 +456,7 @@ emacs?
 
 
 
-<figure>
+<figure id="org7480f80">
 <img src="img/ds-butterfly.png" alt="ds-butterfly.png">
 
 </figure>
@@ -495,7 +471,7 @@ emacs?
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Résumé</a></li>
+<li><a href="resume.pdf">Resume</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
