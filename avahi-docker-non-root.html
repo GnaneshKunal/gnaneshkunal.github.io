@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2021-10-19 Tue 21:41 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 2022-01-27 Thu 20:14 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>mDNS, avahi and docker non-root containers</title>
-<meta name="generator" content="Org mode">
-<meta name="author" content="Gnanesh Kunal">
-<meta name="description" content="Run mDNS on docker non-root containers."
->
-<meta name="keywords" content="Networking, DNS, Avahi">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="author" content="Gnanesh Kunal" />
+<meta name="description" content="Run mDNS on docker non-root containers." />
+<meta name="keywords" content="Networking, DNS, Avahi" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -32,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -42,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -192,35 +192,12 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <header>
 <h1 class="title">mDNS, avahi and docker non-root containers</h1>
 </header><p>
@@ -312,9 +289,9 @@ cluster starts a new node with a different IP address to take up
 <code>node1.my-awesome-cluster.local</code>. This is called <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>.
 </p>
 
-<div id="outline-container-org315811b" class="outline-2">
-<h2 id="org315811b">Why do we need a hostname resolver for local networks?</h2>
-<div class="outline-text-2" id="text-org315811b">
+<div id="outline-container-orgb1e6a51" class="outline-2">
+<h2 id="orgb1e6a51">Why do we need a hostname resolver for local networks?</h2>
+<div class="outline-text-2" id="text-orgb1e6a51">
 <p>
 Earlier you used to connect to the cluster using the IP address of the
 cluster and it worked. Now when you tell your application to connect
@@ -333,9 +310,9 @@ DNS helps you to resolve the domain name to the cluster IP address.
 </div>
 </div>
 
-<div id="outline-container-org1fc92c0" class="outline-2">
-<h2 id="org1fc92c0">mDNS</h2>
-<div class="outline-text-2" id="text-org1fc92c0">
+<div id="outline-container-orgd896dc9" class="outline-2">
+<h2 id="orgd896dc9">mDNS</h2>
+<div class="outline-text-2" id="text-orgd896dc9">
 <p>
 To solve this problem we have <a href="https://en.wikipedia.org/wiki/Multicast_DNS">mDNS</a>. mDNS is a protocol that resolves
 hostname to IP addresses within a small network that lacks the name
@@ -347,23 +324,23 @@ configuration should be changed.
 </p>
 </div>
 
-<div id="outline-container-org097fbf4" class="outline-3">
-<h3 id="org097fbf4">Example</h3>
-<div class="outline-text-3" id="text-org097fbf4">
+<div id="outline-container-orga47ce80" class="outline-3">
+<h3 id="orga47ce80">Example</h3>
+<div class="outline-text-3" id="text-orga47ce80">
 <p>
 Lets try out an example.
 </p>
 
 <p>
 <code>RedisLabs</code> has a Redis Enterprise docker <a href="https://hub.docker.com/r/redislabs/redis/">image</a> that does many
-things<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> but what we want here is the
+things<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> but what we want here is the
 Enterprise cluster.
 </p>
 </div>
 
-<div id="outline-container-orga22aa9f" class="outline-4">
-<h4 id="orga22aa9f">Why Redis Enterprise docker image?</h4>
-<div class="outline-text-4" id="text-orga22aa9f">
+<div id="outline-container-org43a89c7" class="outline-4">
+<h4 id="org43a89c7">Why Redis Enterprise docker image?</h4>
+<div class="outline-text-4" id="text-org43a89c7">
 <p>
 The reason why I have chosen Redis Enterprise docker image is that it
 aligns well with the previous cluster example. With Redis Enterprise
@@ -424,7 +401,7 @@ can give your cluster FQDN like this.
 </p>
 
 
-<figure id="org0bbbf1b">
+<figure id="orgb9ec217">
 <img src="img/mdns-redis-cluster-conf.png" alt="mdns-redis-cluster-conf.png">
 
 </figure>
@@ -454,7 +431,7 @@ page.
 </p>
 
 
-<figure id="orgac41844">
+<figure id="org1c788a0">
 <img src="img/mdns-redis-db-conf-page.png" alt="mdns-redis-db-conf-page.png">
 
 </figure>
@@ -596,9 +573,9 @@ Now lets try to add mDNS.
 </div>
 </div>
 
-<div id="outline-container-org8a94ca8" class="outline-2">
-<h2 id="org8a94ca8">Avahi</h2>
-<div class="outline-text-2" id="text-org8a94ca8">
+<div id="outline-container-org6d72b8e" class="outline-2">
+<h2 id="org6d72b8e">Avahi</h2>
+<div class="outline-text-2" id="text-org6d72b8e">
 <p>
 <a href="https://en.wikipedia.org/wiki/Avahi_(software)">Avahi</a> is a free zero-configuration implementation of the mDNS
 protocol. Let's try to add it.
@@ -703,12 +680,12 @@ resolves <code>redis-12000.mycluster.local</code>.
 </div>
 </div>
 
-<div id="outline-container-org2286c41" class="outline-2">
-<h2 id="org2286c41">Running the container as non-root user</h2>
-<div class="outline-text-2" id="text-org2286c41">
+<div id="outline-container-orgf0b9e11" class="outline-2">
+<h2 id="orgf0b9e11">Running the container as non-root user</h2>
+<div class="outline-text-2" id="text-orgf0b9e11">
 <p>
 Now let's talk about the
-security.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> Many container
+security.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> Many container
 platforms accept only non-root containers, Ex: openshift. If you want
 your application to be deployed at any container platform, you
 can't. Let us try to run the container as a non-root user.
@@ -760,7 +737,7 @@ in <code>/etc/avahi/avahi-daemon.conf</code>.
 <p>
 <code>avahi</code> by default requires root permissions to start. We can bypass
 that by providing <code>--no-drop-root</code>
-flag.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>  You can check out all the options
+flag.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>  You can check out all the options
 <a href="https://linux.die.net/man/8/avahi-daemon">here</a>. Let us remove <code>dbus</code>. Also, let's start the process manually
 without using <code>service</code>.
 </p>
@@ -769,9 +746,9 @@ without using <code>service</code>.
 <code>Dockerfile</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #545454;">   # Dockerfile</span>
-<span style="color: #545454;">   &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf \</span>
-<span style="background-color: #AAFFAA;">+</span><span style="color: #008000; background-color: #DDFFDD;">  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \</span>
+<pre class="src src-diff"><span style="color: #888888;">   # Dockerfile</span>
+<span style="color: #888888;">   &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf \</span>
+<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;">  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \</span>
    &amp;&amp; pip3 install redis
 </pre>
 </div>
@@ -780,13 +757,13 @@ without using <code>service</code>.
 <code>entrypoint.sh</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #545454;">  # entrypoint.sh</span>
-<span style="background-color: #FFBBBB;">-</span><span style="color: #A60000; background-color: #FFDDDD;"> # start avahi's dependency</span>
-<span style="background-color: #FFBBBB;">-</span><span style="color: #A60000; background-color: #FFDDDD;"> service dbus start</span>
+<pre class="src src-diff"><span style="color: #888888;">  # entrypoint.sh</span>
+<span style="color: #CC3333; background-color: #FFDCE0;">-</span><span style="background-color: #FEE8E9;"> # start avahi's dependency</span>
+<span style="color: #CC3333; background-color: #FFDCE0;">-</span><span style="background-color: #FEE8E9;"> service dbus start</span>
 
-<span style="color: #545454;">  # start avahi</span>
-<span style="background-color: #FFBBBB;">-</span><span style="color: #A60000; background-color: #FFDDDD;"> service avahi-daemon start</span>
-<span style="background-color: #AAFFAA;">+</span><span style="color: #008000; background-color: #DDFFDD;"> avahi-daemon --daemonize --no-drop-root</span>
+<span style="color: #888888;">  # start avahi</span>
+<span style="color: #CC3333; background-color: #FFDCE0;">-</span><span style="background-color: #FEE8E9;"> service avahi-daemon start</span>
+<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> avahi-daemon --daemonize --no-drop-root</span>
 
 </pre>
 </div>
@@ -823,12 +800,12 @@ Lets try to change the permissions of the files and folders.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #545454;">  # Dockerfile</span>
-<span style="color: #545454;">  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \</span>
-<span style="background-color: #AAFFAA;">+</span><span style="color: #008000; background-color: #DDFFDD;"> &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf \</span>
-<span style="background-color: #AAFFAA;">+</span><span style="color: #008000; background-color: #DDFFDD;"> &amp;&amp; mkdir -p /var/run/avahi-daemon \</span>
-<span style="background-color: #AAFFAA;">+</span><span style="color: #008000; background-color: #DDFFDD;"> &amp;&amp; chown avahi:avahi /var/run/avahi-daemon \</span>
-<span style="background-color: #AAFFAA;">+</span><span style="color: #008000; background-color: #DDFFDD;"> &amp;&amp; chmod 777 /var/run/avahi-daemon</span>
+<pre class="src src-diff"><span style="color: #888888;">  # Dockerfile</span>
+<span style="color: #888888;">  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \</span>
+<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf \</span>
+<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; mkdir -p /var/run/avahi-daemon \</span>
+<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; chown avahi:avahi /var/run/avahi-daemon \</span>
+<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; chmod 777 /var/run/avahi-daemon</span>
   &amp;&amp; pip3 install redis
 </pre>
 </div>
@@ -932,14 +909,14 @@ this <a href="https://github.com/GnaneshKunal/avahi-docker-non-root">repository<
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara"><a href="https://hub.docker.com/r/redislabs/redis/">Redis Enterprise Software</a> is enterprise grade,
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://hub.docker.com/r/redislabs/redis/">Redis Enterprise Software</a> is enterprise grade,
 distributed, in-memory NoSQL database server, fully compatible with
 open source Redis by Redis Labs.</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara"><a href="https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html">Bitnami Engineering</a>: Why
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html">Bitnami Engineering</a>: Why
 non-root containers are important for security</p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara"><code>avahi-daemon.conf</code> has many
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><code>avahi-daemon.conf</code> has many
 configurations and we don't need it in our application, so I'm just
 setting the <code>enable-dbus</code> to <code>no</code>.</p></div></div>
 
