@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-01-27 Thu 20:14 -->
+<!-- 2022-04-02 Sat 21:06 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>mDNS, avahi and docker non-root containers</title>
@@ -289,9 +289,9 @@ cluster starts a new node with a different IP address to take up
 <code>node1.my-awesome-cluster.local</code>. This is called <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>.
 </p>
 
-<div id="outline-container-orgb1e6a51" class="outline-2">
-<h2 id="orgb1e6a51">Why do we need a hostname resolver for local networks?</h2>
-<div class="outline-text-2" id="text-orgb1e6a51">
+<div id="outline-container-org170bb7a" class="outline-2">
+<h2 id="org170bb7a">Why do we need a hostname resolver for local networks?</h2>
+<div class="outline-text-2" id="text-org170bb7a">
 <p>
 Earlier you used to connect to the cluster using the IP address of the
 cluster and it worked. Now when you tell your application to connect
@@ -310,9 +310,9 @@ DNS helps you to resolve the domain name to the cluster IP address.
 </div>
 </div>
 
-<div id="outline-container-orgd896dc9" class="outline-2">
-<h2 id="orgd896dc9">mDNS</h2>
-<div class="outline-text-2" id="text-orgd896dc9">
+<div id="outline-container-orgb523cb0" class="outline-2">
+<h2 id="orgb523cb0">mDNS</h2>
+<div class="outline-text-2" id="text-orgb523cb0">
 <p>
 To solve this problem we have <a href="https://en.wikipedia.org/wiki/Multicast_DNS">mDNS</a>. mDNS is a protocol that resolves
 hostname to IP addresses within a small network that lacks the name
@@ -324,9 +324,9 @@ configuration should be changed.
 </p>
 </div>
 
-<div id="outline-container-orga47ce80" class="outline-3">
-<h3 id="orga47ce80">Example</h3>
-<div class="outline-text-3" id="text-orga47ce80">
+<div id="outline-container-org9d6b380" class="outline-3">
+<h3 id="org9d6b380">Example</h3>
+<div class="outline-text-3" id="text-org9d6b380">
 <p>
 Lets try out an example.
 </p>
@@ -338,9 +338,9 @@ Enterprise cluster.
 </p>
 </div>
 
-<div id="outline-container-org43a89c7" class="outline-4">
-<h4 id="org43a89c7">Why Redis Enterprise docker image?</h4>
-<div class="outline-text-4" id="text-org43a89c7">
+<div id="outline-container-org3faf11b" class="outline-4">
+<h4 id="org3faf11b">Why Redis Enterprise docker image?</h4>
+<div class="outline-text-4" id="text-org3faf11b">
 <p>
 The reason why I have chosen Redis Enterprise docker image is that it
 aligns well with the previous cluster example. With Redis Enterprise
@@ -401,7 +401,7 @@ can give your cluster FQDN like this.
 </p>
 
 
-<figure id="orgb9ec217">
+<figure id="org66f86d3">
 <img src="img/mdns-redis-cluster-conf.png" alt="mdns-redis-cluster-conf.png">
 
 </figure>
@@ -431,7 +431,7 @@ page.
 </p>
 
 
-<figure id="org1c788a0">
+<figure id="org9658f85">
 <img src="img/mdns-redis-db-conf-page.png" alt="mdns-redis-db-conf-page.png">
 
 </figure>
@@ -573,9 +573,9 @@ Now lets try to add mDNS.
 </div>
 </div>
 
-<div id="outline-container-org6d72b8e" class="outline-2">
-<h2 id="org6d72b8e">Avahi</h2>
-<div class="outline-text-2" id="text-org6d72b8e">
+<div id="outline-container-org746daf8" class="outline-2">
+<h2 id="org746daf8">Avahi</h2>
+<div class="outline-text-2" id="text-org746daf8">
 <p>
 <a href="https://en.wikipedia.org/wiki/Avahi_(software)">Avahi</a> is a free zero-configuration implementation of the mDNS
 protocol. Let's try to add it.
@@ -680,9 +680,9 @@ resolves <code>redis-12000.mycluster.local</code>.
 </div>
 </div>
 
-<div id="outline-container-orgf0b9e11" class="outline-2">
-<h2 id="orgf0b9e11">Running the container as non-root user</h2>
-<div class="outline-text-2" id="text-orgf0b9e11">
+<div id="outline-container-org91c4b66" class="outline-2">
+<h2 id="org91c4b66">Running the container as non-root user</h2>
+<div class="outline-text-2" id="text-org91c4b66">
 <p>
 Now let's talk about the
 security.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> Many container
