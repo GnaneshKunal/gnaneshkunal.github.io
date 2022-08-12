@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-02 Sat 21:06 -->
+<!-- 2022-08-12 Fri 19:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Install packages &amp; libraries on your local paths</title>
@@ -191,7 +191,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
+  .org-svg { }
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -289,7 +289,7 @@ argument that allows you to install the package on given path.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">./configure --prefix $<span style="color: #BA36A5;">HOME</span>/.local
+<pre class="src src-sh">./configure --prefix $<span style="font-weight: bold; font-style: italic;">HOME</span>/.local
 make
 make install
 </pre>
@@ -325,8 +325,8 @@ You must add the path to your <code>$PATH</code> variable.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~.bashrc</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">PATH</span>=<span style="color: #008000;">"$PATH:$HOME/.local/lib:$HOME/.local/share:$HOME/.local/include:$HOME/.local/bin"</span>
+<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">~.bashrc</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"$PATH:$HOME/.local/lib:$HOME/.local/share:$HOME/.local/include:$HOME/.local/bin"</span>
 </pre>
 </div>
 
@@ -335,9 +335,9 @@ Sometimes you get complains about shared libraries.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~/.bashrc</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">LD_LIBRARY_PATH</span>=<span style="color: #008000;">"$LD_LIBRARY_PATH:$HOME/.local/lib"</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">LIBRARY_PATH</span>=<span style="color: #008000;">"$LIBRARY_PATH:$HOME/.local/lib"</span>
+<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">~/.bashrc</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">LD_LIBRARY_PATH</span>=<span style="font-style: italic;">"$LD_LIBRARY_PATH:$HOME/.local/lib"</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">LIBRARY_PATH</span>=<span style="font-style: italic;">"$LIBRARY_PATH:$HOME/.local/lib"</span>
 </pre>
 </div>
 
@@ -346,8 +346,8 @@ Also, you love <code>pkg-config</code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~/.bashrc</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">PKG_CONFIG_PATH</span>=<span style="color: #008000;">"$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig"</span>
+<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">~/.bashrc</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">PKG_CONFIG_PATH</span>=<span style="font-style: italic;">"$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig"</span>
 </pre>
 </div>
 
@@ -357,10 +357,10 @@ couldn't find the headers.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">~/.bashrc</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">CPATH</span>=<span style="color: #008000;">"$CPATH:$HOME/.local/include"</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">C_INCLUDE_PATH</span>=<span style="color: #008000;">"$C_INCLUDE_PATH:$HOME/.local/include"</span>
-<span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">CPLUS_INCLUDE_PATH</span>=<span style="color: #008000;">"$CPLUS_INCLUDE_PATH:$HOME/.local/include"</span>
+<pre class="src src-sh"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">~/.bashrc</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">CPATH</span>=<span style="font-style: italic;">"$CPATH:$HOME/.local/include"</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">C_INCLUDE_PATH</span>=<span style="font-style: italic;">"$C_INCLUDE_PATH:$HOME/.local/include"</span>
+<span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">CPLUS_INCLUDE_PATH</span>=<span style="font-style: italic;">"$CPLUS_INCLUDE_PATH:$HOME/.local/include"</span>
 </pre>
 </div>
 </div>

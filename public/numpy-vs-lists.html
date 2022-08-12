@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-02 Sat 21:06 -->
+<!-- 2022-08-12 Fri 19:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Numpy vs. Python Lists</title>
@@ -191,7 +191,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
+  .org-svg { }
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -274,23 +274,23 @@ example.
 <h4 id="using-lists">Using Lists:</h4>
 <div class="outline-text-4" id="text-using-lists">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(v, w):
-    <span style="color: #0000FF;">return</span> <span style="color: #006FE0;">sum</span>(v_i * w_i <span style="color: #0000FF;">for</span> v_i, w_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(v, w))
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">dot</span>(v, w):
+    <span style="font-weight: bold;">return</span> <span style="font-weight: bold;">sum</span>(v_i * w_i <span style="font-weight: bold;">for</span> v_i, w_i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(v, w))
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">predict_multi</span>(x_i, beta):
-    <span style="color: #0000FF;">return</span> dot(x_i, beta)
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">predict_multi</span>(x_i, beta):
+    <span style="font-weight: bold;">return</span> dot(x_i, beta)
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">error_multi</span>(beta, x, y):
-    <span style="color: #0000FF;">return</span> y - predict_multi(x, beta)
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">error_multi</span>(beta, x, y):
+    <span style="font-weight: bold;">return</span> y - predict_multi(x, beta)
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">stochastic_gradient_descent</span>(x, y, theta, learning_rate=0.001):
-    <span style="color: #0000FF;">for</span> _ <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(1500):
-        <span style="color: #0000FF;">for</span> x_i, y_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x, y):
-            i = 0
-            <span style="color: #0000FF;">for</span> x_ii, theta_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x_i, theta):
-                theta[<span style="color: #BA36A5;">i</span>] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
-                i += 1
-    <span style="color: #0000FF;">return</span> theta
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">stochastic_gradient_descent</span>(x, y, theta, learning_rate=0.001):
+    <span style="font-weight: bold;">for</span> _ <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(1500):
+        <span style="font-weight: bold;">for</span> x_i, y_i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(x, y):
+            <span style="font-weight: bold; font-style: italic;">i</span> = 0
+            <span style="font-weight: bold;">for</span> x_ii, theta_i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(x_i, theta):
+                <span style="font-weight: bold; font-style: italic;">theta</span>[i] = theta_i - learning_rate * (-error_multi(theta, x_i, y_i)) * x_ii
+                <span style="font-weight: bold; font-style: italic;">i</span> += 1
+    <span style="font-weight: bold;">return</span> theta
 </pre>
 </div>
 
@@ -310,13 +310,13 @@ So, the benchmark results
 <h4 id="using-numpy">Using Numpy:</h4>
 <div class="outline-text-4" id="text-using-numpy">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np
+<pre class="src src-python"><span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">stochastic_gradient_descent_np</span>(x, y, theta, learning_rate=0.001):
-    <span style="color: #0000FF;">for</span> _ <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(1500):
-        <span style="color: #0000FF;">for</span> x_i, y_i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(x, y):
-            theta = theta - learning_rate * (np.<span style="color: #006FE0;">sum</span>(x_i * theta) - y_i) * x_i
-    <span style="color: #0000FF;">return</span> theta
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">stochastic_gradient_descent_np</span>(x, y, theta, learning_rate=0.001):
+    <span style="font-weight: bold;">for</span> _ <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(1500):
+        <span style="font-weight: bold;">for</span> x_i, y_i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(x, y):
+            <span style="font-weight: bold; font-style: italic;">theta</span> = theta - learning_rate * (np.<span style="font-weight: bold;">sum</span>(x_i * theta) - y_i) * x_i
+    <span style="font-weight: bold;">return</span> theta
 </pre>
 </div>
 

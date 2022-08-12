@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-02 Sat 21:06 -->
+<!-- 2022-08-12 Fri 19:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Applying Transfer Learning on ResNet using PyTorch</title>
@@ -191,7 +191,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
+  .org-svg { }
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -260,19 +260,19 @@ what to name it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">conv1</span> = nn.Conv2d(3, 8, 5)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">pool</span> = nn.MaxPool(2, 2)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">conv2</span> = nn.Conv2d(8, 16, 3)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">conv3</span> = nn.Conv2d(16, 32, 3)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">conv4</span> = nn.Conv2d(32, 64, 3)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">conv5</span> = nn.Conv2d(64, 64, 3)
+<pre class="src src-python"><span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv1</span> = nn.Conv2d(3, 8, 5)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">pool</span> = nn.MaxPool(2, 2)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv2</span> = nn.Conv2d(8, 16, 3)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv3</span> = nn.Conv2d(16, 32, 3)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv4</span> = nn.Conv2d(32, 64, 3)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">conv5</span> = nn.Conv2d(64, 64, 3)
 
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">fc1</span> = nn.Linear(64 * 5 * 5, 1000)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">fc2</span> = nn.Linear(1000, 500)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">fc3</span> = nn.Linear(500, 120)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">fc4</span> = nn.Linear(120, 84)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">fc5</span> = nn.Linear(84, 10)
-<span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">fc6</span> = nn.Linear(10, 2)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">fc1</span> = nn.Linear(64 * 5 * 5, 1000)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">fc2</span> = nn.Linear(1000, 500)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">fc3</span> = nn.Linear(500, 120)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">fc4</span> = nn.Linear(120, 84)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">fc5</span> = nn.Linear(84, 10)
+<span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">fc6</span> = nn.Linear(10, 2)
 </pre>
 </div>
 
@@ -353,7 +353,7 @@ I've got more than 91% of accuracy.
 </p>
 
 
-<figure id="org6297b48">
+<figure id="org108fbbe">
 <img src="img/cnn1.png" alt="cnn1.png">
 
 </figure>
@@ -366,16 +366,16 @@ though. Look likes there's even more to do. ┬──┬ ノ( ゜-゜ノ)
 </p>
 
 
-<figure id="org7136226">
+<figure id="orgb02deb9">
 <img src="img/cnn2.png" alt="cnn2.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgc93b440" class="outline-2">
-<h2 id="orgc93b440">Source Code</h2>
-<div class="outline-text-2" id="text-orgc93b440">
+<div id="outline-container-orgbbedae1" class="outline-2">
+<h2 id="orgbbedae1">Source Code</h2>
+<div class="outline-text-2" id="text-orgbbedae1">
 <p>
 <a href="https://github.com/GnaneshKunal/dogs-vs-cats-classifier/">GnaneshKunal/dogs-vs-cats-classifier</a>
 </p>

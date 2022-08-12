@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-04-02 Sat 21:06 -->
+<!-- 2022-08-12 Fri 19:21 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>mDNS, avahi and docker non-root containers</title>
@@ -191,7 +191,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
+  .org-svg { }
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -289,9 +289,9 @@ cluster starts a new node with a different IP address to take up
 <code>node1.my-awesome-cluster.local</code>. This is called <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>.
 </p>
 
-<div id="outline-container-org170bb7a" class="outline-2">
-<h2 id="org170bb7a">Why do we need a hostname resolver for local networks?</h2>
-<div class="outline-text-2" id="text-org170bb7a">
+<div id="outline-container-org10d7ca3" class="outline-2">
+<h2 id="org10d7ca3">Why do we need a hostname resolver for local networks?</h2>
+<div class="outline-text-2" id="text-org10d7ca3">
 <p>
 Earlier you used to connect to the cluster using the IP address of the
 cluster and it worked. Now when you tell your application to connect
@@ -310,9 +310,9 @@ DNS helps you to resolve the domain name to the cluster IP address.
 </div>
 </div>
 
-<div id="outline-container-orgb523cb0" class="outline-2">
-<h2 id="orgb523cb0">mDNS</h2>
-<div class="outline-text-2" id="text-orgb523cb0">
+<div id="outline-container-orgb6a6f09" class="outline-2">
+<h2 id="orgb6a6f09">mDNS</h2>
+<div class="outline-text-2" id="text-orgb6a6f09">
 <p>
 To solve this problem we have <a href="https://en.wikipedia.org/wiki/Multicast_DNS">mDNS</a>. mDNS is a protocol that resolves
 hostname to IP addresses within a small network that lacks the name
@@ -324,9 +324,9 @@ configuration should be changed.
 </p>
 </div>
 
-<div id="outline-container-org9d6b380" class="outline-3">
-<h3 id="org9d6b380">Example</h3>
-<div class="outline-text-3" id="text-org9d6b380">
+<div id="outline-container-org0e545d7" class="outline-3">
+<h3 id="org0e545d7">Example</h3>
+<div class="outline-text-3" id="text-org0e545d7">
 <p>
 Lets try out an example.
 </p>
@@ -338,9 +338,9 @@ Enterprise cluster.
 </p>
 </div>
 
-<div id="outline-container-org3faf11b" class="outline-4">
-<h4 id="org3faf11b">Why Redis Enterprise docker image?</h4>
-<div class="outline-text-4" id="text-org3faf11b">
+<div id="outline-container-org23703c5" class="outline-4">
+<h4 id="org23703c5">Why Redis Enterprise docker image?</h4>
+<div class="outline-text-4" id="text-org23703c5">
 <p>
 The reason why I have chosen Redis Enterprise docker image is that it
 aligns well with the previous cluster example. With Redis Enterprise
@@ -401,7 +401,7 @@ can give your cluster FQDN like this.
 </p>
 
 
-<figure id="org66f86d3">
+<figure id="org3db453c">
 <img src="img/mdns-redis-cluster-conf.png" alt="mdns-redis-cluster-conf.png">
 
 </figure>
@@ -431,7 +431,7 @@ page.
 </p>
 
 
-<figure id="org9658f85">
+<figure id="orgf82c96b">
 <img src="img/mdns-redis-db-conf-page.png" alt="mdns-redis-db-conf-page.png">
 
 </figure>
@@ -447,11 +447,11 @@ Let us now create our sample application that simply connects to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="color: #0000FF;">FROM</span> <span style="color: #6434A3;">python:3.8-buster</span>
+<pre class="src src-dockerfile"><span style="font-weight: bold;">FROM</span> <span style="font-weight: bold; text-decoration: underline;">python:3.8-buster</span>
 
-<span style="color: #0000FF;">RUN</span> pip3 install redis
+<span style="font-weight: bold;">RUN</span> pip3 install redis
 
-<span style="color: #0000FF;">CMD</span> [<span style="color: #008000;">"python3"</span>]
+<span style="font-weight: bold;">CMD</span> [<span style="font-style: italic;">"python3"</span>]
 </pre>
 </div>
 
@@ -521,29 +521,29 @@ Now lets try to ping the database using the <code>.local</code> address.
 <pre class="src src-bash">$ docker  run -it py-mdns
 Python 3.8.3 (default, May 16 2020, 07:08:28) 
 [GCC 8.3.0] on linux
-Type <span style="color: #008000;">"help"</span>, <span style="color: #008000;">"copyright"</span>, <span style="color: #008000;">"credits"</span> or <span style="color: #008000;">"license"</span> for more information.
+Type <span style="font-style: italic;">"help"</span>, <span style="font-style: italic;">"copyright"</span>, <span style="font-style: italic;">"credits"</span> or <span style="font-style: italic;">"license"</span> for more information.
 &gt;&gt;&gt; import redis
-&gt;&gt;&gt; redis.Redis(<span style="color: #BA36A5;">host</span>=<span style="color: #008000;">'redis-12000.mycluster.local'</span>, <span style="color: #BA36A5;">port</span>=12000).ping()
-<span style="color: #006699;">Traceback</span> (most recent call last):
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 550,<span style="color: #0000FF;"> in</span> connect
+&gt;&gt;&gt; redis.Redis(<span style="font-weight: bold; font-style: italic;">host</span>=<span style="font-style: italic;">'redis-12000.mycluster.local'</span>, <span style="font-weight: bold; font-style: italic;">port</span>=12000).ping()
+<span style="font-weight: bold;">Traceback</span> (most recent call last):
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 550,<span style="font-weight: bold;"> in</span> connect
     sock = self._connect()
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 575,<span style="color: #0000FF;"> in</span> _connect
-    <span style="color: #0000FF;">for</span> res<span style="color: #0000FF;"> in</span> socket.getaddrinfo(self.host, self.port, self.socket_type,
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/socket.py"</span>, line 918,<span style="color: #0000FF;"> in</span> getaddrinfo
-    <span style="color: #0000FF;">for</span> res<span style="color: #0000FF;"> in</span> _socket.getaddrinfo(host, port, family, type, proto, flags):
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 575,<span style="font-weight: bold;"> in</span> _connect
+    <span style="font-weight: bold;">for</span> res<span style="font-weight: bold;"> in</span> socket.getaddrinfo(self.host, self.port, self.socket_type,
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/socket.py"</span>, line 918,<span style="font-weight: bold;"> in</span> getaddrinfo
+    <span style="font-weight: bold;">for</span> res<span style="font-weight: bold;"> in</span> _socket.getaddrinfo(host, port, family, type, proto, flags):
 socket.gaierror: [Errno -2] Name or service not known
 
 During handling of the above exception, another exception occurred:
 
-<span style="color: #006699;">Traceback</span> (most recent call last):
-  File <span style="color: #008000;">"&lt;stdin&gt;"</span>, line 1,<span style="color: #0000FF;"> in</span> &lt;module&gt;
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/site-packages/redis/client.py"</span>, line 1378,<span style="color: #0000FF;"> in</span> ping
-    <span style="color: #0000FF;">return</span> self.execute_command(<span style="color: #008000;">'PING'</span>)
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/site-packages/redis/client.py"</span>, line 898,<span style="color: #0000FF;"> in</span> execute_command
+<span style="font-weight: bold;">Traceback</span> (most recent call last):
+  File <span style="font-style: italic;">"&lt;stdin&gt;"</span>, line 1,<span style="font-weight: bold;"> in</span> &lt;module&gt;
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/site-packages/redis/client.py"</span>, line 1378,<span style="font-weight: bold;"> in</span> ping
+    <span style="font-weight: bold;">return</span> self.execute_command(<span style="font-style: italic;">'PING'</span>)
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/site-packages/redis/client.py"</span>, line 898,<span style="font-weight: bold;"> in</span> execute_command
     conn = self.connection or pool.get_connection(command_name, **options)
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 1183,<span style="color: #0000FF;"> in</span> get_connection
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 1183,<span style="font-weight: bold;"> in</span> get_connection
     connection.connect()
-  File <span style="color: #008000;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 554,<span style="color: #0000FF;"> in</span> connect
+  File <span style="font-style: italic;">"/usr/local/lib/python3.8/site-packages/redis/connection.py"</span>, line 554,<span style="font-weight: bold;"> in</span> connect
     raise ConnectionError(self._error_message(e))
 redis.exceptions.ConnectionError: Error -2 connecting to redis-12000.mycluster.local:12000. Name or service not known.
 </pre>
@@ -560,7 +560,7 @@ Connecting using the IP address works.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash">&gt;&gt;&gt; redis.Redis(<span style="color: #BA36A5;">host</span>=<span style="color: #008000;">'172.17.0.2'</span>, <span style="color: #BA36A5;">port</span>=12000).ping()
+<pre class="src src-bash">&gt;&gt;&gt; redis.Redis(<span style="font-weight: bold; font-style: italic;">host</span>=<span style="font-style: italic;">'172.17.0.2'</span>, <span style="font-weight: bold; font-style: italic;">port</span>=12000).ping()
 True
 </pre>
 </div>
@@ -573,16 +573,16 @@ Now lets try to add mDNS.
 </div>
 </div>
 
-<div id="outline-container-org746daf8" class="outline-2">
-<h2 id="org746daf8">Avahi</h2>
-<div class="outline-text-2" id="text-org746daf8">
+<div id="outline-container-orgbf61523" class="outline-2">
+<h2 id="orgbf61523">Avahi</h2>
+<div class="outline-text-2" id="text-orgbf61523">
 <p>
 <a href="https://en.wikipedia.org/wiki/Avahi_(software)">Avahi</a> is a free zero-configuration implementation of the mDNS
 protocol. Let's try to add it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="color: #0000FF;">RUN</span> set -ex <span style="color: #008000;">\</span>
+<pre class="src src-dockerfile"><span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
  &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns
 </pre>
 </div>
@@ -594,14 +594,14 @@ three-label. Let's try to configure add that configuration too.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="color: #0000FF;">RUN</span> set -ex <span style="color: #008000;">\</span>
- &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="color: #008000;">\</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resolve node1.mycluster.local.</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
- &amp;&amp; <span style="color: #006FE0;">echo</span> <span style="color: #008000;">'*'</span> &gt; /etc/mdns.allow <span style="color: #008000;">\</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
- &amp;&amp; sed -i <span style="color: #008000;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf
+<pre class="src src-dockerfile"><span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
+ &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="font-style: italic;">\</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resolve node1.mycluster.local.</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
+ &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'*'</span> &gt; /etc/mdns.allow <span style="font-style: italic;">\</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
+ &amp;&amp; sed -i <span style="font-style: italic;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf
 </pre>
 </div>
 
@@ -612,17 +612,17 @@ entrypoint script.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">bash</span>
 
-<span style="color: #006FE0;">set</span> -e
+<span style="font-weight: bold;">set</span> -e
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">start avahi's dependency</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">start avahi's dependency</span>
 service dbus start
 
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">start avahi</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">start avahi</span>
 service avahi-daemon start
 
-<span style="color: #0000FF;">exec</span> <span style="color: #008000;">"$@"</span>
+<span style="font-weight: bold;">exec</span> <span style="font-style: italic;">"$@"</span>
 
 </pre>
 </div>
@@ -633,25 +633,25 @@ how the <code>Dockerfile</code> looks like.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="color: #0000FF;">FROM</span> <span style="color: #6434A3;">python:3.8-buster</span>
+<pre class="src src-dockerfile"><span style="font-weight: bold;">FROM</span> <span style="font-weight: bold; text-decoration: underline;">python:3.8-buster</span>
 
-<span style="color: #0000FF;">WORKDIR</span> /app
+<span style="font-weight: bold;">WORKDIR</span> /app
 
-<span style="color: #0000FF;">COPY</span> entrypoint.sh /app/
+<span style="font-weight: bold;">COPY</span> entrypoint.sh /app/
 
-<span style="color: #0000FF;">RUN</span> set -ex <span style="color: #008000;">\</span>
- &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="color: #008000;">\</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resolve node1.mycluster.local.</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
- &amp;&amp; <span style="color: #006FE0;">echo</span> <span style="color: #008000;">'*'</span> &gt; /etc/mdns.allow <span style="color: #008000;">\</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
- &amp;&amp; sed -i <span style="color: #008000;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf <span style="color: #008000;">\</span>
+<span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
+ &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="font-style: italic;">\</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resolve node1.mycluster.local.</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
+ &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'*'</span> &gt; /etc/mdns.allow <span style="font-style: italic;">\</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
+ &amp;&amp; sed -i <span style="font-style: italic;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf <span style="font-style: italic;">\</span>
  &amp;&amp; pip3 install redis
 
-<span style="color: #0000FF;">ENTRYPOINT</span> [<span style="color: #008000;">"bash"</span>, <span style="color: #008000;">"./entrypoint.sh"</span>]
+<span style="font-weight: bold;">ENTRYPOINT</span> [<span style="font-style: italic;">"bash"</span>, <span style="font-style: italic;">"./entrypoint.sh"</span>]
 
-<span style="color: #0000FF;">CMD</span> [<span style="color: #008000;">"python3"</span>]
+<span style="font-weight: bold;">CMD</span> [<span style="font-style: italic;">"python3"</span>]
 
 </pre>
 </div>
@@ -666,9 +666,9 @@ Let's try to build the image and run the container.
 [ ok ] Starting Avahi mDNS/DNS-SD Daemon: avahi-daemon.
 Python 3.8.3 (default, May 16 2020, 07:08:28) 
 [GCC 8.3.0] on linux
-Type <span style="color: #008000;">"help"</span>, <span style="color: #008000;">"copyright"</span>, <span style="color: #008000;">"credits"</span> or <span style="color: #008000;">"license"</span> for more information.
+Type <span style="font-style: italic;">"help"</span>, <span style="font-style: italic;">"copyright"</span>, <span style="font-style: italic;">"credits"</span> or <span style="font-style: italic;">"license"</span> for more information.
 &gt;&gt;&gt; import redis
-&gt;&gt;&gt; redis.Redis(<span style="color: #BA36A5;">host</span>=<span style="color: #008000;">'redis-12000.mycluster.local'</span>, <span style="color: #BA36A5;">port</span>=12000).ping()
+&gt;&gt;&gt; redis.Redis(<span style="font-weight: bold; font-style: italic;">host</span>=<span style="font-style: italic;">'redis-12000.mycluster.local'</span>, <span style="font-weight: bold; font-style: italic;">port</span>=12000).ping()
 True
 </pre>
 </div>
@@ -680,9 +680,9 @@ resolves <code>redis-12000.mycluster.local</code>.
 </div>
 </div>
 
-<div id="outline-container-org91c4b66" class="outline-2">
-<h2 id="org91c4b66">Running the container as non-root user</h2>
-<div class="outline-text-2" id="text-org91c4b66">
+<div id="outline-container-orgb9532fa" class="outline-2">
+<h2 id="orgb9532fa">Running the container as non-root user</h2>
+<div class="outline-text-2" id="text-orgb9532fa">
 <p>
 Now let's talk about the
 security.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> Many container
@@ -746,9 +746,9 @@ without using <code>service</code>.
 <code>Dockerfile</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #888888;">   # Dockerfile</span>
-<span style="color: #888888;">   &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf \</span>
-<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;">  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \</span>
+<pre class="src src-diff">   # Dockerfile
+   &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf \
++  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \
    &amp;&amp; pip3 install redis
 </pre>
 </div>
@@ -757,13 +757,13 @@ without using <code>service</code>.
 <code>entrypoint.sh</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #888888;">  # entrypoint.sh</span>
-<span style="color: #CC3333; background-color: #FFDCE0;">-</span><span style="background-color: #FEE8E9;"> # start avahi's dependency</span>
-<span style="color: #CC3333; background-color: #FFDCE0;">-</span><span style="background-color: #FEE8E9;"> service dbus start</span>
+<pre class="src src-diff">  # entrypoint.sh
+- # start avahi's dependency
+- service dbus start
 
-<span style="color: #888888;">  # start avahi</span>
-<span style="color: #CC3333; background-color: #FFDCE0;">-</span><span style="background-color: #FEE8E9;"> service avahi-daemon start</span>
-<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> avahi-daemon --daemonize --no-drop-root</span>
+  # start avahi
+- service avahi-daemon start
++ avahi-daemon --daemonize --no-drop-root
 
 </pre>
 </div>
@@ -800,12 +800,12 @@ Lets try to change the permissions of the files and folders.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #888888;">  # Dockerfile</span>
-<span style="color: #888888;">  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \</span>
-<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf \</span>
-<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; mkdir -p /var/run/avahi-daemon \</span>
-<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; chown avahi:avahi /var/run/avahi-daemon \</span>
-<span style="color: #3A993A; background-color: #CDFFD8;">+</span><span style="background-color: #DDFFDD;"> &amp;&amp; chmod 777 /var/run/avahi-daemon</span>
+<pre class="src src-diff">  # Dockerfile
+  &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \
++ &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf \
++ &amp;&amp; mkdir -p /var/run/avahi-daemon \
++ &amp;&amp; chown avahi:avahi /var/run/avahi-daemon \
++ &amp;&amp; chmod 777 /var/run/avahi-daemon
   &amp;&amp; pip3 install redis
 </pre>
 </div>
@@ -822,32 +822,32 @@ add <code>USER</code> flag so by default it runs as the UUID specified.
 <code>Dockerfile</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="color: #0000FF;">FROM</span> <span style="color: #6434A3;">python:3.8-buster</span>
+<pre class="src src-dockerfile"><span style="font-weight: bold;">FROM</span> <span style="font-weight: bold; text-decoration: underline;">python:3.8-buster</span>
 
-<span style="color: #0000FF;">WORKDIR</span> /app
+<span style="font-weight: bold;">WORKDIR</span> /app
 
-<span style="color: #0000FF;">COPY</span> entrypoint.sh /app/
+<span style="font-weight: bold;">COPY</span> entrypoint.sh /app/
 
-<span style="color: #0000FF;">RUN</span> set -ex <span style="color: #008000;">\</span>
- &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="color: #008000;">\</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resolve node1.mycluster.local.</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
- &amp;&amp; <span style="color: #006FE0;">echo</span> <span style="color: #008000;">'*'</span> &gt; /etc/mdns.allow <span style="color: #008000;">\</span>
- <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
- &amp;&amp; sed -i <span style="color: #008000;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf <span style="color: #008000;">\</span>
- &amp;&amp; <span style="color: #006FE0;">printf</span> <span style="color: #008000;">"[server]\nenable-dbus=no\n"</span> &gt;&gt; /etc/avahi/avahi-daemon.conf <span style="color: #008000;">\</span>
- &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf <span style="color: #008000;">\</span>
- &amp;&amp; mkdir -p /var/run/avahi-daemon <span style="color: #008000;">\</span>
- &amp;&amp; chown avahi:avahi /var/run/avahi-daemon <span style="color: #008000;">\</span>
- &amp;&amp; chmod 777 /var/run/avahi-daemon <span style="color: #008000;">\</span>
+<span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
+ &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="font-style: italic;">\</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resolve node1.mycluster.local.</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
+ &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'*'</span> &gt; /etc/mdns.allow <span style="font-style: italic;">\</span>
+ <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
+ &amp;&amp; sed -i <span style="font-style: italic;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf <span style="font-style: italic;">\</span>
+ &amp;&amp; <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"[server]\nenable-dbus=no\n"</span> &gt;&gt; /etc/avahi/avahi-daemon.conf <span style="font-style: italic;">\</span>
+ &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf <span style="font-style: italic;">\</span>
+ &amp;&amp; mkdir -p /var/run/avahi-daemon <span style="font-style: italic;">\</span>
+ &amp;&amp; chown avahi:avahi /var/run/avahi-daemon <span style="font-style: italic;">\</span>
+ &amp;&amp; chmod 777 /var/run/avahi-daemon <span style="font-style: italic;">\</span>
  &amp;&amp; pip3 install redis
 
-<span style="color: #0000FF;">USER</span> 1001
+<span style="font-weight: bold;">USER</span> 1001
 
-<span style="color: #0000FF;">ENTRYPOINT</span> [<span style="color: #008000;">"bash"</span>, <span style="color: #008000;">"./entrypoint.sh"</span>]
+<span style="font-weight: bold;">ENTRYPOINT</span> [<span style="font-style: italic;">"bash"</span>, <span style="font-style: italic;">"./entrypoint.sh"</span>]
 
-<span style="color: #0000FF;">CMD</span> [<span style="color: #008000;">"python3"</span>]
+<span style="font-weight: bold;">CMD</span> [<span style="font-style: italic;">"python3"</span>]
 
 </pre>
 </div>
@@ -856,13 +856,13 @@ add <code>USER</code> flag so by default it runs as the UUID specified.
 <code>entrypoint.sh</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-bash"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/bin/</span><span style="color: #0000FF;">bash</span>
+<pre class="src src-bash"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/bin/</span><span style="font-weight: bold;">bash</span>
 
-<span style="color: #006FE0;">set</span> -e
+<span style="font-weight: bold;">set</span> -e
 
 avahi-daemon --daemonize --no-drop-root
 
-<span style="color: #0000FF;">exec</span> <span style="color: #008000;">"$@"</span>
+<span style="font-weight: bold;">exec</span> <span style="font-style: italic;">"$@"</span>
 
 </pre>
 </div>
@@ -876,9 +876,9 @@ since we have put <code>USER</code> command inside <code>Dockerfile</code>.
 <pre class="src src-bash">$ docker  run -it --user 1001 py-mdns
 Python 3.8.3 (default, May 16 2020, 07:08:28) 
 [GCC 8.3.0] on linux
-Type <span style="color: #008000;">"help"</span>, <span style="color: #008000;">"copyright"</span>, <span style="color: #008000;">"credits"</span> or <span style="color: #008000;">"license"</span> for more information.
+Type <span style="font-style: italic;">"help"</span>, <span style="font-style: italic;">"copyright"</span>, <span style="font-style: italic;">"credits"</span> or <span style="font-style: italic;">"license"</span> for more information.
 &gt;&gt;&gt; import redis
-&gt;&gt;&gt; redis.Redis(<span style="color: #BA36A5;">host</span>=<span style="color: #008000;">'redis-12000.mycluster.local'</span>, <span style="color: #BA36A5;">port</span>=12000).ping()
+&gt;&gt;&gt; redis.Redis(<span style="font-weight: bold; font-style: italic;">host</span>=<span style="font-style: italic;">'redis-12000.mycluster.local'</span>, <span style="font-weight: bold; font-style: italic;">port</span>=12000).ping()
 True
 
 </pre>
