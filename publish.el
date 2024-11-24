@@ -11,6 +11,9 @@
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
 
+;; org mode
+(use-package org)
+
 (setq org-id-link-to-org-use-id
       'create-if-interactive-and-no-custom-id)
 
@@ -105,7 +108,7 @@
 <li><a href=\"index.html\">Home</a></li>
 <li><a href=\"about.html\">About</a></li>
 <li><a href=\"https://github.com/Gnaneshkunal\">GitHub</a></li>
-<li><a href=\"resume.pdf\">Résumé</a></li>
+<li><a href=\"resume.html\">Résumé</a></li>
 <li><a href=\"key.pub\">PGP</a></li>
 </ul>
 </div>"
@@ -139,7 +142,7 @@
 <li><a href=\"index.html\">Home</a></li>
 <li><a href=\"about.html\">About</a></li>
 <li><a href=\"https://github.com/Gnaneshkunal\">GitHub</a></li>
-<li><a href=\"resume.pdf\">Résumé</a></li>
+<li><a href=\"resume.html\">Résumé</a></li>
 <li><a href=\"key.pub\">PGP</a></li>
 </ul>
 </div>

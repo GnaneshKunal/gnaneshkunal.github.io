@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gnanesh R's Resume</title>
+    <style>
+        h2 {
+            font-variant: small-caps;
+        }
+        
+        body {
+            background-color: #eeeeee;
+            color: #222222;
+            font-family: serif;
+            letter-spacing: 0.02em;
+            font-size: 10pt;
+            padding: 20px;  /* Add consistent padding for both views */
+
+            margin: 2px;
+            margin-right: 20%;
+        }
+        
+        a:link {
+            color: #000070;
+        }
+        
+        a:visited {
+            color: #006000;
+        }
+        
+        a:hover {
+            color: #0000FF;
+            text-decoration: none;
+        }
+
+        dt {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        dd {
+            margin-bottom: 12px;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+
+        html {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        @media print {
+            @page :first {
+                margin-top: 0;
+            }
+
+            Removes default headers/footers that browsers add
+            @page :left {
+                margin: 0;
+            }
+            @page :right {
+                margin: 0;
+            }
+
+            body {
+                margin-right: 0px; /* Remove the 35% margin for print */
+                width: 100%; /* Use full width */
+                max-width: 100%;
+                background-color: white; /* Ensure white background for printing */
+                padding: 0px; /* Remove padding for printing */
+            }
+
+            a { 
+                /* color: #000000 !important; /\* Force black color for links when printing *\/ */
+                text-decoration: none;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Gnanesh R</h1>
+    <p>
+        <a href="mailto:gnaneshkunal@outlook.com">gnaneshkunal@outlook.com</a><br>
+        <a href="https://gnanesh.me">gnanesh.me</a><br>
+        <a href="https://github.com/gnaneshkunal">github.com/gnaneshkunal</a><br>
+        <a href="https://linkedin.com/in/gnanesh-kunal">linkedin.com/in/gnanesh-kunal</a>
+    </p>
+
+    <div id="objective">
+        <h2>Summary</h2>
+        <p>Language-agnostic engineer with expertise in software development, demonstrating strong capabilities in understanding requirements, taking ownership of design, building, and maintaining solutions. Experienced in distributed systems, payment technologies, and open-source contributions.</p>
+    </div>
+
+    <div id="experience">
+        <h2>Experience</h2>
+        <dl>
+            <dt><em>Sept 2021-Present</em> | <a href="https://setu.co">Setu</a> | <strong>Software Engineer III</strong></dt>
+            <dd>
+                <ul>
+                    <li>Led and maintained mission-critical payment infrastructure serving India's largest credit card payment provider, ensuring 99.99% uptime while handling 150+ TPS consistently with peak loads of over 200 TPS, demonstrating system resilience at scale</li>
+                    <li>Re-architected payment infrastructure from monolithic to event-driven architecture, scaling system capacity from 100 RPS to 750+ RPS while maintaining strong consistency through Redis integration</li>
+                    <li>Achieved 100% system uptime through fault-tolerant design and proactive monitoring, implementing automated failover mechanisms and immediate incident response protocols</li>
+                    <li>Reduced AWS infrastructure costs by 60-70% through code-level optimizations and efficient auto-scaling implementations while handling high-traffic scenarios</li>
+                    <li>Managed critical BBPS integrations with multiple banks (Axis, Canara), implementing bank-specific security algorithms and compliance protocols while serving as primary stakeholder contact</li>
+                    <li>Built highly reusable system components and utility scripts, enabling rapid deployment of new payment services and reducing development time for team initiatives</li>
+                    <li>Developed bank integration middleware for payload transformation, enabling seamless vendor onboarding without core application changes</li>
+                    <li>Automated multi-version API documentation generation with spec file compatibility for internal documentation servers</li>
+                </ul>
+            </dd>
+
+            <dt><em>Oct 2021-Present</em> | <a href="https://redis.io">Redis</a> | <strong>Software Engineer</strong></dt>
+            <dd>
+                <ul>
+                    <li>Maintained RedisInsight V1 and provided technical expertise for V2 development</li>
+                    <li>Implemented visualizers for RedisGraph, RedisTimeseries, and module query explainer</li>
+                    <li>Developed infrastructure automation using Terraform and enterprise reverse proxy setups</li>
+                </ul>
+            </dd>
+
+            <dt><em>Aug 2021-Sep 2021</em> | <a href="https://www.tryvital.com">Vital</a> | <strong>Full Stack Engineer II</strong></dt>
+            <dd>
+                <ul>
+                    <li>Reverse engineered 8sleep's complex API infrastructure and provided seamless integration pathways, enabling data extraction from proprietary endpoints while ensuring maintainable and robust implementations</li>
+                    <li>Designed and implemented provider-agnostic dashboard APIs that standardized data formats across multiple health device manufacturers, reducing integration complexity and maintenance overhead</li>
+                    <li>Built automated testing frameworks for API reliability verification, ensuring consistent data extraction and transformation across various provider platforms and API versions</li>
+                </ul>
+            </dd>
+
+            <dt><em>Feb 2019-Aug 2021</em> | <a href="https://hashedin.com">HashedIn Technologies</a> | <strong>Senior Software Engineer - 1</strong></dt>
+            <dd>
+                <ul>
+                    <li>Led integration of RedisGraph, RedisJSON, and RedisGears modules</li>
+                    <li>Optimized cypher query performance, reducing memory usage by 85%</li>
+                    <li>Implemented auto-discovery for Redis servers in Kubernetes environments</li>
+                    <li>Reduced CI resources cost by 50% through optimization</li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+
+    <div id="skills">
+        <h2>Technical Skills</h2>
+        <dl>
+            <dt>Languages</dt>
+            <dd>Golang, Python, Rust, TypeScript, C</dd>
+
+            <dt>Technologies</dt>
+            <dd>React, Docker, Redis, Git, PostgreSQL, RabbitMQ</dd>
+
+            <dt>Cloud & Infrastructure</dt>
+            <dd>AWS, Kubernetes, Terraform</dd>
+
+            <dt>Specializations</dt>
+            <dd>Distributed Systems, System Programming, Reverse Engineering</dd>
+        </dl>
+    </div>
+
+    <div id="projects">
+        <h2>Notable Projects</h2>
+        <ul>
+            <li><strong>LazyKubernetes:</strong> TUI for Kubernetes, winning project in FOSS 2020 hackathon</li>
+            <li><strong>RDBParser:</strong> Parser for RDB file implemented in Rust</li>
+            <li><strong>Raft-rs & Swim-rs:</strong> Implementation of Raft consensus and SWIM gossip protocol in Rust</li>
+        </ul>
+    </div>
+
+    <div id="education">
+        <h2>Education</h2>
+        <dl>
+            <dt><em>2015-2019</em> | <a href="#">VIT University</a></dt>
+            <dd>
+                <ul>
+                    <li>B.Tech. in Computer Science</li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+
+    <p style="font-size: 80%;">Last updated November 24, 2024</p>
+</body>
+</html>

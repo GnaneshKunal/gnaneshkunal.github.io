@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-12 Fri 19:21 -->
+<!-- 2024-11-24 Sun 18:53 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>mDNS, avahi and docker non-root containers</title>
@@ -9,7 +9,7 @@
 <meta name="description" content="Run mDNS on docker non-root containers." />
 <meta name="keywords" content="Networking, DNS, Avahi" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -288,10 +288,9 @@ cluster starts a new node with a different IP address to take up
 <code>node1</code>'s position, the new node will be reachable at
 <code>node1.my-awesome-cluster.local</code>. This is called <a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>.
 </p>
-
-<div id="outline-container-org10d7ca3" class="outline-2">
-<h2 id="org10d7ca3">Why do we need a hostname resolver for local networks?</h2>
-<div class="outline-text-2" id="text-org10d7ca3">
+<div id="outline-container-org035a239" class="outline-2">
+<h2 id="org035a239">Why do we need a hostname resolver for local networks?</h2>
+<div class="outline-text-2" id="text-org035a239">
 <p>
 Earlier you used to connect to the cluster using the IP address of the
 cluster and it worked. Now when you tell your application to connect
@@ -309,10 +308,9 @@ DNS helps you to resolve the domain name to the cluster IP address.
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb6a6f09" class="outline-2">
-<h2 id="orgb6a6f09">mDNS</h2>
-<div class="outline-text-2" id="text-orgb6a6f09">
+<div id="outline-container-org9f7a3d3" class="outline-2">
+<h2 id="org9f7a3d3">mDNS</h2>
+<div class="outline-text-2" id="text-org9f7a3d3">
 <p>
 To solve this problem we have <a href="https://en.wikipedia.org/wiki/Multicast_DNS">mDNS</a>. mDNS is a protocol that resolves
 hostname to IP addresses within a small network that lacks the name
@@ -323,24 +321,22 @@ conventional unicast DNS sever. In those cases, necessary network
 configuration should be changed.
 </p>
 </div>
-
-<div id="outline-container-org0e545d7" class="outline-3">
-<h3 id="org0e545d7">Example</h3>
-<div class="outline-text-3" id="text-org0e545d7">
+<div id="outline-container-org0ede6ff" class="outline-3">
+<h3 id="org0ede6ff">Example</h3>
+<div class="outline-text-3" id="text-org0ede6ff">
 <p>
 Lets try out an example.
 </p>
 
 <p>
 <code>RedisLabs</code> has a Redis Enterprise docker <a href="https://hub.docker.com/r/redislabs/redis/">image</a> that does many
-things<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> but what we want here is the
+things<sup><a id="fnr.RE_Software" class="footref" href="#fn.RE_Software" role="doc-backlink">1</a></sup> but what we want here is the
 Enterprise cluster.
 </p>
 </div>
-
-<div id="outline-container-org23703c5" class="outline-4">
-<h4 id="org23703c5">Why Redis Enterprise docker image?</h4>
-<div class="outline-text-4" id="text-org23703c5">
+<div id="outline-container-orgcdc4619" class="outline-4">
+<h4 id="orgcdc4619">Why Redis Enterprise docker image?</h4>
+<div class="outline-text-4" id="text-orgcdc4619">
 <p>
 The reason why I have chosen Redis Enterprise docker image is that it
 aligns well with the previous cluster example. With Redis Enterprise
@@ -401,7 +397,7 @@ can give your cluster FQDN like this.
 </p>
 
 
-<figure id="org3db453c">
+<figure id="orgd040b65">
 <img src="img/mdns-redis-cluster-conf.png" alt="mdns-redis-cluster-conf.png">
 
 </figure>
@@ -431,7 +427,7 @@ page.
 </p>
 
 
-<figure id="orgf82c96b">
+<figure id="orgb37ca24">
 <img src="img/mdns-redis-db-conf-page.png" alt="mdns-redis-db-conf-page.png">
 
 </figure>
@@ -447,11 +443,11 @@ Let us now create our sample application that simply connects to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="font-weight: bold;">FROM</span> <span style="font-weight: bold; text-decoration: underline;">python:3.8-buster</span>
+<pre class="src src-dockerfile">FROM python:3.8-buster
 
-<span style="font-weight: bold;">RUN</span> pip3 install redis
+RUN pip3 install redis
 
-<span style="font-weight: bold;">CMD</span> [<span style="font-style: italic;">"python3"</span>]
+CMD ["python3"]
 </pre>
 </div>
 
@@ -572,17 +568,16 @@ Now lets try to add mDNS.
 </div>
 </div>
 </div>
-
-<div id="outline-container-orgbf61523" class="outline-2">
-<h2 id="orgbf61523">Avahi</h2>
-<div class="outline-text-2" id="text-orgbf61523">
+<div id="outline-container-org8f3446b" class="outline-2">
+<h2 id="org8f3446b">Avahi</h2>
+<div class="outline-text-2" id="text-org8f3446b">
 <p>
 <a href="https://en.wikipedia.org/wiki/Avahi_(software)">Avahi</a> is a free zero-configuration implementation of the mDNS
 protocol. Let's try to add it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
+<pre class="src src-dockerfile">RUN set -ex \
  &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns
 </pre>
 </div>
@@ -594,14 +589,14 @@ three-label. Let's try to configure add that configuration too.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
- &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="font-style: italic;">\</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resolve node1.mycluster.local.</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
- &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'*'</span> &gt; /etc/mdns.allow <span style="font-style: italic;">\</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
- &amp;&amp; sed -i <span style="font-style: italic;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf
+<pre class="src src-dockerfile">RUN set -ex \
+ &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns \
+ # allow hostnames with more labels to be resolved. so that we can
+ # resolve node1.mycluster.local.
+ # (https://github.com/lathiat/nss-mdns#etcmdnsallow)
+ &amp;&amp; echo '*' &gt; /etc/mdns.allow \
+ # Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected
+ &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf
 </pre>
 </div>
 
@@ -633,25 +628,25 @@ how the <code>Dockerfile</code> looks like.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="font-weight: bold;">FROM</span> <span style="font-weight: bold; text-decoration: underline;">python:3.8-buster</span>
+<pre class="src src-dockerfile">FROM python:3.8-buster
 
-<span style="font-weight: bold;">WORKDIR</span> /app
+WORKDIR /app
 
-<span style="font-weight: bold;">COPY</span> entrypoint.sh /app/
+COPY entrypoint.sh /app/
 
-<span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
- &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="font-style: italic;">\</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resolve node1.mycluster.local.</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
- &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'*'</span> &gt; /etc/mdns.allow <span style="font-style: italic;">\</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
- &amp;&amp; sed -i <span style="font-style: italic;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf <span style="font-style: italic;">\</span>
+RUN set -ex \
+ &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns \
+ # allow hostnames with more labels to be resolved. so that we can
+ # resolve node1.mycluster.local.
+ # (https://github.com/lathiat/nss-mdns#etcmdnsallow)
+ &amp;&amp; echo '*' &gt; /etc/mdns.allow \
+ # Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected
+ &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf \
  &amp;&amp; pip3 install redis
 
-<span style="font-weight: bold;">ENTRYPOINT</span> [<span style="font-style: italic;">"bash"</span>, <span style="font-style: italic;">"./entrypoint.sh"</span>]
+ENTRYPOINT ["bash", "./entrypoint.sh"]
 
-<span style="font-weight: bold;">CMD</span> [<span style="font-style: italic;">"python3"</span>]
+CMD ["python3"]
 
 </pre>
 </div>
@@ -679,13 +674,12 @@ resolves <code>redis-12000.mycluster.local</code>.
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgb9532fa" class="outline-2">
-<h2 id="orgb9532fa">Running the container as non-root user</h2>
-<div class="outline-text-2" id="text-orgb9532fa">
+<div id="outline-container-orgbbad0d3" class="outline-2">
+<h2 id="orgbbad0d3">Running the container as non-root user</h2>
+<div class="outline-text-2" id="text-orgbbad0d3">
 <p>
 Now let's talk about the
-security.<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> Many container
+security.<sup><a id="fnr.running_non_root_containers" class="footref" href="#fn.running_non_root_containers" role="doc-backlink">2</a></sup> Many container
 platforms accept only non-root containers, Ex: openshift. If you want
 your application to be deployed at any container platform, you
 can't. Let us try to run the container as a non-root user.
@@ -737,7 +731,7 @@ in <code>/etc/avahi/avahi-daemon.conf</code>.
 <p>
 <code>avahi</code> by default requires root permissions to start. We can bypass
 that by providing <code>--no-drop-root</code>
-flag.<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>  You can check out all the options
+flag.<sup><a id="fnr.avahi-daemon-conf-dbus" class="footref" href="#fn.avahi-daemon-conf-dbus" role="doc-backlink">3</a></sup>  You can check out all the options
 <a href="https://linux.die.net/man/8/avahi-daemon">here</a>. Let us remove <code>dbus</code>. Also, let's start the process manually
 without using <code>service</code>.
 </p>
@@ -822,32 +816,32 @@ add <code>USER</code> flag so by default it runs as the UUID specified.
 <code>Dockerfile</code>:
 </p>
 <div class="org-src-container">
-<pre class="src src-dockerfile"><span style="font-weight: bold;">FROM</span> <span style="font-weight: bold; text-decoration: underline;">python:3.8-buster</span>
+<pre class="src src-dockerfile">FROM python:3.8-buster
 
-<span style="font-weight: bold;">WORKDIR</span> /app
+WORKDIR /app
 
-<span style="font-weight: bold;">COPY</span> entrypoint.sh /app/
+COPY entrypoint.sh /app/
 
-<span style="font-weight: bold;">RUN</span> set -ex <span style="font-style: italic;">\</span>
- &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns <span style="font-style: italic;">\</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">allow hostnames with more labels to be resolved. so that we can</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resolve node1.mycluster.local.</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(https://github.com/lathiat/nss-mdns#etcmdnsallow)</span>
- &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">'*'</span> &gt; /etc/mdns.allow <span style="font-style: italic;">\</span>
- <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected</span>
- &amp;&amp; sed -i <span style="font-style: italic;">"s/hosts:.*/hosts:          files mdns4 dns/g"</span> /etc/nsswitch.conf <span style="font-style: italic;">\</span>
- &amp;&amp; <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"[server]\nenable-dbus=no\n"</span> &gt;&gt; /etc/avahi/avahi-daemon.conf <span style="font-style: italic;">\</span>
- &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf <span style="font-style: italic;">\</span>
- &amp;&amp; mkdir -p /var/run/avahi-daemon <span style="font-style: italic;">\</span>
- &amp;&amp; chown avahi:avahi /var/run/avahi-daemon <span style="font-style: italic;">\</span>
- &amp;&amp; chmod 777 /var/run/avahi-daemon <span style="font-style: italic;">\</span>
+RUN set -ex \
+ &amp;&amp; apt-get update &amp;&amp; apt-get install -y --no-install-recommends avahi-daemon libnss-mdns \
+ # allow hostnames with more labels to be resolved. so that we can
+ # resolve node1.mycluster.local.
+ # (https://github.com/lathiat/nss-mdns#etcmdnsallow)
+ &amp;&amp; echo '*' &gt; /etc/mdns.allow \
+ # Configure NSSwitch to use the mdns4 plugin so mdns.allow is respected
+ &amp;&amp; sed -i "s/hosts:.*/hosts:          files mdns4 dns/g" /etc/nsswitch.conf \
+ &amp;&amp; printf "[server]\nenable-dbus=no\n" &gt;&gt; /etc/avahi/avahi-daemon.conf \
+ &amp;&amp; chmod 777 /etc/avahi/avahi-daemon.conf \
+ &amp;&amp; mkdir -p /var/run/avahi-daemon \
+ &amp;&amp; chown avahi:avahi /var/run/avahi-daemon \
+ &amp;&amp; chmod 777 /var/run/avahi-daemon \
  &amp;&amp; pip3 install redis
 
-<span style="font-weight: bold;">USER</span> 1001
+USER 1001
 
-<span style="font-weight: bold;">ENTRYPOINT</span> [<span style="font-style: italic;">"bash"</span>, <span style="font-style: italic;">"./entrypoint.sh"</span>]
+ENTRYPOINT ["bash", "./entrypoint.sh"]
 
-<span style="font-weight: bold;">CMD</span> [<span style="font-style: italic;">"python3"</span>]
+CMD ["python3"]
 
 </pre>
 </div>
@@ -909,14 +903,14 @@ this <a href="https://github.com/GnaneshKunal/avahi-docker-non-root">repository<
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://hub.docker.com/r/redislabs/redis/">Redis Enterprise Software</a> is enterprise grade,
+<div class="footdef"><sup><a id="fn.RE_Software" class="footnum" href="#fnr.RE_Software" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://hub.docker.com/r/redislabs/redis/">Redis Enterprise Software</a> is enterprise grade,
 distributed, in-memory NoSQL database server, fully compatible with
 open source Redis by Redis Labs.</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html">Bitnami Engineering</a>: Why
+<div class="footdef"><sup><a id="fn.running_non_root_containers" class="footnum" href="#fnr.running_non_root_containers" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><a href="https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html">Bitnami Engineering</a>: Why
 non-root containers are important for security</p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><code>avahi-daemon.conf</code> has many
+<div class="footdef"><sup><a id="fn.avahi-daemon-conf-dbus" class="footnum" href="#fnr.avahi-daemon-conf-dbus" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara"><code>avahi-daemon.conf</code> has many
 configurations and we don't need it in our application, so I'm just
 setting the <code>enable-dbus</code> to <code>no</code>.</p></div></div>
 
@@ -931,7 +925,7 @@ setting the <code>enable-dbus</code> to <code>no</code>.</p></div></div>
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Résumé</a></li>
+<li><a href="resume.html">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
