@@ -44,3 +44,4 @@ submit:
 release: submit
 								@echo "Releasing from 'generator' branch to 'master' branch..."
 								git subtree push --prefix=public origin master
+								# git push origin `git subtree split --prefix public generator`:master --force
