@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2022-08-12 Fri 19:21 -->
+<!-- 2024-11-24 Sun 18:53 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Numpy vs. Python Lists</title>
@@ -9,7 +9,7 @@
 <meta name="description" content="Comparing Numpy aganist Python lists." />
 <meta name="keywords" content="Numpy, Python" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
@@ -195,27 +195,38 @@
 </style>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-sans-pro" type="text/css"/><link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/source-code-pro" type="text/css"/><script data-goatcounter="https://gnanesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -240,7 +251,6 @@ It was a bit harder to write everything from scratch. Even the
 Finally, I've felt comfortable and could clearly understand what is
 happening in the background (cause, Machine Learning is all about Math).
 </p>
-
 <div id="outline-container-implementing-stochastic-gradient-descent" class="outline-2">
 <h2 id="implementing-stochastic-gradient-descent">Implementing Stochastic Gradient Descent</h2>
 <div class="outline-text-2" id="text-implementing-stochastic-gradient-descent">
@@ -263,13 +273,10 @@ example.
 \[{J_{train}(\Theta)  = \dfrac{1}{m} \sum_{i=1}^{m} cost( \Theta, (x^{(i)}, y^{(i)}))}\]
 </p>
 </div>
-
-
 <div id="outline-container-a-dumb-stochastic-gradient-descent-implementation" class="outline-3">
 <h3 id="a-dumb-stochastic-gradient-descent-implementation">A dumb Stochastic Gradient Descent Implementation</h3>
 <div class="outline-text-3" id="text-a-dumb-stochastic-gradient-descent-implementation">
 </div>
-
 <div id="outline-container-using-lists" class="outline-4">
 <h4 id="using-lists">Using Lists:</h4>
 <div class="outline-text-4" id="text-using-lists">
@@ -305,7 +312,6 @@ So, the benchmark results
 </div>
 </div>
 </div>
-
 <div id="outline-container-using-numpy" class="outline-4">
 <h4 id="using-numpy">Using Numpy:</h4>
 <div class="outline-text-4" id="text-using-numpy">
@@ -352,7 +358,7 @@ faster.
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="https://github.com/Gnaneshkunal">GitHub</a></li>
-<li><a href="resume.pdf">Résumé</a></li>
+<li><a href="resume.html">Résumé</a></li>
 <li><a href="key.pub">PGP</a></li>
 </ul>
 </div>
