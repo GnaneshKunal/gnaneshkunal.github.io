@@ -95,14 +95,20 @@
     <div id="experience">
         <h2>Experience</h2>
         <dl>
-            <dt><em>Sept 2021-Present</em> | <a href="https://setu.co">Setu</a> | <strong>Software Engineer III</strong></dt>
+            <dt><em>Sept 2021-Present</em> | <a href="https://setu.co">Setu</a> | <strong>Senior Software Engineer</strong></dt>
             <dd>
                 <ul>
-                    <li>Led and maintained mission-critical payment infrastructure serving India's largest credit card payment provider, ensuring 99.99% uptime while handling 150+ TPS consistently with peak loads of over 200 TPS, demonstrating system resilience at scale</li>
+                    <li>Led and maintained mission-critical payment infrastructure serving India's largest credit card payment provider, ensuring 99.95% uptime while handling 150+ TPS consistently with peak loads of over 200 TPS, demonstrating system resilience at scale</li>
                     <li>Re-architected payment infrastructure from monolithic to event-driven architecture, scaling system capacity from 100 RPS to 750+ RPS while maintaining strong consistency through Redis integration</li>
                     <li>Achieved 100% system uptime through fault-tolerant design and proactive monitoring, implementing automated failover mechanisms and immediate incident response protocols</li>
+                    <li>Architected critical optimization of transaction table storage (2.39 TB/partition, 8TB+ total, $2K+ monthly costs) reducing partitions by 45%—analyzed TOAST overhead from encrypted JSONB payloads, designed and prototyped stateless message-driven architecture shifting payload storage from PostgreSQL to RabbitMQ in-memory processing, achieving $27K annual cost savings, faster query performance, reduced replication lag, and improved PII security across production environments</li>
+                    <li>Designed end-to-end NPCI settlement reconciliation system replacing Debezium+Kafka multi-service pipeline—implemented memory-efficient streaming parser (xml.Decoder), bulk CTE-based SQL updates with keyset pagination, and SQS-driven automation for refunds/notifications, eliminating manual processes and enabling instant reconciliation, automated NPCI alerts, missing file detection, and direct FinOps cost analysis</li>
+                    <li>Led redesign of biller reporting from batch to real-time system, evaluating and implementing PostgreSQL logical replication over CDC/trigger alternatives—deployed partitioned replica database with PL/pgSQL triggers for denormalized aggregations, reducing reporting latency from 30-60 minutes to <1 minute while meeting NPS Biller SLAs even during settlement processing/high load, isolating workload and enabling horizontal scaling</li>
+                    <li>Led comprehensive k6-based load testing initiative for high-volume client onboarding, scaling system from 917 to 3621 RPS—identified and resolved critical bottlenecks (21-30s p99 latencies, 9% error rates, infrastructure crashes), implemented multi-tier optimization strategy (RDS proxy, multi-shard ElastiCache, ECS auto-scaling), achieving <50ms p99 latency, zero crashes, and significant cost reduction strategies</li>
+                    <li>Resolved critical memory scalability issue in settlement file processing service—diagnosed buffering leaks in HTTP middleware and implemented zero-copy streaming architecture, reducing memory usage by 99.999% (500MB → 500 bytes per file) and preventing OOM crashes in production</li>
+                    <li>Diagnosed and resolved production deadlock in NPCI MIS reconciliation affecting payment processing—implemented file-specific filtering to eliminate cross-file scans and circular lock waits in concurrent consumers, restoring system reliability under high-volume loads</li>
                     <li>Reduced AWS infrastructure costs by 60-70% through code-level optimizations and efficient auto-scaling implementations while handling high-traffic scenarios</li>
-                    <li>Managed critical BBPS integrations with multiple banks (Axis, Canara), implementing bank-specific security algorithms and compliance protocols while serving as primary stakeholder contact</li>
+                    <li>Managed critical BBPS integrations with multiple partners (Axis, Canara, CRED), implementing bank-specific security algorithms and compliance protocols while serving as primary stakeholder contact</li>
                     <li>Built highly reusable system components and utility scripts, enabling rapid deployment of new payment services and reducing development time for team initiatives</li>
                     <li>Developed bank integration middleware for payload transformation, enabling seamless vendor onboarding without core application changes</li>
                     <li>Automated multi-version API documentation generation with spec file compatibility for internal documentation servers</li>
@@ -114,6 +120,7 @@
                 <ul>
                     <li>Maintained RedisInsight V1 and provided technical expertise for V2 development</li>
                     <li>Implemented visualizers for RedisGraph, RedisTimeseries, and module query explainer</li>
+                    <li>Developed RDB file parser in Rust for prototyping memory analysis features, with comprehensive support for Redis modules and custom data types</li>
                     <li>Developed infrastructure automation using Terraform and enterprise reverse proxy setups</li>
                 </ul>
             </dd>
@@ -177,6 +184,6 @@
         </dl>
     </div>
 
-    <p style="font-size: 80%;">Last updated November 24, 2024</p>
+    <p style="font-size: 80%;">Last updated November 1, 2025</p>
 </body>
 </html>
